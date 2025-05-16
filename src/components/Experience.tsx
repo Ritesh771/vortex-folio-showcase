@@ -1,0 +1,193 @@
+
+import React, { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+interface TimelineItemProps {
+  title: string;
+  organization: string;
+  period: string;
+  description: string[];
+  technologies?: string[];
+  index: number;
+}
+
+const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period, description, technologies, index }) => {
+  return (
+    <div className={`mb-8 animate-on-scroll opacity-0`} style={{ animationDelay: `${index * 100}ms` }}>
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-1/3 mb-2 md:mb-0">
+          <span className="text-sm font-medium text-portfolio-blue">{period}</span>
+        </div>
+        <div className="md:w-2/3 md:pl-6 border-l-2 border-portfolio-lightBlue">
+          <h4 className="text-xl font-semibold mb-1">{title}</h4>
+          <p className="text-portfolio-blue font-medium mb-3">{organization}</p>
+          <ul className="list-disc list-inside space-y-2 mb-3 text-gray-700">
+            {description.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+          {technologies && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {technologies.map((tech) => (
+                <span key={tech} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Experience = () => {
+  const workExperience = [
+    {
+      id: 1,
+      title: "Technical Intern & Team Lead",
+      organization: "Castle Rockin",
+      period: "Feb 2025 - Present",
+      description: [
+        "Promoted to Team Lead within 2 months of joining",
+        "Led end-to-end development for a placement guidance platform (under NDA)",
+        "Collaborated with cross-functional teams using Git, React, and Django stack",
+        "Worked on PostgreSQL-based dynamic dashboards and secure backend services"
+      ],
+      technologies: ["React.js", "Django", "PostgreSQL", "Git"]
+    },
+    {
+      id: 2,
+      title: "Founder & CEO",
+      organization: "Stalight Technology Pvt Ltd",
+      period: "Feb 2025 - Present",
+      description: [
+        "Bootstrapped an AI-based education tech startup",
+        "Leading product design and development of an AI-enabled Campus Management System",
+        "Developed multiple MVPs including real-time attendance systems, navigation aids for the visually impaired, and women's safety apps",
+      ],
+      technologies: ["React.js", "Django", "PostgreSQL", "AWS", "Android"]
+    },
+    {
+      id: 3,
+      title: "Python Development Intern",
+      organization: "Codetech IT Solutions",
+      period: "Jan 2023 - Jan 2024",
+      description: [
+        "Built and deployed ML models using TensorFlow",
+        "Designed and implemented smart attendance tracking with performance prediction",
+        "Conducted data analysis for business insights",
+        "Improved data processing efficiency across student datasets"
+      ],
+      technologies: ["Python", "TensorFlow", "Data Analysis"]
+    }
+  ];
+
+  const education = [
+    {
+      id: 1,
+      title: "Bachelor of Engineering in Computer Science (AI & ML)",
+      organization: "A.M.C. Engineering College, Bangalore",
+      period: "Aug 2022 - Present",
+      description: [
+        "CGPA: SEM1 – 9.05 | SEM2 – 8.6 | SEM3 – 9.0 | SEM4 – 9.26",
+        "Actively involved in technical projects and hackathons",
+        "No active backlogs"
+      ]
+    },
+    {
+      id: 2,
+      title: "Pre-University (11th-12th)",
+      organization: "Narayana PU College, Bangalore",
+      period: "Jun 2020 - Jun 2022",
+      description: [
+        "Overall Score: 92%",
+        "2nd Place – Inter-Narayana Basketball Tournament",
+        "Subject Topper in Mathematics"
+      ]
+    },
+    {
+      id: 3,
+      title: "High School (1st-10th Grade)",
+      organization: "Sri Krishna International School, Bangalore",
+      period: "May 2006 - Jun 2020",
+      description: [
+        "Overall Score: 89%",
+        "Active participant in sports – Throwball & Basketball"
+      ]
+    }
+  ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
+  return (
+    <section id="experience" className="py-20">
+      <div className="container mx-auto px-4">
+        <h2 className="section-title mb-12">Experience & Education</h2>
+        
+        <Tabs defaultValue="work" className="w-full">
+          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10">
+            <TabsTrigger value="work">Work Experience</TabsTrigger>
+            <TabsTrigger value="education">Education</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="work" className="animate-on-scroll opacity-0">
+            <div className="space-y-6">
+              {workExperience.map((item, index) => (
+                <TimelineItem
+                  key={item.id}
+                  title={item.title}
+                  organization={item.organization}
+                  period={item.period}
+                  description={item.description}
+                  technologies={item.technologies}
+                  index={index}
+                />
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="education" className="animate-on-scroll opacity-0">
+            <div className="space-y-6">
+              {education.map((item, index) => (
+                <TimelineItem
+                  key={item.id}
+                  title={item.title}
+                  organization={item.organization}
+                  period={item.period}
+                  description={item.description}
+                  index={index}
+                />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
+  );
+};
+
+export default Experience;
