@@ -55,7 +55,7 @@ const Navbar = () => {
               <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-5 h-5 text-gray-700 hover:text-portfolio-blue transition-colors" />
               </a>
-              <a href="https://linkedin.com/in/ritesh-n" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="w-5 h-5 text-gray-700 hover:text-portfolio-blue transition-colors" />
               </a>
               <a href="mailto:riteshnvisonex@gmail.com" aria-label="Email">
@@ -92,7 +92,7 @@ const Navbar = () => {
                 <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                   <Github className="w-5 h-5 text-gray-700 hover:text-portfolio-blue transition-colors" />
                 </a>
-                <a href="https://linkedin.com/in/ritesh-n" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Linkedin className="w-5 h-5 text-gray-700 hover:text-portfolio-blue transition-colors" />
                 </a>
                 <a href="mailto:riteshnvisonex@gmail.com" aria-label="Email">
