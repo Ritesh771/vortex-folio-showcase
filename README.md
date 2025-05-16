@@ -1,73 +1,144 @@
-# Welcome to your Lovable project
+# Ritesh N - Portfolio
 
-## Project info
 
-**URL**: https://lovable.dev/projects/2792c7c6-e0db-40e2-a751-0072cf73834e
+## About Me
 
-## How can I edit this code?
+Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College, Bangalore. Founder and CEO of Stalight Technology Pvt Ltd, a tech startup focused on campus automation and AI-driven applications.
 
-There are several ways of editing your application.
+I bring hands-on experience in backend development using Django and REST APIs, along with a keen eye for building responsive and engaging frontends using React.js and Tailwind CSS. Passionate about building scalable tech solutions with real-world impact, especially in the education and security sectors.
 
-**Use Lovable**
+## Education
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2792c7c6-e0db-40e2-a751-0072cf73834e) and start prompting.
+### Bachelor of Engineering in Computer Science (AI & ML)
+- **Institution**: A.M.C. Engineering College, Bangalore
+- **Duration**: Aug 2022 – Present
+- **CGPA**:
+  - SEM1: 9.05
+  - SEM2: 8.6
+  - SEM3: 9.0
+  - SEM4: 9.26
+- **Activities**: Actively involved in technical projects and hackathons
+- **Backlogs**: No active backlogs
 
-Changes made via Lovable will be committed automatically to this repo.
+### Pre-University (11th–12th)
+- **Institution**: Narayana PU College, Bangalore
+- **Duration**: Jun 2020 – Jun 2022
+- **Overall Score**: 92%
+- **Achievements**:
+  - 2nd Place – Inter-Narayana Basketball Tournament
+  - Subject Topper in Mathematics
 
-**Use your preferred IDE**
+### High School (1st–10th Grade)
+- **Institution**: Sri Krishna International School, Bangalore
+- **Duration**: May 2006 – Jun 2020
+- **Overall Score**: 89%
+- **Activities**: Active participant in sports – Throwball & Basketball
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Technical Skills
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Languages & Frameworks
+- Python, JavaScript, TypeScript, HTML5, CSS3
+- Django, Django REST Framework, Flask, TensorFlow
 
-Follow these steps:
+### Frontend Technologies
+- React.js, Redux Toolkit, Tailwind CSS
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Databases & DevOps
+- PostgreSQL, MySQL, Redis, Git, Postman
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Tools & Platforms
+- Visual Studio Code, GitHub, AWS (basic), Android Studio
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Soft Skills
+- Team Leadership, Agile Collaboration, Technical Mentoring
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## Work Experience
 
-**Edit a file directly in GitHub**
+### Technical Intern & Team Lead
+- **Company**: Castle Rockin, Bengaluru
+- **Duration**: Feb 2025 – Present
+- **Responsibilities**:
+  - Promoted to Team Lead within 2 months of joining
+  - Led end-to-end development for a placement guidance platform (under NDA)
+  - Collaborated with cross-functional teams using Git, React, and Django stack
+  - Worked on PostgreSQL-based dynamic dashboards and secure backend services
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Founder & CEO
+- **Company**: Stalight Technology Pvt Ltd, Bengaluru
+- **Duration**: Feb 2025 – Present
+- **Responsibilities**:
+  - Bootstrapped an AI-based education tech startup
+  - Leading product design and development of an AI-enabled Campus Management System
+  - Developed multiple MVPs including real-time attendance systems, navigation aids for the visually impaired, and women’s safety apps
+  - Tech stack: React.js, Django, PostgreSQL, AWS, Android
 
-**Use GitHub Codespaces**
+### Python Development Intern
+- **Company**: Codetech IT Solutions (Remote)
+- **Duration**: Jan 2023 – Jan 2024
+- **Responsibilities**:
+  - Built and deployed ML models using TensorFlow
+  - Designed and implemented smart attendance tracking with performance prediction
+  - Conducted data analysis for business insights
+  - Improved data processing efficiency across student datasets
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Key Projects
 
-## What technologies are used for this project?
+### Safe Space (Women’s Safety App)
+- **Duration**: Apr 2025 – Present | Stalight Technology
+- **Description**: Mobile app with location tracking, panic button, and emergency alerts. Alerts routed to nearest police stations and family members in real time.
+- **Technologies**: React.js, Django, PostgreSQL, AWS, Android
 
-This project is built with:
+### Slot Booking Platform
+- **Duration**: Jun 2023 – Aug 2023 | Stalight Technology
+- **Description**: Online slot booking system for sports with Razorpay integration. Features: Secure payments, transaction rollback, real-time dashboards.
+- **Technologies**: React.js, Django, PostgreSQL, Redis
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Crack the Campus (Placement Guidance)
+- **Duration**: Feb 2025 – Present | Castle Rockin
+- **Description**: Confidential platform under NDA – personal role included UI development and backend APIs.
+- **Technologies**: HTML5, CSS3, React.js, Django
 
-## How can I deploy this project?
+### AgriWe (Smart Farming Assistant)
+- **Duration**: Apr 2024 | T. John College of Engineering
+- **Description**: Suggests high-yield crops, fertilizers, and pesticides based on seasonal data using NPK sensor integration.
+- **Technologies**: Python, HTML5, CSS3
 
-Simply open [Lovable](https://lovable.dev/projects/2792c7c6-e0db-40e2-a751-0072cf73834e) and click on Share -> Publish.
+### Anomaly Detection Surveillance System
+- **Duration**: Jan 2024 – Mar 2024 | AMC College of Engineering
+- **Description**: Real-time detection of suspicious activity using Python & Flask. Automatically reports with captured image to local police.
+- **Technologies**: Flask, MySQL, Redis
 
-## Can I connect a custom domain to my Lovable project?
+### TravelTech Chatbot
+- **Duration**: Dec 2022 | AMC College of Engineering
+- **Description**: Chatbot for travel company FAQs and support. Built using TypeScript and React.js.
+- **Technologies**: TypeScript, React.js
 
-Yes, you can!
+### Navigation Guidance for the Visually Impaired
+- **Duration**: Jan 2025 | Stalight Technology
+- **Description**: TensorFlow-based navigation system providing audio cues. Targeted for embedded systems and IoT applications.
+- **Technologies**: Python, Flask, TensorFlow
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Proficiency Level
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Software Engineering**: Advanced (75%)
+- **Backend Development**: Proficient (70%)
+- **Frontend Development**: Intermediate (65%)
+- **DevOps & Deployment**: Working Knowledge (50%)
+
+## Preferred Job Roles
+
+- Software Engineer
+- Backend Developer
+- Frontend Developer
+- DevOps Engineer
+
+
+## Location Preference
+
+- Bengaluru, India
+
+## Contact Information
+
+- **Email**: riteshnvisonex@gmail.com
+- **GitHub**: [github.com/Ritesh771](https://github.com/Ritesh771)
+- **LinkedIn**: https://www.linkedin.com/in/ritesh-n-5113b328a/
