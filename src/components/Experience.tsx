@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Education from './Education';
 
@@ -90,73 +89,15 @@ const Experience = () => {
     }
   ];
 
-  const education = [
-    {
-      id: 1,
-      title: "Bachelor of Engineering in Computer Science (AI & ML)",
-      organization: "A.M.C. Engineering College, Bangalore",
-      period: "Aug 2022 - Present",
-      description: [
-        "CGPA: SEM1 – 9.05 | SEM2 – 8.6 | SEM3 – 9.0 | SEM4 – 9.26",
-        "Actively involved in technical projects and hackathons",
-        "No active backlogs"
-      ]
-    },
-    {
-      id: 2,
-      title: "Pre-University (11th-12th)",
-      organization: "Narayana PU College, Bangalore",
-      period: "Jun 2020 - Jun 2022",
-      description: [
-        "Overall Score: 92%",
-        "2nd Place – Inter-Narayana Basketball Tournament",
-        "Subject Topper in Mathematics"
-      ]
-    },
-    {
-      id: 3,
-      title: "High School (1st-10th Grade)",
-      organization: "Sri Krishna International School, Bangalore",
-      period: "May 2006 - Jun 2020",
-      description: [
-        "Overall Score: 89%",
-        "Active participant in sports – Throwball & Basketball"
-      ]
-    }
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
-  }, []);
-
   return (
     <section id="experience" className="py-20 relative">
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent z-0"></div>
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="section-title mb-12">Experience & Education</h2>
+        <h2 className="section-title mb-12 animate-on-scroll">Experience & Education</h2>
         
         <Tabs defaultValue="work" value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10 bg-white/80 backdrop-blur-sm">
+          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10 bg-white/80 backdrop-blur-sm animate-on-scroll">
             <TabsTrigger value="work" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
               Work Experience
             </TabsTrigger>
@@ -181,8 +122,10 @@ const Experience = () => {
             </div>
           </TabsContent>
           
-          <TabsContent value="education" className="animate-on-scroll opacity-0">
-            {activeTab === "education" && <Education />}
+          <TabsContent value="education">
+            <div className="animate-on-scroll opacity-0">
+              <Education />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
