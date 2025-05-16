@@ -96,7 +96,7 @@ const Experience = () => {
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12 animate-on-scroll">Experience & Education</h2>
         
-        <Tabs defaultValue="work" value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs defaultValue="work" className="w-full">
           <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10 bg-white/80 backdrop-blur-sm animate-on-scroll">
             <TabsTrigger value="work" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
               Work Experience
@@ -106,7 +106,7 @@ const Experience = () => {
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="work" className="animate-on-scroll opacity-0">
+          <TabsContent value="work">
             <div className="space-y-6">
               {workExperience.map((item, index) => (
                 <TimelineItem
@@ -123,9 +123,7 @@ const Experience = () => {
           </TabsContent>
           
           <TabsContent value="education">
-            <div className="animate-on-scroll opacity-0">
-              <Education />
-            </div>
+            <Education />
           </TabsContent>
         </Tabs>
       </div>

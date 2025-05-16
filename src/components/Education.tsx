@@ -40,18 +40,18 @@ const Education = () => {
 
   return (
     <div className="space-y-6">
-      {educationData.map((edu) => (
-        <Card key={edu.id} className="animate-on-scroll opacity-0">
+      {educationData.map((edu, index) => (
+        <Card key={edu.id} className="overflow-visible mb-6">
           <CardContent className="pt-6">
             <h4 className="text-xl font-semibold text-portfolio-darkBlue">{edu.degree}</h4>
-            <p className="text-portfolio-blue mt-1">{edu.institution}</p>
-            <Badge variant="outline" className="mt-2">{edu.duration}</Badge>
+            <p className="text-portfolio-blue mt-1">Institution: {edu.institution}</p>
+            <Badge variant="outline" className="mt-2">Duration: {edu.duration}</Badge>
             
             <div className="mt-4 space-y-2">
               {edu.highlights.map((highlight) => (
-                <div key={highlight.id} className="flex flex-col md:flex-row md:items-center">
+                <div key={highlight.id} className="flex flex-col md:flex-row md:items-start">
                   <span className="font-medium text-gray-700 md:w-28">{highlight.label}:</span>
-                  <span className="text-gray-600">{highlight.value}</span>
+                  <span className="text-gray-600 md:flex-1">{highlight.value}</span>
                 </div>
               ))}
             </div>
