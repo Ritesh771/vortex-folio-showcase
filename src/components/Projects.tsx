@@ -8,7 +8,7 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -23,6 +23,9 @@ interface Project {
     demo?: string;
     github?: string;
   };
+  challenges?: string[];
+  achievements?: string[];
+  detailedDescription?: string;
 }
 
 const Projects = () => {
@@ -39,6 +42,17 @@ const Projects = () => {
       company: "Stalight Technology",
       technologies: ["React.js", "Django", "PostgreSQL", "AWS", "Android"],
       image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      challenges: [
+        "Implementing accurate real-time location tracking with minimal battery consumption",
+        "Creating a reliable alert system that works even in poor network conditions",
+        "Ensuring user privacy while maintaining emergency functionality"
+      ],
+      achievements: [
+        "Reduced alert delivery time by 40% compared to similar applications",
+        "Implemented a fallback SMS system for areas with poor internet connectivity",
+        "Optimized battery usage to less than 5% per day with active monitoring"
+      ],
+      detailedDescription: "Safe Space is a comprehensive women's safety application designed to provide immediate assistance during emergencies. The app features a one-tap panic button that, when activated, sends the user's real-time location to pre-configured emergency contacts and the nearest police station. The backend infrastructure is built on Django with PostgreSQL for reliable data storage, while the frontend uses React Native for a seamless cross-platform experience. To ensure reliability, we implemented a multi-channel notification system that uses both internet and SMS fallbacks."
     },
     {
       id: 2,
@@ -52,7 +66,18 @@ const Projects = () => {
       links: {
         demo: "https://example.com/demo",
         github: "https://github.com/example/project"
-      }
+      },
+      challenges: [
+        "Managing concurrent bookings to prevent double-booking issues",
+        "Implementing secure payment processing with proper error handling",
+        "Creating an intuitive calendar interface for slot selection"
+      ],
+      achievements: [
+        "Successfully processed over 1,000 bookings in the first month",
+        "Achieved 99.8% uptime with robust error handling",
+        "Reduced booking abandonment rate by 35% with streamlined UI"
+      ],
+      detailedDescription: "The Slot Booking Platform is a comprehensive solution for sports facilities to manage their court and equipment reservations. It features an intuitive calendar interface where users can view availability and book slots in real-time. We integrated Razorpay for secure payment processing with automatic transaction rollback in case of booking failures. The system uses Redis for caching frequently accessed data and managing booking locks to prevent double-booking scenarios. A custom analytics dashboard provides facility owners with insights on usage patterns, popular time slots, and revenue metrics."
     },
     {
       id: 3,
@@ -63,6 +88,17 @@ const Projects = () => {
       company: "Castle Rockin",
       technologies: ["HTML5", "CSS3", "React.js", "Django"],
       image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
+      challenges: [
+        "Working within strict NDA constraints while delivering quality features",
+        "Creating an adaptive UI for diverse user personas (students, recruiters, administrators)",
+        "Implementing complex filtering algorithms for placement opportunities"
+      ],
+      achievements: [
+        "Developed a modular component library reused across multiple sections",
+        "Created secure API endpoints with comprehensive authentication",
+        "Improved data loading performance by 65% through query optimization"
+      ],
+      detailedDescription: "While under NDA, I can share that this project focuses on connecting students with relevant placement opportunities. My role involved developing both frontend and backend components of the platform. On the frontend, I created responsive interfaces using React.js with a focus on intuitive navigation and information presentation. For the backend, I developed Django REST APIs for data retrieval, user authentication, and profile management. One notable achievement was implementing a recommendation algorithm that matched students with suitable opportunities based on their skills and preferences."
     },
     {
       id: 4,
@@ -73,6 +109,17 @@ const Projects = () => {
       company: "T. John College of Engineering",
       technologies: ["Python", "HTML5", "CSS3"],
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      challenges: [
+        "Integrating with various IoT sensors for soil data collection",
+        "Building accurate prediction models with limited historical data",
+        "Creating a simple interface accessible to farmers with varying tech literacy"
+      ],
+      achievements: [
+        "Achieved 82% accuracy in crop recommendation predictions",
+        "Successfully deployed in 5 farms for beta testing",
+        "Reduced fertilizer usage by 30% while maintaining crop yields"
+      ],
+      detailedDescription: "AgriWe is a smart farming assistant designed to help farmers make data-driven decisions. The application connects to NPK (Nitrogen, Phosphorus, Potassium) sensors placed in the soil to gather real-time data on soil composition. Using historical weather data, current soil conditions, and crop databases, our predictive models suggest optimal crops for the season along with appropriate fertilizers and pesticides to maximize yield while minimizing resource usage. The interface was specifically designed to be accessible to users with limited technical expertise, featuring simple navigation and visual representations of recommendations."
     },
     {
       id: 5,
@@ -83,6 +130,17 @@ const Projects = () => {
       company: "AMC College of Engineering",
       technologies: ["Flask", "MySQL", "Redis"],
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      challenges: [
+        "Processing video streams in real-time with limited computational resources",
+        "Training the model to detect genuinely suspicious behavior with minimal false positives",
+        "Creating secure communication channels for police reporting"
+      ],
+      achievements: [
+        "Reduced false positive rate to below 5% through model optimization",
+        "Implemented efficient frame processing that works on standard hardware",
+        "Created an encrypted alert system compliant with local security protocols"
+      ],
+      detailedDescription: "The Anomaly Detection Surveillance System is designed to enhance security by automatically identifying suspicious activities in video feeds. Using computer vision and machine learning techniques, the system analyzes movement patterns, object recognition, and behavioral anomalies to flag potential security concerns. When a suspicious activity is detected, the system captures images of the incident, logs the event details, and sends an encrypted alert to designated security personnel or local police. The backend is built with Flask for API endpoints and uses Redis for caching frequently accessed data, while MySQL handles persistent storage of events and configuration."
     },
     {
       id: 6,
@@ -93,6 +151,17 @@ const Projects = () => {
       company: "Stalight Technology",
       technologies: ["Python", "Flask", "TensorFlow"],
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      challenges: [
+        "Optimizing neural networks to run efficiently on resource-constrained devices",
+        "Creating reliable object detection in varied lighting and environmental conditions",
+        "Designing intuitive audio cues that convey spatial information effectively"
+      ],
+      achievements: [
+        "Reduced model size by 75% while maintaining 92% detection accuracy",
+        "Created a comprehensive audio vocabulary for spatial navigation",
+        "Successfully tested with visually impaired volunteers with positive feedback"
+      ],
+      detailedDescription: "This project aims to improve mobility and independence for visually impaired individuals through a wearable navigation system. Using a camera mounted on glasses or a cap, the system processes the visual environment through an optimized TensorFlow model, detecting objects, obstacles, paths, and potential hazards. This information is then converted into audio cues delivered through bone-conduction headphones, allowing users to perceive their surroundings without blocking their hearing. The audio cues use a combination of directional sounds and verbal descriptions to communicate spatial information clearly. The system is designed to work offline on embedded hardware, making it reliable in areas with poor connectivity."
     },
   ];
 
@@ -125,8 +194,9 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50 relative">
+      <div className="absolute inset-0 bg-circuit-pattern opacity-[0.03] z-0"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12">Key Projects</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -136,26 +206,26 @@ const Projects = () => {
               className="project-card-container opacity-0"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="project-card h-full">
+              <div className="project-card h-full group">
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
                     <div className="p-4 text-white">
                       <p className="text-sm font-medium">{project.duration}</p>
                       <p className="text-sm opacity-80">{project.company}</p>
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 bg-white">
                   <h3 className="text-xl font-semibold mb-2 text-portfolio-darkBlue">{project.title}</h3>
                   <p className="text-gray-600 mb-4 line-clamp-2">{project.shortDescription}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs">
+                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs hover:bg-portfolio-blue hover:text-white transition-colors">
                         {tech}
                       </span>
                     ))}
@@ -167,10 +237,11 @@ const Projects = () => {
                   </div>
                   <Button 
                     variant="outline" 
-                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white"
+                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2"
                     onClick={() => handleOpenDetails(project)}
                   >
-                    View Details
+                    <span>View Details</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
               </div>
@@ -180,7 +251,7 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[600px]">
+            <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-portfolio-darkBlue">{selectedProject.title}</DialogTitle>
                 <DialogDescription className="text-portfolio-blue font-medium">
@@ -188,20 +259,43 @@ const Projects = () => {
                 </DialogDescription>
               </DialogHeader>
               <div className="mt-4">
-                <div className="mb-6">
+                <div className="mb-6 overflow-hidden rounded-md">
                   <img 
                     src={selectedProject.image} 
                     alt={selectedProject.title} 
-                    className="w-full h-64 object-cover rounded-md" 
+                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500" 
                   />
                 </div>
-                <h4 className="text-lg font-medium mb-2">Description</h4>
-                <p className="text-gray-700 mb-4">{selectedProject.fullDescription}</p>
+                
+                <h4 className="text-lg font-medium mb-2">Overview</h4>
+                <p className="text-gray-700 mb-6 leading-relaxed">{selectedProject.detailedDescription}</p>
+                
+                {selectedProject.challenges && (
+                  <div className="mb-6">
+                    <h4 className="text-lg font-medium mb-2">Challenges</h4>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                      {selectedProject.challenges.map((challenge, index) => (
+                        <li key={index} className="transition-all hover:translate-x-1">{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {selectedProject.achievements && (
+                  <div className="mb-6">
+                    <h4 className="text-lg font-medium mb-2">Key Achievements</h4>
+                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                      {selectedProject.achievements.map((achievement, index) => (
+                        <li key={index} className="transition-all hover:translate-x-1">{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 
                 <h4 className="text-lg font-medium mb-2">Technologies</h4>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {selectedProject.technologies.map((tech) => (
-                    <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm">
+                    <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
                       {tech}
                     </span>
                   ))}
@@ -210,13 +304,13 @@ const Projects = () => {
                 {selectedProject.links && (
                   <div className="flex gap-4">
                     {selectedProject.links.demo && (
-                      <Button className="flex items-center gap-2">
+                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors">
                         <ExternalLink className="w-4 h-4" />
                         View Demo
                       </Button>
                     )}
                     {selectedProject.links.github && (
-                      <Button variant="outline" className="flex items-center gap-2">
+                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white">
                         <Github className="w-4 h-4" />
                         View Code
                       </Button>

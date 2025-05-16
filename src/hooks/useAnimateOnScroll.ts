@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface AnimateOnScrollOptions {
   animationClass?: string;
@@ -7,6 +7,9 @@ interface AnimateOnScrollOptions {
   rootMargin?: string;
   once?: boolean;
   selector?: string;
+  delay?: number;
+  stagger?: boolean;
+  staggerDelay?: number;
 }
 
 export const useAnimateOnScroll = (options: AnimateOnScrollOptions = {}) => {
@@ -16,16 +19,28 @@ export const useAnimateOnScroll = (options: AnimateOnScrollOptions = {}) => {
     rootMargin = '0px',
     once = true,
     selector = '.animate-on-scroll',
+    delay = 0,
+    stagger = false,
+    staggerDelay = 100,
   } = options;
 
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    observerRef.current = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add(animationClass);
+            const element = entry.target as HTMLElement;
+            const baseDelay = delay + (stagger ? index * staggerDelay : 0);
+            
+            setTimeout(() => {
+              element.classList.add(animationClass);
+              element.style.visibility = 'visible';
+            }, baseDelay);
+            
             if (once) {
-              observer.unobserve(entry.target);
+              observerRef.current?.unobserve(entry.target);
             }
           } else if (!once) {
             entry.target.classList.remove(animationClass);
@@ -39,10 +54,21 @@ export const useAnimateOnScroll = (options: AnimateOnScrollOptions = {}) => {
     );
 
     const elements = document.querySelectorAll(selector);
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((el) => {
+      // Set initial visibility to hidden to prevent flash
+      (el as HTMLElement).style.visibility = 'hidden';
+      observerRef.current?.observe(el);
+    });
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      if (observerRef.current) {
+        elements.forEach((el) => {
+          observerRef.current?.unobserve(el);
+        });
+        observerRef.current = null;
+      }
     };
-  }, [animationClass, threshold, rootMargin, once, selector]);
+  }, [animationClass, threshold, rootMargin, once, selector, delay, stagger, staggerDelay]);
+
+  return observerRef;
 };

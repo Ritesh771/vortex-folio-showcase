@@ -1,7 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Education from './Education';
 
 interface TimelineItemProps {
   title: string;
@@ -19,18 +20,21 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period
         <div className="md:w-1/3 mb-2 md:mb-0">
           <span className="text-sm font-medium text-portfolio-blue">{period}</span>
         </div>
-        <div className="md:w-2/3 md:pl-6 border-l-2 border-portfolio-lightBlue">
+        <div className="md:w-2/3 md:pl-6 border-l-2 border-portfolio-lightBlue relative">
+          {/* Timeline dot */}
+          <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-portfolio-blue"></div>
+          
           <h4 className="text-xl font-semibold mb-1">{title}</h4>
           <p className="text-portfolio-blue font-medium mb-3">{organization}</p>
           <ul className="list-disc list-inside space-y-2 mb-3 text-gray-700">
             {description.map((item, i) => (
-              <li key={i}>{item}</li>
+              <li key={i} className="transition-all hover:translate-x-1">{item}</li>
             ))}
           </ul>
           {technologies && (
             <div className="flex flex-wrap gap-2 mt-3">
               {technologies.map((tech) => (
-                <span key={tech} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                <span key={tech} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-portfolio-lightBlue hover:text-white transition-colors">
                   {tech}
                 </span>
               ))}
@@ -43,6 +47,8 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period
 };
 
 const Experience = () => {
+  const [activeTab, setActiveTab] = useState("work");
+  
   const workExperience = [
     {
       id: 1,
@@ -144,14 +150,19 @@ const Experience = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="experience" className="py-20 relative">
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12">Experience & Education</h2>
         
-        <Tabs defaultValue="work" className="w-full">
-          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10">
-            <TabsTrigger value="work">Work Experience</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
+        <Tabs defaultValue="work" value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10 bg-white/80 backdrop-blur-sm">
+            <TabsTrigger value="work" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
+              Work Experience
+            </TabsTrigger>
+            <TabsTrigger value="education" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
+              Education
+            </TabsTrigger>
           </TabsList>
           
           <TabsContent value="work" className="animate-on-scroll opacity-0">
@@ -171,18 +182,7 @@ const Experience = () => {
           </TabsContent>
           
           <TabsContent value="education" className="animate-on-scroll opacity-0">
-            <div className="space-y-6">
-              {education.map((item, index) => (
-                <TimelineItem
-                  key={item.id}
-                  title={item.title}
-                  organization={item.organization}
-                  period={item.period}
-                  description={item.description}
-                  index={index}
-                />
-              ))}
-            </div>
+            {activeTab === "education" && <Education />}
           </TabsContent>
         </Tabs>
       </div>
