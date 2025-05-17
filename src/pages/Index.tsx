@@ -9,6 +9,7 @@ import Contact from '../components/Contact';
 import Certificates from '../components/Certificates';
 import Footer from '../components/Footer';
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Index = () => {
   // Fade in animation (default upward movement)
@@ -94,6 +95,7 @@ const Index = () => {
     style.innerHTML = `
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Adjust based on navbar height */
       }
       section {
         scroll-margin-top: 80px; /* Adjust based on navbar height */
@@ -122,35 +124,47 @@ const Index = () => {
         border-radius: 2px;
       }
       
-      /* Apply smooth transitions globally */
+      /* Apply enhanced smooth transitions globally */
       * {
         transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 150ms;
+        transition-duration: 200ms;
       }
       
       /* Custom scrollbar for a more polished look */
       ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
       }
       
       ::-webkit-scrollbar-track {
         background: rgba(247, 250, 252, 0.8);
+        border-radius: 4px;
       }
       
       ::-webkit-scrollbar-thumb {
-        background: rgba(59, 130, 246, 0.5);
-        border-radius: 5px;
+        background: rgba(59, 130, 246, 0.6);
+        border-radius: 4px;
       }
       
       ::-webkit-scrollbar-thumb:hover {
-        background: rgba(59, 130, 246, 0.7);
+        background: rgba(59, 130, 246, 0.8);
       }
       
-      /* Apple-style card transitions */
+      /* Enhanced Apple-style card transitions */
       .certificate-carousel .embla__slide {
-        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      
+      /* Add subtle depth and dimension to cards */
+      .certificate-card {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      
+      .certificate-card:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07), 0 6px 10px rgba(0, 0, 0, 0.05);
+        transform: translateY(-5px) scale(1.02);
       }
     `;
     document.head.appendChild(style);

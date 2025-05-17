@@ -20,8 +20,7 @@ interface CertificateItem {
 }
 
 const Certificates = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   const certificates: CertificateItem[] = [
     {
@@ -90,8 +89,8 @@ const Certificates = () => {
     }
   ];
 
-  // Apple-style animation effect
   useEffect(() => {
+    // Apple-style animation effect
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -109,7 +108,35 @@ const Certificates = () => {
       observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    // Set up automatic carousel scrolling
+    let scrollInterval: NodeJS.Timeout;
+    
+    const startAutoScroll = () => {
+      scrollInterval = setInterval(() => {
+        if (carouselRef.current) {
+          const scrollContainer = carouselRef.current.querySelector('.embla__container');
+          if (scrollContainer) {
+            const scrollAmount = 1; // pixels to scroll each interval
+            scrollContainer.scrollLeft += scrollAmount;
+            
+            // Reset scroll position when we reach the end to create infinite effect
+            const scrollWidth = scrollContainer.scrollWidth;
+            const containerWidth = scrollContainer.clientWidth;
+            
+            if (scrollContainer.scrollLeft + containerWidth >= scrollWidth) {
+              scrollContainer.scrollLeft = 0;
+            }
+          }
+        }
+      }, 30); // smoother animation with shorter interval
+    };
+    
+    startAutoScroll();
+    
+    return () => {
+      observer.disconnect();
+      clearInterval(scrollInterval);
+    };
   }, []);
 
   const getIconByType = (type: string) => {
@@ -138,13 +165,17 @@ const Certificates = () => {
           <Carousel 
             className="w-full max-w-5xl mx-auto certificate-carousel"
             opts={{
-              align: "center",
+              align: "start",
               loop: true,
+              dragFree: true,
+              containScroll: false
             }}
+            ref={carouselRef}
           >
             <CarouselContent className="py-4">
-              {certificates.map((cert, index) => (
-                <CarouselItem key={cert.id} className="md:basis-1/2 lg:basis-1/3 pl-4">
+              {/* Duplicate certificates array to create illusion of infinite scroll */}
+              {[...certificates, ...certificates].map((cert, index) => (
+                <CarouselItem key={`${cert.id}-${index}`} className="md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500">
                   <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-lg border border-gray-100 h-full flex flex-col">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="flex justify-between items-start mb-4">
@@ -197,6 +228,40 @@ const Certificates = () => {
             .certificate-card {
               opacity: 0;
               transform: translateY(30px);
+            }
+            
+            /* Smooth scroll enhancements */
+            html {
+              scroll-behavior: smooth;
+              scroll-padding-top: 100px;
+            }
+            
+            /* Custom animation for continuously moving cards */
+            @keyframes slideLeft {
+              from {
+                transform: translateX(0);
+              }
+              to {
+                transform: translateX(-100%);
+              }
+            }
+            
+            .certificate-carousel .embla__container {
+              display: flex;
+              -ms-overflow-style: none;  /* IE and Edge */
+              scrollbar-width: none;  /* Firefox */
+            }
+            
+            .certificate-carousel .embla__container::-webkit-scrollbar {
+              display: none;
+            }
+            
+            .embla__slide {
+              transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            
+            .embla__slide:hover {
+              z-index: 5;
             }
           `}
         </style>
