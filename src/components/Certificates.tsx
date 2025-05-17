@@ -8,7 +8,7 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Award, Certificate } from "lucide-react";
+import { Trophy, Award, GraduationCap } from "lucide-react";
 
 interface CertificateItem {
   id: number;
@@ -115,13 +115,13 @@ const Certificates = () => {
   const getIconByType = (type: string) => {
     switch (type) {
       case 'certification':
-        return <Certificate className="w-6 h-6 text-portfolio-blue" />;
+        return <GraduationCap className="w-6 h-6 text-portfolio-blue" />;
       case 'course':
         return <Award className="w-6 h-6 text-amber-500" />;
       case 'award':
         return <Trophy className="w-6 h-6 text-yellow-500" />;
       default:
-        return <Certificate className="w-6 h-6 text-portfolio-blue" />;
+        return <GraduationCap className="w-6 h-6 text-portfolio-blue" />;
     }
   };
 
@@ -177,27 +177,29 @@ const Certificates = () => {
           </Carousel>
         </div>
         
-        <style jsx>{`
-          @keyframes fadeSlideUp {
-            from {
+        <style>
+          {`
+            @keyframes fadeSlideUp {
+              from {
+                opacity: 0;
+                transform: translateY(30px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            
+            .card-visible {
+              animation: fadeSlideUp 0.7s ease forwards;
+            }
+            
+            .certificate-card {
               opacity: 0;
               transform: translateY(30px);
             }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          .card-visible {
-            animation: fadeSlideUp 0.7s ease forwards;
-          }
-          
-          .certificate-card {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-        `}</style>
+          `}
+        </style>
       </div>
     </section>
   );
