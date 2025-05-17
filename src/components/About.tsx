@@ -56,10 +56,10 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, percentage, delay }) => {
 
 const About = () => {
   const skills = [
-    { id: 1, name: "Software Engineering", percentage: 75, delay: 200 },
-    { id: 2, name: "Backend Development", percentage: 70, delay: 400 },
-    { id: 3, name: "Frontend Development", percentage: 65, delay: 600 },
-    { id: 4, name: "DevOps & Deployment", percentage: 50, delay: 800 }
+    { id: 1, name: "Backend Development", percentage: 75, delay: 400 },
+    { id: 2, name: "Frontend Development", percentage: 65, delay: 600 },
+    { id: 3, name: "DevOps & Deployment", percentage: 60, delay: 800 },
+    { id: 4, name: "Software Engineering", percentage: 50, delay: 200 }
   ];
 
   const animateOnScroll = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
