@@ -95,35 +95,29 @@ const Index = () => {
     // Apply a subtle blue tint to the body background
     document.body.classList.add('bg-gradient-to-br', 'from-blue-50', 'via-white', 'to-blue-50');
     
-    // Smooth scroll to section when clicking on nav links
-    const handleHashLinkClick = (event: MouseEvent) => {
-      const target = event.target as HTMLAnchorElement;
-      if (target && target.tagName === 'A' && target.hash) {
-        const section = document.querySelector(target.hash);
-        if (section) {
-          event.preventDefault();
-          section.scrollIntoView({ behavior: 'smooth' });
-          
-          // Update the URL without causing a new page load
-          window.history.pushState(null, '', target.hash);
-        }
+    // Apply styles for smooth scrolling and better section positioning
+    const style = document.createElement('style');
+    style.innerHTML = `
+      html {
+        scroll-behavior: smooth;
       }
-    };
+      section {
+        scroll-margin-top: 80px; /* Adjust based on navbar height */
+      }
+    `;
+    document.head.appendChild(style);
     
-    document.addEventListener('click', handleHashLinkClick);
-    
-    // Add a scroll indicator on the body
-    const body = document.body;
+    // Update the scroll-progress indicator
     const handleScroll = () => {
       const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
+      document.body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
     };
 
     window.addEventListener('scroll', handleScroll);
     
     return () => {
-      document.removeEventListener('click', handleHashLinkClick);
       window.removeEventListener('scroll', handleScroll);
+      document.head.removeChild(style);
     };
   }, []);
   
@@ -140,14 +134,16 @@ const Index = () => {
       
       <div className="relative z-10">
         <Navbar />
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Contact />
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Contact />
+        </main>
         <Footer />
       </div>
-      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue z-50 progress-indicator"></div>
+      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue z-50 progress-indicator" style={{width: 'var(--scroll-progress, 0%)'}}></div>
     </div>
   );
 };

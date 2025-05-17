@@ -5,6 +5,17 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      window.scrollTo({
+        top: element.getBoundingClientRect().top + window.scrollY - 80,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-portfolio-darkBlue text-white py-12">
       <div className="container mx-auto px-4">
@@ -43,11 +54,24 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} Ritesh N. All rights reserved.</p>
-          <p className="mt-2 text-sm">
-            Built with React, Tailwind CSS, and Shadcn UI
-          </p>
+        <div className="mt-8 pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-center md:text-left">
+            <p className="text-gray-400">&copy; {currentYear} Ritesh N. All rights reserved.</p>
+          </div>
+          
+          <div className="mt-4 md:mt-0">
+            <ul className="flex flex-wrap justify-center space-x-4 text-sm text-gray-400">
+              <li><a href="#home" onClick={(e) => handleNavLinkClick(e, '#home')} className="hover:text-portfolio-lightBlue transition-colors">Home</a></li>
+              <li><a href="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-portfolio-lightBlue transition-colors">About</a></li>
+              <li><a href="#experience" onClick={(e) => handleNavLinkClick(e, '#experience')} className="hover:text-portfolio-lightBlue transition-colors">Experience</a></li>
+              <li><a href="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-portfolio-lightBlue transition-colors">Projects</a></li>
+              <li><a href="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-portfolio-lightBlue transition-colors">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="text-center mt-4 text-sm text-gray-400">
+          <p>Built with React, Tailwind CSS, and Shadcn UI</p>
         </div>
       </div>
     </footer>

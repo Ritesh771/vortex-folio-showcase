@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Education from './Education';
 
@@ -46,8 +46,6 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period
 };
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("work");
-  
   const workExperience = [
     {
       id: 1,
@@ -90,7 +88,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 relative">
+    <section id="experience" className="py-20 relative scroll-mt-20">
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent z-0"></div>
       <div className="container mx-auto px-4 relative z-10">
@@ -106,7 +104,7 @@ const Experience = () => {
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="work">
+          <TabsContent value="work" className="mt-2">
             <div className="space-y-6">
               {workExperience.map((item, index) => (
                 <TimelineItem
@@ -122,7 +120,7 @@ const Experience = () => {
             </div>
           </TabsContent>
           
-          <TabsContent value="education">
+          <TabsContent value="education" className="mt-2">
             <Education />
           </TabsContent>
         </Tabs>

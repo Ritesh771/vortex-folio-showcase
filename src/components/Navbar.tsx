@@ -20,6 +20,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      setIsMenuOpen(false);
+      window.scrollTo({
+        top: element.getBoundingClientRect().top + window.scrollY - 80,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -35,7 +47,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#" className="text-portfolio-blue font-bold text-2xl">Ritesh N</a>
+            <a href="#home" className="text-portfolio-blue font-bold text-2xl">Ritesh N</a>
           </div>
           
           {/* Desktop Navigation */}
@@ -45,6 +57,7 @@ const Navbar = () => {
                 <a 
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavLinkClick(e, link.href)}
                   className="text-gray-700 hover:text-portfolio-blue font-medium transition-colors"
                 >
                   {link.name}
@@ -83,7 +96,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className="text-gray-700 hover:text-portfolio-blue font-medium transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => handleNavLinkClick(e, link.href)}
                 >
                   {link.name}
                 </a>

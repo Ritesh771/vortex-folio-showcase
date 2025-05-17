@@ -87,51 +87,93 @@ export const useAnimateOnScroll = (options: AnimateOnScrollOptions = {}) => {
       }, delayMs);
     };
 
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
-            const element = entry.target as HTMLElement;
-            const baseDelay = delay + (stagger ? index * staggerDelay : 0);
-            
-            animateElement(element, baseDelay);
-            
-            if (once) {
-              observerRef.current?.unobserve(entry.target);
+    const setupObserver = () => {
+      // Create a new observer
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              const element = entry.target as HTMLElement;
+              const baseDelay = delay + (stagger ? index * staggerDelay : 0);
+              
+              animateElement(element, baseDelay);
+              
+              if (once) {
+                observerRef.current?.unobserve(entry.target);
+              }
+            } else if (!once) {
+              // Reset when out of view if once is false
+              setInitialStyles(entry.target as HTMLElement);
+              entry.target.classList.remove(animationClass || '');
             }
-          } else if (!once) {
-            // Reset when out of view if once is false
-            setInitialStyles(entry.target as HTMLElement);
-            entry.target.classList.remove(animationClass || '');
-          }
-        });
-      },
-      {
-        threshold,
-        rootMargin,
-      }
-    );
-
-    // Get all elements matching the selector
-    const targetElements = document.querySelectorAll(selector);
+          });
+        },
+        {
+          threshold,
+          rootMargin,
+        }
+      );
+      
+      // Get all elements matching the selector
+      const targetElements = document.querySelectorAll(selector);
+      
+      // Set initial styles
+      targetElements.forEach((el) => {
+        setInitialStyles(el as HTMLElement);
+      });
+      
+      // Observe elements
+      targetElements.forEach((el) => {
+        observerRef.current?.observe(el);
+      });
+    };
     
-    // Set initial styles
-    targetElements.forEach((el) => {
-      setInitialStyles(el as HTMLElement);
+    // Set up the observer
+    setupObserver();
+    
+    // Set up a mutation observer to detect when new elements are added to the DOM
+    // This is especially useful for the tab switching scenario
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          // Check if any of the added nodes match our selector or contain elements that do
+          mutation.addedNodes.forEach((node) => {
+            if (node instanceof HTMLElement) {
+              // Check if the node itself matches the selector
+              if (node.matches(selector)) {
+                setInitialStyles(node);
+                observerRef.current?.observe(node);
+              }
+              
+              // Check if any of its children match the selector
+              const childElements = node.querySelectorAll(selector);
+              childElements.forEach((child) => {
+                setInitialStyles(child as HTMLElement);
+                observerRef.current?.observe(child);
+              });
+            }
+          });
+        }
+      });
     });
-
-    // Observe elements
-    targetElements.forEach((el) => {
-      observerRef.current?.observe(el);
+    
+    // Start observing the entire document body for new elements
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
     });
 
     return () => {
       if (observerRef.current) {
+        const targetElements = document.querySelectorAll(selector);
         targetElements.forEach((el) => {
           observerRef.current?.unobserve(el);
         });
+        observerRef.current.disconnect();
         observerRef.current = null;
       }
+      
+      mutationObserver.disconnect();
     };
   }, [animationClass, threshold, rootMargin, once, selector, delay, stagger, staggerDelay, duration, easing, direction, intensity, distance]);
 
