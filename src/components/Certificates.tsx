@@ -8,7 +8,7 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Award, GraduationCap, Eye } from "lucide-react";
+import { Trophy, Award, GraduationCap, Eye, Download } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -25,14 +25,14 @@ interface CertificateItem {
   issuer: string;
   date: string;
   type: 'certification' | 'course' | 'award';
-  imageSrc?: string;
+  imageSrc: string;
   description?: string;
 }
 
 const Certificates = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
-  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const autoScrollIntervalRef = useRef<number | null>(null);
   
   const certificates: CertificateItem[] = [
     {
@@ -41,7 +41,7 @@ const Certificates = () => {
       issuer: "AWS Academy",
       date: "October 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/2e76645b-cd19-474a-a96d-0a062e010060.png",
       description: "Comprehensive foundation in AWS Cloud concepts, services, security, architecture, pricing, and support."
     },
     {
@@ -50,7 +50,7 @@ const Certificates = () => {
       issuer: "Google for Developers",
       date: "July - September 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/0d981e4c-6539-4124-8a7f-b9175943347a.png",
       description: "Gained hands-on experience developing Android applications using Kotlin and implementing Material Design principles."
     },
     {
@@ -59,7 +59,7 @@ const Certificates = () => {
       issuer: "Google for Developers",
       date: "April - June 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/f58513e8-4a21-4965-8eb1-6fb36dffbdac.png",
       description: "Worked on machine learning models and AI applications using TensorFlow and Google Cloud AI services."
     },
     {
@@ -68,7 +68,7 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "September - October 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/5d06b6c2-ffe6-431b-a012-c47551cd94c5.png",
       description: "Mastered UX/UI design principles and Figma tools for creating interactive prototypes and design systems."
     },
     {
@@ -77,7 +77,7 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "October 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/8ded9581-fe7c-4d9d-8dd7-0d4924f0b403.png",
       description: "Prepared for technical interviews with data structures, algorithms, and system design principles."
     },
     {
@@ -86,7 +86,7 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "November 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/2f60887c-421e-42fd-b023-3b7a0e2cab61.png",
       description: "Comprehensive Python programming course covering fundamentals to advanced concepts like OOP and data analysis."
     },
     {
@@ -95,7 +95,7 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "February 2025",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/dfb6e82e-4854-4734-8fab-62b635c21dfc.png",
       description: "Built complex React applications with hooks, context API, and modern state management techniques."
     },
     {
@@ -104,48 +104,94 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "January 2025",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      imageSrc: "/lovable-uploads/edc85877-7b81-41eb-aa14-b1fbcf2a3f6c.png",
       description: "Mastered database design, complex queries, and performance optimization for relational databases."
+    },
+    {
+      id: 9,
+      title: "Technical Internship Offer",
+      issuer: "Net Ninja Solutions",
+      date: "February 2025",
+      type: "certification",
+      imageSrc: "/lovable-uploads/86787c2a-3f5f-43a0-9573-0524ac48ae08.png",
+      description: "Technical Intern position at Net Ninja Solutions Private Limited with a stipend of INR 3,000 per month."
+    },
+    {
+      id: 10,
+      title: "Artificial Intelligence Internship",
+      issuer: "CodSoft",
+      date: "January 2024",
+      type: "certification", 
+      imageSrc: "/lovable-uploads/5d274e86-f713-460f-bc10-65475bf84534.png",
+      description: "Virtual internship position in Artificial Intelligence at CodSoft for 4 weeks."
+    },
+    {
+      id: 11,
+      title: "Text to Speech Using IBM Watson",
+      issuer: "IBM SkillsBuild",
+      date: "October 2024",
+      type: "certification",
+      imageSrc: "/lovable-uploads/6b9add63-dda6-44cd-b763-ed763a73b700.png",
+      description: "Exploration of Text to Speech capabilities using IBM Watson technology."
     }
   ];
 
   const startAutoScroll = () => {
-    if (autoScrollIntervalRef.current) {
-      clearInterval(autoScrollIntervalRef.current);
-    }
-
-    // Use requestAnimationFrame for smoother animations
-    let startTime: number | null = null;
-    let pixelsPerSecond = 30; // Adjust speed as needed
-    
-    const scrollContainer = carouselRef.current?.querySelector('.embla__container') as HTMLElement;
-    if (!scrollContainer) return;
-    
-    const step = (timestamp: number) => {
-      if (!autoScrollEnabled) return;
-      if (!startTime) startTime = timestamp;
-      
-      const elapsed = timestamp - startTime;
-      const pixelsToScroll = (elapsed / 1000) * pixelsPerSecond;
-      
-      if (scrollContainer) {
-        scrollContainer.scrollLeft += pixelsToScroll / 60; // Smooth division for 60fps
-        
-        // Reset to beginning when reaching end to create infinite effect
-        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 10) {
-          scrollContainer.scrollLeft = 0;
-        }
+    if (typeof window !== 'undefined') {
+      // Clear any existing interval
+      if (autoScrollIntervalRef.current) {
+        window.cancelAnimationFrame(autoScrollIntervalRef.current);
+        autoScrollIntervalRef.current = null;
       }
+
+      let startTime: number | null = null;
+      const speed = 0.5; // Pixels per millisecond - adjust for speed
       
-      startTime = timestamp;
-      requestAnimationFrame(step);
-    };
-    
-    requestAnimationFrame(step);
+      const scrollContainer = carouselRef.current?.querySelector('.embla__container') as HTMLElement;
+      if (!scrollContainer) return;
+      
+      const animate = (timestamp: number) => {
+        if (!autoScrollEnabled) {
+          startTime = null;
+          if (autoScrollIntervalRef.current) {
+            autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
+          }
+          return;
+        }
+        
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const pixelsToScroll = elapsed * speed;
+        
+        if (scrollContainer) {
+          scrollContainer.scrollLeft += pixelsToScroll / 60;
+          
+          // Reset to beginning when reaching end to create infinite effect
+          if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth - 10) {
+            scrollContainer.scrollLeft = 0;
+          }
+        }
+        
+        startTime = timestamp;
+        autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
+      };
+      
+      autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
+    }
+  };
+
+  const handleDownload = (certificate: CertificateItem) => {
+    // Create a temporary anchor element to trigger download
+    const link = document.createElement('a');
+    link.href = certificate.imageSrc;
+    link.download = `${certificate.title.replace(/\s+/g, '-')}-Certificate.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   useEffect(() => {
-    // Apple-style animation effect for cards
+    // Apply animations to cards
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -156,7 +202,7 @@ const Certificates = () => {
           }
         });
       },
-      { threshold: 0.5, rootMargin: "-100px" }
+      { threshold: 0.2, rootMargin: "-100px" }
     );
 
     document.querySelectorAll('.certificate-card').forEach((el) => {
@@ -178,8 +224,8 @@ const Certificates = () => {
       return () => {
         carouselElement.removeEventListener('mouseenter', handleMouseEnter);
         carouselElement.removeEventListener('mouseleave', handleMouseLeave);
-        if (autoScrollIntervalRef.current) {
-          clearInterval(autoScrollIntervalRef.current);
+        if (autoScrollIntervalRef.current && typeof window !== 'undefined') {
+          window.cancelAnimationFrame(autoScrollIntervalRef.current);
         }
         observer.disconnect();
       };
@@ -269,11 +315,11 @@ const Certificates = () => {
                               
                               <div className="mt-4 space-y-4">
                                 {cert.imageSrc && (
-                                  <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                                  <div className="relative w-full aspect-auto bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                     <img 
                                       src={cert.imageSrc} 
                                       alt={`${cert.title} certificate`}
-                                      className="w-full h-full object-cover"
+                                      className="w-full h-auto object-contain"
                                     />
                                   </div>
                                 )}
@@ -297,8 +343,9 @@ const Certificates = () => {
                                   <Button 
                                     variant="outline"
                                     className="text-portfolio-blue border-portfolio-blue/50 hover:bg-portfolio-blue/10"
+                                    onClick={() => handleDownload(cert)}
                                   >
-                                    Download
+                                    <Download className="w-4 h-4 mr-2" /> Download
                                   </Button>
                                 </div>
                               </div>
@@ -318,66 +365,64 @@ const Certificates = () => {
           </Carousel>
         </div>
         
-        <style>
-          {`
-            @keyframes fadeSlideUp {
-              from {
-                opacity: 0;
-                transform: translateY(30px);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            
-            .card-visible {
-              animation: fadeSlideUp 0.7s ease forwards;
-            }
-            
-            .certificate-card {
+        <style jsx>{`
+          @keyframes fadeSlideUp {
+            from {
               opacity: 0;
               transform: translateY(30px);
-              transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             }
-            
-            .certificate-card:hover {
-              z-index: 10;
-              transform: translateY(-5px) scale(1.03);
-              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            to {
+              opacity: 1;
+              transform: translateY(0);
             }
-            
-            /* Smooth scroll enhancements */
-            html {
-              scroll-behavior: smooth;
-              scroll-padding-top: 100px;
-            }
-            
-            /* Enhanced infinite scroll effect */
-            .infinite-scroll-content {
-              scroll-behavior: smooth;
-            }
-            
-            .certificate-carousel .embla__container {
-              display: flex;
-              -ms-overflow-style: none;  /* IE and Edge */
-              scrollbar-width: none;  /* Firefox */
-            }
-            
-            .certificate-carousel .embla__container::-webkit-scrollbar {
-              display: none;
-            }
-            
-            /* Enhanced carousel interactions */
-            .embla__slide {
-              transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            }
-            
-            .embla__slide:hover {
-              z-index: 5;
-            }
-          `}
-        </style>
+          }
+          
+          .card-visible {
+            animation: fadeSlideUp 0.7s ease forwards;
+          }
+          
+          .certificate-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          
+          .certificate-card:hover {
+            z-index: 10;
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+          }
+          
+          /* Smooth scroll enhancements */
+          html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+          }
+          
+          /* Enhanced infinite scroll effect */
+          .infinite-scroll-content {
+            scroll-behavior: smooth;
+          }
+          
+          .certificate-carousel .embla__container {
+            display: flex;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+          }
+          
+          .certificate-carousel .embla__container::-webkit-scrollbar {
+            display: none;
+          }
+          
+          /* Enhanced carousel interactions */
+          .embla__slide {
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+          }
+          
+          .embla__slide:hover {
+            z-index: 5;
+          }
+        `}</style>
       </div>
     </section>
   );
