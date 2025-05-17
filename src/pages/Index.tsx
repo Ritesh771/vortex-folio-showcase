@@ -166,6 +166,18 @@ const Index = () => {
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07), 0 6px 10px rgba(0, 0, 0, 0.05);
         transform: translateY(-5px) scale(1.02);
       }
+      
+      /* Enhanced smooth animations */
+      @media (prefers-reduced-motion: no-preference) {
+        .smooth-appear {
+          animation: smooth-appear 0.8s ease forwards;
+        }
+        
+        @keyframes smooth-appear {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      }
     `;
     document.head.appendChild(style);
     

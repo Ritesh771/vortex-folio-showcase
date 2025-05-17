@@ -8,7 +8,16 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Award, GraduationCap } from "lucide-react";
+import { Trophy, Award, GraduationCap, Eye } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface CertificateItem {
   id: number;
@@ -17,10 +26,13 @@ interface CertificateItem {
   date: string;
   type: 'certification' | 'course' | 'award';
   imageSrc?: string;
+  description?: string;
 }
 
 const Certificates = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+  const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const certificates: CertificateItem[] = [
     {
@@ -29,7 +41,8 @@ const Certificates = () => {
       issuer: "AWS Academy",
       date: "October 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Comprehensive foundation in AWS Cloud concepts, services, security, architecture, pricing, and support."
     },
     {
       id: 2,
@@ -37,7 +50,8 @@ const Certificates = () => {
       issuer: "Google for Developers",
       date: "July - September 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Gained hands-on experience developing Android applications using Kotlin and implementing Material Design principles."
     },
     {
       id: 3,
@@ -45,7 +59,8 @@ const Certificates = () => {
       issuer: "Google for Developers",
       date: "April - June 2024",
       type: "certification",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Worked on machine learning models and AI applications using TensorFlow and Google Cloud AI services."
     },
     {
       id: 4,
@@ -53,7 +68,8 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "September - October 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Mastered UX/UI design principles and Figma tools for creating interactive prototypes and design systems."
     },
     {
       id: 5,
@@ -61,7 +77,8 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "October 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Prepared for technical interviews with data structures, algorithms, and system design principles."
     },
     {
       id: 6,
@@ -69,7 +86,8 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "November 2024",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Comprehensive Python programming course covering fundamentals to advanced concepts like OOP and data analysis."
     },
     {
       id: 7,
@@ -77,7 +95,8 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "February 2025",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Built complex React applications with hooks, context API, and modern state management techniques."
     },
     {
       id: 8,
@@ -85,12 +104,48 @@ const Certificates = () => {
       issuer: "LetsUpgrade",
       date: "January 2025",
       type: "course",
-      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
+      imageSrc: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      description: "Mastered database design, complex queries, and performance optimization for relational databases."
     }
   ];
 
+  const startAutoScroll = () => {
+    if (autoScrollIntervalRef.current) {
+      clearInterval(autoScrollIntervalRef.current);
+    }
+
+    // Use requestAnimationFrame for smoother animations
+    let startTime: number | null = null;
+    let pixelsPerSecond = 30; // Adjust speed as needed
+    
+    const scrollContainer = carouselRef.current?.querySelector('.embla__container') as HTMLElement;
+    if (!scrollContainer) return;
+    
+    const step = (timestamp: number) => {
+      if (!autoScrollEnabled) return;
+      if (!startTime) startTime = timestamp;
+      
+      const elapsed = timestamp - startTime;
+      const pixelsToScroll = (elapsed / 1000) * pixelsPerSecond;
+      
+      if (scrollContainer) {
+        scrollContainer.scrollLeft += pixelsToScroll / 60; // Smooth division for 60fps
+        
+        // Reset to beginning when reaching end to create infinite effect
+        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 10) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      
+      startTime = timestamp;
+      requestAnimationFrame(step);
+    };
+    
+    requestAnimationFrame(step);
+  };
+
   useEffect(() => {
-    // Apple-style animation effect
+    // Apple-style animation effect for cards
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -107,37 +162,36 @@ const Certificates = () => {
     document.querySelectorAll('.certificate-card').forEach((el) => {
       observer.observe(el);
     });
-
-    // Set up automatic carousel scrolling
-    let scrollInterval: NodeJS.Timeout;
     
-    const startAutoScroll = () => {
-      scrollInterval = setInterval(() => {
-        if (carouselRef.current) {
-          const scrollContainer = carouselRef.current.querySelector('.embla__container');
-          if (scrollContainer) {
-            const scrollAmount = 1; // pixels to scroll each interval
-            scrollContainer.scrollLeft += scrollAmount;
-            
-            // Reset scroll position when we reach the end to create infinite effect
-            const scrollWidth = scrollContainer.scrollWidth;
-            const containerWidth = scrollContainer.clientWidth;
-            
-            if (scrollContainer.scrollLeft + containerWidth >= scrollWidth) {
-              scrollContainer.scrollLeft = 0;
-            }
-          }
-        }
-      }, 30); // smoother animation with shorter interval
-    };
-    
+    // Start auto-scrolling
     startAutoScroll();
     
-    return () => {
-      observer.disconnect();
-      clearInterval(scrollInterval);
-    };
+    // Event listeners for pausing/resuming auto-scroll on hover
+    const carouselElement = carouselRef.current;
+    if (carouselElement) {
+      const handleMouseEnter = () => setAutoScrollEnabled(false);
+      const handleMouseLeave = () => setAutoScrollEnabled(true);
+      
+      carouselElement.addEventListener('mouseenter', handleMouseEnter);
+      carouselElement.addEventListener('mouseleave', handleMouseLeave);
+      
+      return () => {
+        carouselElement.removeEventListener('mouseenter', handleMouseEnter);
+        carouselElement.removeEventListener('mouseleave', handleMouseLeave);
+        if (autoScrollIntervalRef.current) {
+          clearInterval(autoScrollIntervalRef.current);
+        }
+        observer.disconnect();
+      };
+    }
   }, []);
+
+  // Resume auto-scroll when enablement changes
+  useEffect(() => {
+    if (autoScrollEnabled) {
+      startAutoScroll();
+    }
+  }, [autoScrollEnabled]);
 
   const getIconByType = (type: string) => {
     switch (type) {
@@ -172,7 +226,7 @@ const Certificates = () => {
             }}
             ref={carouselRef}
           >
-            <CarouselContent className="py-4">
+            <CarouselContent className="py-4 infinite-scroll-content">
               {/* Duplicate certificates array to create illusion of infinite scroll */}
               {[...certificates, ...certificates].map((cert, index) => (
                 <CarouselItem key={`${cert.id}-${index}`} className="md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500">
@@ -193,7 +247,63 @@ const Certificates = () => {
                           <span className="text-xs uppercase tracking-wider text-gray-400">
                             {cert.type === 'certification' ? 'Certification' : cert.type === 'course' ? 'Course Completion' : 'Award'}
                           </span>
-                          <span className="text-portfolio-blue text-sm cursor-pointer hover:underline">View</span>
+                          
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="link" className="text-portfolio-blue text-sm p-0 h-auto">
+                                <span className="flex items-center gap-1">
+                                  View <Eye className="w-3.5 h-3.5" />
+                                </span>
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-3xl">
+                              <DialogHeader>
+                                <DialogTitle className="text-xl text-portfolio-blue">{cert.title}</DialogTitle>
+                                <DialogDescription>
+                                  <div className="flex items-center justify-between my-2">
+                                    <span>Issued by: <strong>{cert.issuer}</strong></span>
+                                    <span>Date: <strong>{cert.date}</strong></span>
+                                  </div>
+                                </DialogDescription>
+                              </DialogHeader>
+                              
+                              <div className="mt-4 space-y-4">
+                                {cert.imageSrc && (
+                                  <div className="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                                    <img 
+                                      src={cert.imageSrc} 
+                                      alt={`${cert.title} certificate`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                )}
+                                
+                                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+                                  <h4 className="font-medium text-gray-800 mb-2">Description</h4>
+                                  <p className="text-gray-600">{cert.description}</p>
+                                </div>
+                                
+                                <div className="flex justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <div className="p-2 bg-gray-50 rounded-md">
+                                      {getIconByType(cert.type)}
+                                    </div>
+                                    <span className="text-sm font-medium">
+                                      {cert.type === 'certification' ? 'Certification' : 
+                                       cert.type === 'course' ? 'Course Completion' : 'Award'}
+                                    </span>
+                                  </div>
+                                  
+                                  <Button 
+                                    variant="outline"
+                                    className="text-portfolio-blue border-portfolio-blue/50 hover:bg-portfolio-blue/10"
+                                  >
+                                    Download
+                                  </Button>
+                                </div>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
                         </div>
                       </div>
                     </CardContent>
@@ -228,6 +338,13 @@ const Certificates = () => {
             .certificate-card {
               opacity: 0;
               transform: translateY(30px);
+              transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            
+            .certificate-card:hover {
+              z-index: 10;
+              transform: translateY(-5px) scale(1.03);
+              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             }
             
             /* Smooth scroll enhancements */
@@ -236,14 +353,9 @@ const Certificates = () => {
               scroll-padding-top: 100px;
             }
             
-            /* Custom animation for continuously moving cards */
-            @keyframes slideLeft {
-              from {
-                transform: translateX(0);
-              }
-              to {
-                transform: translateX(-100%);
-              }
+            /* Enhanced infinite scroll effect */
+            .infinite-scroll-content {
+              scroll-behavior: smooth;
             }
             
             .certificate-carousel .embla__container {
@@ -256,6 +368,7 @@ const Certificates = () => {
               display: none;
             }
             
+            /* Enhanced carousel interactions */
             .embla__slide {
               transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             }
