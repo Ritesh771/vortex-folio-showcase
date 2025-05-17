@@ -6,6 +6,7 @@ import About from '../components/About';
 import Experience from '../components/Experience';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
+import Certificates from '../components/Certificates';
 import Footer from '../components/Footer';
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll';
 
@@ -17,9 +18,7 @@ const Index = () => {
     once: true,
     selector: '.animate-on-scroll',
     stagger: true,
-    staggerDelay: 150,
-    duration: 800,
-    direction: 'up'
+    staggerDelay: 150
   });
   
   // Slide in from left
@@ -30,7 +29,6 @@ const Index = () => {
     selector: '.slide-in-left',
     stagger: true,
     staggerDelay: 100,
-    duration: 800,
     direction: 'left'
   });
   
@@ -42,7 +40,6 @@ const Index = () => {
     selector: '.slide-in-right',
     stagger: true,
     staggerDelay: 100,
-    duration: 800,
     direction: 'right'
   });
   
@@ -54,7 +51,6 @@ const Index = () => {
     selector: '.scale-in',
     stagger: true,
     staggerDelay: 50,
-    duration: 600,
     direction: 'scale'
   });
   
@@ -66,7 +62,6 @@ const Index = () => {
     selector: '.rotate-in',
     stagger: true,
     staggerDelay: 50,
-    duration: 800,
     direction: 'rotate'
   });
   
@@ -78,7 +73,6 @@ const Index = () => {
     selector: '.flip-in',
     stagger: true,
     staggerDelay: 150,
-    duration: 1000,
     direction: 'flip'
   });
   
@@ -103,6 +97,60 @@ const Index = () => {
       }
       section {
         scroll-margin-top: 80px; /* Adjust based on navbar height */
+      }
+      
+      /* Improve animations */
+      .section-title {
+        position: relative;
+        display: inline-block;
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #1E3A8A;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 4px;
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 1), rgba(59, 130, 246, 0.2));
+        border-radius: 2px;
+      }
+      
+      /* Apply smooth transitions globally */
+      * {
+        transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+      
+      /* Custom scrollbar for a more polished look */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: rgba(247, 250, 252, 0.8);
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: rgba(59, 130, 246, 0.5);
+        border-radius: 5px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(59, 130, 246, 0.7);
+      }
+      
+      /* Apple-style card transitions */
+      .certificate-carousel .embla__slide {
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       }
     `;
     document.head.appendChild(style);
@@ -139,6 +187,7 @@ const Index = () => {
           <About />
           <Experience />
           <Projects />
+          <Certificates />
           <Contact />
         </main>
         <Footer />

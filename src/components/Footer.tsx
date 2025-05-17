@@ -65,14 +65,13 @@ const Footer = () => {
               <li><a href="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-portfolio-lightBlue transition-colors">About</a></li>
               <li><a href="#experience" onClick={(e) => handleNavLinkClick(e, '#experience')} className="hover:text-portfolio-lightBlue transition-colors">Experience</a></li>
               <li><a href="#projects" onClick={(e) => handleNavLinkClick(e, '#projects')} className="hover:text-portfolio-lightBlue transition-colors">Projects</a></li>
+              <li><a href="#certificates" onClick={(e) => handleNavLinkClick(e, '#certificates')} className="hover:text-portfolio-lightBlue transition-colors">Certificates</a></li>
               <li><a href="#contact" onClick={(e) => handleNavLinkClick(e, '#contact')} className="hover:text-portfolio-lightBlue transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>
         
-        <div className="text-center mt-4 text-sm text-gray-400">
-          <p>Built with React, Tailwind CSS, and Shadcn UI</p>
-        </div>
+        {/* Removed the "Built with React, Tailwind CSS, and Shadcn UI" line */}
       </div>
     </footer>
   );
