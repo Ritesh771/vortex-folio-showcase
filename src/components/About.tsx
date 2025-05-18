@@ -18,12 +18,13 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, percentage, delay }) => {
             setTimeout(() => {
               if (progressRef.current) {
                 progressRef.current.style.width = `${percentage}%`;
+                progressRef.current.style.transition = `width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
               }
             }, delay);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2, rootMargin: "-50px" }
     );
     
     if (progressRef.current) {
@@ -38,16 +39,19 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, percentage, delay }) => {
   }, [percentage, delay]);
   
   return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-1">
+    <div className="mb-6 transform transition-all duration-500 hover:scale-[1.02]">
+      <div className="flex justify-between mb-2">
         <span className="font-medium text-gray-700">{skill}</span>
         <span className="text-sm text-gray-500">{percentage}%</span>
       </div>
-      <div className="progress-bar">
+      <div className="progress-bar h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
         <div
           ref={progressRef}
-          className="progress-bar-fill"
-          style={{ width: "0%" }}
+          className="progress-bar-fill h-full rounded-full"
+          style={{ 
+            width: "0%",
+            background: "linear-gradient(90deg, #3B82F6, #1E3A8A)"
+          }}
         />
       </div>
     </div>
@@ -89,42 +93,44 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
         <h2 className="section-title mb-12">About Me</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="animate-on-scroll opacity-0">
+          <div className="animate-on-scroll opacity-0 transform transition-all duration-700">
             <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Professional Summary</h3>
-            <p className="text-gray-700 mb-6">
+            <p className="text-gray-700 mb-6 leading-relaxed">
               I bring hands-on experience in backend development using Django and REST APIs, along with a keen eye for building responsive and engaging frontends using React.js and Tailwind CSS. Passionate about building scalable tech solutions with real-world impact, especially in the education and security sectors.
             </p>
             
             <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Technical Skills</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div>
+              <div className="transform transition hover:translate-y-[-5px] hover:shadow-md p-4 rounded-lg">
                 <h4 className="font-medium mb-2 text-portfolio-blue">Languages & Frameworks</h4>
                 <p className="text-gray-700">Python, JavaScript, TypeScript, HTML5, CSS3, Django, Django REST Framework, Flask, TensorFlow</p>
               </div>
-              <div>
+              <div className="transform transition hover:translate-y-[-5px] hover:shadow-md p-4 rounded-lg">
                 <h4 className="font-medium mb-2 text-portfolio-blue">Frontend Technologies</h4>
                 <p className="text-gray-700">React.js, Redux Toolkit, Tailwind CSS</p>
               </div>
-              <div>
+              <div className="transform transition hover:translate-y-[-5px] hover:shadow-md p-4 rounded-lg">
                 <h4 className="font-medium mb-2 text-portfolio-blue">Databases & DevOps</h4>
                 <p className="text-gray-700">PostgreSQL, MySQL, Redis, Git, Postman</p>
               </div>
-              <div>
+              <div className="transform transition hover:translate-y-[-5px] hover:shadow-md p-4 rounded-lg">
                 <h4 className="font-medium mb-2 text-portfolio-blue">Tools & Platforms</h4>
                 <p className="text-gray-700">Visual Studio Code, GitHub, AWS (basic), Android Studio</p>
               </div>
             </div>
             
-            <h4 className="font-medium mb-2 text-portfolio-blue">Soft Skills</h4>
-            <p className="text-gray-700">Team Leadership, Agile Collaboration, Technical Mentoring</p>
+            <div className="transform transition hover:translate-y-[-5px] hover:shadow-md p-4 rounded-lg">
+              <h4 className="font-medium mb-2 text-portfolio-blue">Soft Skills</h4>
+              <p className="text-gray-700">Team Leadership, Agile Collaboration, Technical Mentoring</p>
+            </div>
           </div>
           
-          <div className="animate-on-scroll opacity-0">
+          <div className="animate-on-scroll opacity-0 transform transition-all duration-700 delay-300">
             <h3 className="text-2xl font-semibold mb-6 text-portfolio-darkBlue">Proficiency Level</h3>
             <div>
               {skills.map((skill) => (
@@ -141,14 +147,14 @@ const About = () => {
               <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Preferred Job Roles</h3>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["Software Engineer", "Backend Developer", "Frontend Developer", "DevOps Engineer"].map((role) => (
-                  <span key={role} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm">
+                  <span key={role} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm transform transition-all duration-300 hover:scale-105 hover:bg-opacity-20">
                     {role}
                   </span>
                 ))}
               </div>
               
               <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Location Preference</h3>
-              <p className="flex items-center text-gray-700">
+              <p className="flex items-center text-gray-700 transform transition hover:translate-x-1">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-portfolio-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
