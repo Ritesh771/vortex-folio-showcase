@@ -144,7 +144,7 @@ const Certificates = () => {
       }
 
       let startTime: number | null = null;
-      const speed = 0.5;
+      const speed = 0.8; // Increased speed for more noticeable movement
 
       const scrollContainer = carouselRef.current?.querySelector('.embla__container') as HTMLElement;
       if (!scrollContainer) return;
@@ -164,9 +164,11 @@ const Certificates = () => {
 
         if (scrollContainer) {
           scrollContainer.scrollLeft += pixelsToScroll / 60;
-
-          if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth - 10) {
-            scrollContainer.scrollLeft = 0;
+          
+          // Better infinite scroll with smoother transition
+          if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth - 20) {
+            // When we're near the end, smoothly reset to beginning with a small offset to avoid visual jump
+            scrollContainer.scrollLeft = 10;
           }
         }
 
@@ -211,13 +213,19 @@ const Certificates = () => {
     if (carouselElement) {
       const handleMouseEnter = () => setAutoScrollEnabled(false);
       const handleMouseLeave = () => setAutoScrollEnabled(true);
+      const handleTouchStart = () => setAutoScrollEnabled(false);
+      const handleTouchEnd = () => setAutoScrollEnabled(true);
 
       carouselElement.addEventListener('mouseenter', handleMouseEnter);
       carouselElement.addEventListener('mouseleave', handleMouseLeave);
+      carouselElement.addEventListener('touchstart', handleTouchStart);
+      carouselElement.addEventListener('touchend', handleTouchEnd);
 
       return () => {
         carouselElement.removeEventListener('mouseenter', handleMouseEnter);
         carouselElement.removeEventListener('mouseleave', handleMouseLeave);
+        carouselElement.removeEventListener('touchstart', handleTouchStart);
+        carouselElement.removeEventListener('touchend', handleTouchEnd);
         if (autoScrollIntervalRef.current && typeof window !== 'undefined') {
           window.cancelAnimationFrame(autoScrollIntervalRef.current);
         }
@@ -265,7 +273,7 @@ const Certificates = () => {
             ref={carouselRef}
           >
             <CarouselContent className="py-4 infinite-scroll-content">
-              {[...certificates, ...certificates].map((cert, index) => (
+              {[...certificates, ...certificates, ...certificates].map((cert, index) => (
                 <CarouselItem key={`${cert.id}-${index}`} className="md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500">
                   <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-lg border border-gray-100 h-full flex flex-col">
                     <CardContent className="p-6 flex flex-col h-full">
@@ -423,4 +431,3 @@ const Certificates = () => {
 };
 
 export default Certificates;
-
