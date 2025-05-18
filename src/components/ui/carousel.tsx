@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -6,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useIsMobile } from "@/hooks/use-mobile" 
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -56,13 +58,20 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
-    const [carouselRef, api] = useEmblaCarousel(
-      {
-        ...opts,
-        axis: orientation === "horizontal" ? "x" : "y",
-      },
-      plugins
-    )
+    const isMobile = useIsMobile()
+    
+    // Enhanced options for better mobile experience
+    const enhancedOpts: CarouselOptions = {
+      ...opts,
+      axis: orientation === "horizontal" ? "x" : "y",
+      dragFree: isMobile ? true : opts?.dragFree,
+      containScroll: isMobile ? "trimSnaps" : opts?.containScroll,
+      loop: opts?.loop || false,
+      inViewThreshold: isMobile ? 0.7 : opts?.inViewThreshold || 0.5,
+      align: isMobile ? "start" : opts?.align || "center",
+    }
+    
+    const [carouselRef, api] = useEmblaCarousel(enhancedOpts, plugins)
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
@@ -76,11 +85,15 @@ const Carousel = React.forwardRef<
     }, [])
 
     const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev()
+      api?.scrollPrev({
+        animation: { duration: 300, easing: (t) => 1 - Math.pow(1 - t, 3) }
+      })
     }, [api])
 
     const scrollNext = React.useCallback(() => {
-      api?.scrollNext()
+      api?.scrollNext({
+        animation: { duration: 300, easing: (t) => 1 - Math.pow(1 - t, 3) }
+      })
     }, [api])
 
     const handleKeyDown = React.useCallback(
@@ -95,6 +108,17 @@ const Carousel = React.forwardRef<
       },
       [scrollPrev, scrollNext]
     )
+    
+    // Handle touch swipe for better mobile responsiveness
+    const handleTouchStart = React.useCallback(() => {
+      // Pause any auto-scroll if implemented
+      document.body.style.overscrollBehavior = "none"
+    }, [])
+    
+    const handleTouchEnd = React.useCallback(() => {
+      // Resume auto-scroll if implemented
+      document.body.style.overscrollBehavior = "auto"
+    }, [])
 
     React.useEffect(() => {
       if (!api || !setApi) {
@@ -117,13 +141,34 @@ const Carousel = React.forwardRef<
         api?.off("select", onSelect)
       }
     }, [api, onSelect])
+    
+    // Apply smooth momentum scrolling for better mobile UX
+    React.useEffect(() => {
+      if (!api) return
+      
+      const carouselNode = carouselRef?.current
+      if (!carouselNode) return
+      
+      if (isMobile) {
+        // Set smoother options for mobile
+        api.reInit({
+          ...enhancedOpts,
+          speed: 15, // Lower speed for smoother momentum scrolling on mobile
+          dragFree: true,
+        })
+      }
+      
+      return () => {
+        // Clean up any event listeners if needed
+      }
+    }, [api, carouselRef, isMobile, enhancedOpts])
 
     return (
       <CarouselContext.Provider
         value={{
           carouselRef,
           api: api,
-          opts,
+          opts: enhancedOpts,
           orientation:
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev,
@@ -135,6 +180,8 @@ const Carousel = React.forwardRef<
         <div
           ref={ref}
           onKeyDownCapture={handleKeyDown}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           className={cn("relative", className)}
           role="region"
           aria-roledescription="carousel"
@@ -153,16 +200,21 @@ const CarouselContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
+  const isMobile = useIsMobile()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div ref={carouselRef} className={cn("overflow-hidden", isMobile ? "scrollable" : "")} style={{ WebkitOverflowScrolling: 'touch' }}>
       <div
         ref={ref}
         className={cn(
-          "flex",
+          "flex will-change-transform",
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className
         )}
+        style={{ 
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+        }}
         {...props}
       />
     </div>
@@ -175,6 +227,7 @@ const CarouselItem = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const { orientation } = useCarousel()
+  const isMobile = useIsMobile()
 
   return (
     <div
@@ -184,8 +237,13 @@ const CarouselItem = React.forwardRef<
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
+        isMobile ? "transition-transform duration-300 ease-out" : "",
         className
       )}
+      style={{ 
+        touchAction: 'pan-y',
+        WebkitTapHighlightColor: 'transparent'
+      }}
       {...props}
     />
   )
@@ -197,6 +255,12 @@ const CarouselPrevious = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const isMobile = useIsMobile()
+
+  // Adjust button position for mobile
+  const mobileClass = isMobile ? 
+    "opacity-70 h-8 w-8 -left-2 bg-white/80 shadow-md border-0" : 
+    "h-8 w-8 -left-12"
 
   return (
     <Button
@@ -204,9 +268,9 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute rounded-full",
         orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
+          ? `${mobileClass} top-1/2 -translate-y-1/2`
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
@@ -226,6 +290,12 @@ const CarouselNext = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const isMobile = useIsMobile()
+  
+  // Adjust button position for mobile
+  const mobileClass = isMobile ? 
+    "opacity-70 h-8 w-8 -right-2 bg-white/80 shadow-md border-0" : 
+    "h-8 w-8 -right-12"
 
   return (
     <Button
@@ -233,9 +303,9 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute rounded-full",
         orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
+          ? `${mobileClass} top-1/2 -translate-y-1/2`
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}

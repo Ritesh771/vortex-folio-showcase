@@ -10,71 +10,81 @@ import Certificates from '../components/Certificates';
 import Footer from '../components/Footer';
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useIsMobile, useBreakpoint } from '@/hooks/use-mobile';
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  const isDesktop = useBreakpoint('lg');
+
   // Fade in animation (default upward movement)
   useAnimateOnScroll({
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px',
+    threshold: isMobile ? 0.05 : 0.1, // Lower threshold on mobile for earlier animation
+    rootMargin: isMobile ? '0px 0px -10px 0px' : '0px 0px -50px 0px',
     once: true,
     selector: '.animate-on-scroll',
     stagger: true,
-    staggerDelay: 150
+    staggerDelay: isMobile ? 100 : 150, // Faster stagger on mobile
+    duration: isMobile ? 600 : 800 // Slightly faster animations on mobile
   });
 
   // Slide in from left
   useAnimateOnScroll({
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
     rootMargin: '0px',
     once: true,
     selector: '.slide-in-left',
     stagger: true,
-    staggerDelay: 100,
-    direction: 'left'
+    staggerDelay: isMobile ? 75 : 100,
+    direction: 'left',
+    distance: isMobile ? '15px' : '30px' // Shorter distance on mobile
   });
 
   // Slide in from right
   useAnimateOnScroll({
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
     rootMargin: '0px',
     once: true,
     selector: '.slide-in-right',
     stagger: true,
-    staggerDelay: 100,
-    direction: 'right'
+    staggerDelay: isMobile ? 75 : 100,
+    direction: 'right',
+    distance: isMobile ? '15px' : '30px' // Shorter distance on mobile
   });
 
   // Scale animation
   useAnimateOnScroll({
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
     rootMargin: '0px',
     once: true,
     selector: '.scale-in',
     stagger: true,
-    staggerDelay: 50,
-    direction: 'scale'
+    staggerDelay: isMobile ? 40 : 50,
+    direction: 'scale',
+    intensity: isMobile ? 0.9 : 1
   });
 
   // Rotation animation
   useAnimateOnScroll({
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
     rootMargin: '0px',
     once: true,
     selector: '.rotate-in',
     stagger: true,
-    staggerDelay: 50,
-    direction: 'rotate'
+    staggerDelay: isMobile ? 40 : 50,
+    direction: 'rotate',
+    intensity: isMobile ? 0.8 : 1 // Less rotation on mobile
   });
 
   // 3D flip animation
   useAnimateOnScroll({
-    threshold: 0.1,
+    threshold: isMobile ? 0.05 : 0.1,
     rootMargin: '0px',
     once: true,
     selector: '.flip-in',
     stagger: true,
-    staggerDelay: 150,
-    direction: 'flip'
+    staggerDelay: isMobile ? 120 : 150,
+    direction: 'flip',
+    intensity: isMobile ? 0.8 : 1 // Less extreme flip on mobile
   });
 
   useEffect(() => {
@@ -95,17 +105,25 @@ const Index = () => {
     style.innerHTML = `
       html {
         scroll-behavior: smooth !important;
-        scroll-padding-top: 80px; /* Adjust based on navbar height */
+        scroll-padding-top: ${isMobile ? 60 : 80}px; /* Adjust based on navbar height and device */
+        overflow-x: hidden;
       }
+      
+      body {
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
       section {
-        scroll-margin-top: 80px; /* Adjust based on navbar height */
+        scroll-margin-top: ${isMobile ? 60 : 80}px; /* Adjust based on navbar height and device */
       }
 
       /* Improve animations */
       .section-title {
         position: relative;
         display: inline-block;
-        font-size: 2.25rem;
+        font-size: ${isMobile ? '1.875rem' : '2.25rem'};
         font-weight: 700;
         color: #1E3A8A;
         margin-bottom: 1rem;
@@ -118,7 +136,7 @@ const Index = () => {
         bottom: -0.5rem;
         left: 50%;
         transform: translateX(-50%);
-        width: 60%;
+        width: ${isMobile ? '50%' : '60%'};
         height: 4px;
         background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 1), rgba(59, 130, 246, 0.2));
         border-radius: 2px;
@@ -129,12 +147,13 @@ const Index = () => {
         transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 200ms;
+        box-sizing: border-box;
       }
 
       /* Custom scrollbar for a more polished look */
       ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: ${isMobile ? '4px' : '6px'};
+        height: ${isMobile ? '4px' : '6px'};
       }
 
       ::-webkit-scrollbar-track {
@@ -165,8 +184,8 @@ const Index = () => {
       }
 
       .certificate-card:hover {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07), 0 6px 10px rgba(0, 0, 0, 0.05);
-        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 ${isMobile ? '6px 15px' : '10px 25px'} rgba(0, 0, 0, 0.07), 0 ${isMobile ? '4px 6px' : '6px 10px'} rgba(0, 0, 0, 0.05);
+        transform: translateY(-5px) ${isMobile ? 'scale(1.01)' : 'scale(1.02)'};
       }
 
       /* Enhanced smooth animations */
@@ -184,8 +203,10 @@ const Index = () => {
 
       /* Ensure modal content is scrollable */
       .DialogContent {
-        max-height: 80vh;
+        max-height: ${isMobile ? '85vh' : '80vh'};
         overflow-y: auto;
+        max-width: ${isMobile ? '95vw' : 'none'};
+        width: ${isMobile ? 'auto' : 'initial'};
       }
 
       /* Ensure the modal content container is scrollable */
@@ -205,6 +226,55 @@ const Index = () => {
         will-change: transform;
         backface-visibility: hidden;
       }
+      
+      /* Mobile-specific optimizations */
+      @media (max-width: 768px) {
+        .section-padding {
+          padding: 3rem 1rem;
+        }
+        
+        .button-touch-target {
+          min-height: 44px;
+          min-width: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        /* Fix for iOS momentum scrolling */
+        .scrollable-container {
+          -webkit-overflow-scrolling: touch;
+          overflow-y: auto;
+        }
+        
+        /* Adjust modal size on mobile */
+        .modal-mobile {
+          width: 95vw !important;
+          max-width: 95vw !important;
+        }
+      }
+      
+      /* Responsive typography */
+      @media (max-width: 480px) {
+        h1 { font-size: 1.75rem; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.25rem; }
+        p { font-size: 0.95rem; }
+      }
+      
+      /* Enhanced touch interactions */
+      @media (hover: none) {
+        .touch-feedback:active {
+          opacity: 0.7;
+          transform: scale(0.98);
+        }
+        
+        /* Remove hover effects on mobile */
+        .no-hover-mobile:hover {
+          transform: none !important;
+          box-shadow: none !important;
+        }
+      }
     `;
     document.head.appendChild(style);
 
@@ -212,16 +282,31 @@ const Index = () => {
     const handleScroll = () => {
       const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
       document.body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
+      
+      // Optimize performance by using requestAnimationFrame
+      requestAnimationFrame(() => {
+        document.body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
+      });
     };
 
     // Use passive event listener for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Add viewport height fix for mobile browsers
+    const setVh = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setVh();
+    window.addEventListener('resize', setVh);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', setVh);
       document.head.removeChild(style);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/80 via-white to-blue-100/50">
@@ -229,10 +314,12 @@ const Index = () => {
       <div className="bg-pattern absolute inset-0 opacity-5 z-0"></div>
       <div className="absolute inset-0 bg-gradient-radial from-portfolio-blue/5 via-transparent to-transparent z-0"></div>
 
-      {/* Dynamic vortex background */}
-      <div className="absolute top-0 left-0 right-0 h-[300px] overflow-hidden z-0 pointer-events-none">
-        <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-conic from-portfolio-blue/3 via-portfolio-lightBlue/1 to-portfolio-blue/3 animate-vortex gpu-accelerated"></div>
-      </div>
+      {/* Dynamic vortex background - conditionally render for performance on mobile */}
+      {!isMobile && (
+        <div className="absolute top-0 left-0 right-0 h-[300px] overflow-hidden z-0 pointer-events-none">
+          <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-conic from-portfolio-blue/3 via-portfolio-lightBlue/1 to-portfolio-blue/3 animate-vortex gpu-accelerated"></div>
+        </div>
+      )}
 
       <div className="relative z-10">
         <Navbar />
