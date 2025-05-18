@@ -85,15 +85,11 @@ const Carousel = React.forwardRef<
     }, [])
 
     const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev({
-        animation: { duration: 300, easing: (t) => 1 - Math.pow(1 - t, 3) }
-      })
+      api?.scrollPrev()
     }, [api])
 
     const scrollNext = React.useCallback(() => {
-      api?.scrollNext({
-        animation: { duration: 300, easing: (t) => 1 - Math.pow(1 - t, 3) }
-      })
+      api?.scrollNext()
     }, [api])
 
     const handleKeyDown = React.useCallback(
@@ -146,14 +142,10 @@ const Carousel = React.forwardRef<
     React.useEffect(() => {
       if (!api) return
       
-      const carouselNode = carouselRef?.current
-      if (!carouselNode) return
-      
-      if (isMobile) {
+      if (carouselRef && isMobile) {
         // Set smoother options for mobile
         api.reInit({
           ...enhancedOpts,
-          speed: 15, // Lower speed for smoother momentum scrolling on mobile
           dragFree: true,
         })
       }
