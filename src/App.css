@@ -119,3 +119,27 @@ body {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Progress indicator - improved for mobile */
+.progress-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, #3B82F6, #93c5fd, #3B82F6);
+  z-index: 9999;
+  width: var(--scroll-progress, 0%);
+  transition: width 0.1s ease-out;
+  transform: translateZ(0);
+  will-change: width;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Make sure the progress indicator works on all devices */
+@media (max-width: 768px) {
+  .progress-indicator {
+    height: 2px; /* Slightly thinner on mobile */
+  }
+}
+
