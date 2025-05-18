@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
@@ -94,7 +93,7 @@ const Index = () => {
     const style = document.createElement('style');
     style.innerHTML = `
       html {
-        scroll-behavior: smooth !important;
+        scroll-behavior: smooth;
         scroll-padding-top: 80px; /* Adjust based on navbar height */
       }
       section {
@@ -133,8 +132,8 @@ const Index = () => {
 
       /* Custom scrollbar for a more polished look */
       ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
+        width: 8px;
+        height: 8px;
       }
 
       ::-webkit-scrollbar-track {
@@ -154,14 +153,12 @@ const Index = () => {
       /* Enhanced Apple-style card transitions */
       .certificate-carousel .embla__slide {
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
       }
 
       /* Add subtle depth and dimension to cards */
       .certificate-card {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, box-shadow;
       }
 
       .certificate-card:hover {
@@ -173,7 +170,6 @@ const Index = () => {
       @media (prefers-reduced-motion: no-preference) {
         .smooth-appear {
           animation: smooth-appear 0.8s ease forwards;
-          will-change: opacity, transform;
         }
 
         @keyframes smooth-appear {
@@ -193,29 +189,16 @@ const Index = () => {
         max-height: inherit;
         overflow-y: auto;
       }
-
-      /* Optimized animations */
-      [class*='animate-'] {
-        will-change: transform, opacity;
-      }
-
-      /* Enhanced certificate carousel */
-      .certificate-carousel .embla__container {
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        will-change: transform;
-        backface-visibility: hidden;
-      }
     `;
     document.head.appendChild(style);
 
-    // Update the scroll-progress indicator with optimized performance
+    // Update the scroll-progress indicator
     const handleScroll = () => {
       const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
       document.body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
     };
 
-    // Use passive event listener for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -231,12 +214,12 @@ const Index = () => {
 
       {/* Dynamic vortex background */}
       <div className="absolute top-0 left-0 right-0 h-[300px] overflow-hidden z-0 pointer-events-none">
-        <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-conic from-portfolio-blue/3 via-portfolio-lightBlue/1 to-portfolio-blue/3 animate-vortex gpu-accelerated"></div>
+        <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-conic from-portfolio-blue/3 via-portfolio-lightBlue/1 to-portfolio-blue/3 animate-vortex"></div>
       </div>
 
       <div className="relative z-10">
         <Navbar />
-        <main className="gpu-accelerated">
+        <main>
           <Hero />
           <About />
           <Experience />

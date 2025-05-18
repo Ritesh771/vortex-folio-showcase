@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -81,7 +82,6 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
     transition: background-color 0.5s ease;
-    overscroll-behavior-y: none; /* Prevents bounce effect on some browsers */
   }
   
   ::selection {
@@ -129,8 +129,8 @@
   
   /* Enhanced scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   
   ::-webkit-scrollbar-track {
@@ -141,19 +141,19 @@
   ::-webkit-scrollbar-thumb {
     background: rgba(59, 130, 246, 0.6);
     border-radius: 10px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     background-clip: content-box;
   }
   
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(59, 130, 246, 0.8);
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     background-clip: content-box;
   }
   
   /* Improved transitions */
   a, button, input, textarea, select {
-    @apply transition-all duration-300 ease-in-out;
+    @apply transition-all duration-300;
   }
   
   /* Enhanced button interactions */
@@ -236,7 +236,6 @@
     height: 4px;
     transition: width 0.05s ease;
     background: linear-gradient(90deg, #3B82F6, #1E3A8A);
-    will-change: width; /* Performance optimization */
   }
 
   .animate-bounce-subtle {
@@ -253,7 +252,6 @@
 
   .animate-vortex {
     animation: vortex 20s linear infinite;
-    will-change: transform; /* Performance optimization */
   }
 
   .animate-spin-slow {
@@ -287,12 +285,10 @@
   /* Dialog enhancement */
   .DialogOverlay {
     animation: overlayShow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity; /* Performance optimization */
   }
   
   .DialogContent {
     animation: contentShow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform; /* Performance optimization */
   }
   
   @keyframes overlayShow {
@@ -314,17 +310,10 @@
   /* Enhanced card animations */
   .certificate-card {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    will-change: transform, box-shadow, opacity; /* Performance optimization */
   }
   
   .certificate-card:hover {
     transform: translateY(-8px) scale(1.03) !important;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  /* GPU-accelerated animations */
-  .gpu-accelerated {
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 }
