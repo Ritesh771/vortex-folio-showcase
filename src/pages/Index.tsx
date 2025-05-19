@@ -1,5 +1,4 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -10,12 +9,8 @@ import Certificates from '../components/Certificates';
 import Footer from '../components/Footer';
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useIsMobile } from '../hooks/use-mobile';
 
 const Index = () => {
-  const progressRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-
   // Fade in animation (default upward movement)
   useAnimateOnScroll({
     threshold: 0.1,
@@ -197,60 +192,19 @@ const Index = () => {
     `;
     document.head.appendChild(style);
 
-    // Update the scroll-progress indicator - improved for mobile
+    // Update the scroll-progress indicator
     const handleScroll = () => {
-      // Get document height correctly accounting for mobile viewport
-      const docHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-      
-      // Calculate viewport height
-      const windowHeight = window.innerHeight;
-      
-      // Calculate how far we can scroll
-      const scrollable = docHeight - windowHeight;
-      
-      // Calculate scroll percentage more accurately
-      const scrollPercentage = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-      
-      // Update the CSS variable for the progress indicator
-      document.documentElement.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
-      
-      // Also update the progress element directly if it exists
-      if (progressRef.current) {
-        progressRef.current.style.width = `${scrollPercentage}%`;
-      }
+      const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      document.body.style.setProperty('--scroll-progress', `${scrollPercentage}%`);
     };
 
-    // Initial calculation when page loads
-    handleScroll();
-    
-    // Add event listeners for both scroll and resize (important for mobile orientation changes)
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    
-    // Handle mobile-specific touch events that might not trigger scroll events
-    if (isMobile) {
-      window.addEventListener('touchmove', handleScroll, { passive: true });
-      window.addEventListener('touchend', handleScroll, { passive: true });
-    }
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      
-      if (isMobile) {
-        window.removeEventListener('touchmove', handleScroll);
-        window.removeEventListener('touchend', handleScroll);
-      }
-      
       document.head.removeChild(style);
     };
-  }, [isMobile]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/80 via-white to-blue-100/50">
@@ -275,17 +229,7 @@ const Index = () => {
         </main>
         <Footer />
       </div>
-      
-      {/* Progress indicator with hardware acceleration and proper event handling for mobile */}
-      <div 
-        ref={progressRef}
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue z-50 progress-indicator"
-        style={{
-          width: 'var(--scroll-progress, 0%)',
-          transform: 'translateZ(0)',
-          willChange: 'width'
-        }}
-      ></div>
+      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue z-50 progress-indicator" style={{width: 'var(--scroll-progress, 0%)'}}></div>
     </div>
   );
 };

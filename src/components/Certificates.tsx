@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import {
   Carousel,
@@ -357,8 +356,7 @@ const Certificates = () => {
           </Carousel>
         </div>
 
-        <style>
-          {`
+        <style>{`
           @keyframes fadeSlideUp {
             from {
               opacity: 0;
@@ -415,12 +413,10 @@ const Certificates = () => {
           .embla__slide:hover {
             z-index: 5;
           }
-        `}
-        </style>
+        `}</style>
       </div>
     </section>
   );
 };
 
 export default Certificates;
-
