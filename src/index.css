@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +34,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
     --scroll-progress: 0%;
     
-    /* Theme colors based on the profile photo */
+    /* Theme colors */
     --theme-primary: #1E3A8A;
     --theme-secondary: #3B82F6;
     --theme-accent: #93c5fd;
