@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog,
@@ -199,7 +198,7 @@ const Projects = () => {
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12">Key Projects</h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
@@ -207,11 +206,12 @@ const Projects = () => {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="project-card h-full group">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 sm:h-56 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
                     <div className="p-4 text-white">
@@ -220,24 +220,24 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-6 bg-white">
-                  <h3 className="text-xl font-semibold mb-2 text-portfolio-darkBlue">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{project.shortDescription}</p>
+                <div className="p-4 sm:p-6 bg-white">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2">{project.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">{project.shortDescription}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs hover:bg-portfolio-blue hover:text-white transition-colors">
+                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs sm:text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
+                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs sm:text-sm">
                         +{project.technologies.length - 3}
                       </span>
                     )}
                   </div>
                   <Button 
                     variant="outline" 
-                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2"
+                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
                     onClick={() => handleOpenDetails(project)}
                   >
                     <span>View Details</span>
@@ -251,10 +251,10 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
+            <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto p-4 sm:p-6">
               <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-portfolio-darkBlue">{selectedProject.title}</DialogTitle>
-                <DialogDescription className="text-portfolio-blue font-medium">
+                <DialogTitle className="text-xl sm:text-2xl font-bold text-portfolio-darkBlue">{selectedProject.title}</DialogTitle>
+                <DialogDescription className="text-portfolio-blue font-medium text-sm sm:text-base">
                   {selectedProject.duration} | {selectedProject.company}
                 </DialogDescription>
               </DialogHeader>
@@ -263,17 +263,18 @@ const Projects = () => {
                   <img 
                     src={selectedProject.image} 
                     alt={selectedProject.title} 
-                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-48 sm:h-64 object-cover hover:scale-105 transition-transform duration-500" 
+                    loading="lazy"
                   />
                 </div>
                 
                 <h4 className="text-lg font-medium mb-2">Overview</h4>
-                <p className="text-gray-700 mb-6 leading-relaxed">{selectedProject.detailedDescription}</p>
+                <p className="text-gray-700 mb-6 leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
                 
                 {selectedProject.challenges && (
                   <div className="mb-6">
                     <h4 className="text-lg font-medium mb-2">Challenges</h4>
-                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.challenges.map((challenge, index) => (
                         <li key={index} className="transition-all hover:translate-x-1">{challenge}</li>
                       ))}
@@ -284,7 +285,7 @@ const Projects = () => {
                 {selectedProject.achievements && (
                   <div className="mb-6">
                     <h4 className="text-lg font-medium mb-2">Key Achievements</h4>
-                    <ul className="list-disc list-inside space-y-2 text-gray-700">
+                    <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.achievements.map((achievement, index) => (
                         <li key={index} className="transition-all hover:translate-x-1">{achievement}</li>
                       ))}
@@ -302,15 +303,15 @@ const Projects = () => {
                 </div>
                 
                 {selectedProject.links && (
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4">
                     {selectedProject.links.demo && (
-                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors">
+                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm sm:text-base">
                         <ExternalLink className="w-4 h-4" />
                         View Demo
                       </Button>
                     )}
                     {selectedProject.links.github && (
-                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white">
+                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm sm:text-base">
                         <Github className="w-4 h-4" />
                         View Code
                       </Button>

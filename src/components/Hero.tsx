@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -80,21 +79,22 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-radial from-portfolio-blue/5 via-transparent to-transparent z-0"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
       
-      <div className="container mx-auto px-4 py-12 md:py-20 flex flex-col items-center text-center z-10">
-        <div className="relative mb-8 md:mb-12 overflow-visible">
+      <div className="container mx-auto px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center text-center z-10">
+        <div className="relative mb-6 sm:mb-8 md:mb-12 overflow-visible">
           {/* Enhanced profile image with 3D effect */}
           <div 
             ref={profileImageRef} 
-            className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl transform-gpu"
+            className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl transform-gpu"
             style={{ 
               transformStyle: 'preserve-3d',
               transition: 'filter 0.5s ease-out, box-shadow 0.5s ease-out'
             }}
           >
             <img 
-              src="/lovable-uploads/fd7db455-f9ec-4fd9-9156-ce563858b01f.png" 
+              src="/profile.png" 
               alt="Ritesh N" 
               className="w-full h-full object-cover"
+              loading="eager"
             />
           </div>
           
@@ -104,14 +104,14 @@ const Hero = () => {
           {/* Animated particle effect around the image */}
           <div className="absolute inset-0 rounded-full -z-5 overflow-hidden">
             <div className="absolute inset-[-10px] opacity-20 animate-spin-slow" style={{ animationDuration: '25s' }}>
-              <div className="absolute w-6 h-6 bg-blue-400 rounded-full top-1/4 left-[5%] blur-sm"></div>
-              <div className="absolute w-4 h-4 bg-blue-300 rounded-full top-2/3 right-[10%] blur-sm"></div>
-              <div className="absolute w-5 h-5 bg-blue-500 rounded-full bottom-1/4 left-[20%] blur-sm"></div>
+              <div className="absolute w-4 h-4 sm:w-6 sm:h-6 bg-blue-400 rounded-full top-1/4 left-[5%] blur-sm"></div>
+              <div className="absolute w-3 h-3 sm:w-4 sm:h-4 bg-blue-300 rounded-full top-2/3 right-[10%] blur-sm"></div>
+              <div className="absolute w-4 h-4 sm:w-5 sm:h-5 bg-blue-500 rounded-full bottom-1/4 left-[20%] blur-sm"></div>
             </div>
           </div>
         </div>
         
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue mb-6 animate-fade-in tracking-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue mb-4 sm:mb-6 animate-fade-in tracking-tight">
           Hi, I'm <span className="text-gradient-blue font-extrabold">Ritesh N</span>
         </h1>
         
