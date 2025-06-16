@@ -7,7 +7,8 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
+import BentoGrid from './BentoGrid';
 
 interface Project {
   id: number;
@@ -198,56 +199,16 @@ const Projects = () => {
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12">Key Projects</h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {projects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className="project-card-container opacity-0"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
-              <div className="project-card h-full group">
-                <div className="relative h-48 sm:h-56 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
-                    <div className="p-4 text-white">
-                      <p className="text-sm font-medium">{project.duration}</p>
-                      <p className="text-sm opacity-80">{project.company}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 sm:p-6 bg-white">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">{project.shortDescription}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs sm:text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs sm:text-sm">
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
-                    onClick={() => handleOpenDetails(project)}
-                  >
-                    <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <BentoGrid 
+          projects={projects.map(project => ({
+            id: project.id,
+            title: project.title,
+            shortDescription: project.shortDescription,
+            technologies: project.technologies,
+            image: project.image
+          }))}
+          onProjectClick={handleOpenDetails}
+        />
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
