@@ -1,5 +1,5 @@
+
 import React, { useEffect, useRef } from 'react';
-import ContainerScrollAnimation from './ContainerScrollAnimation';
 
 interface SkillBarProps {
   skill: string;
@@ -93,7 +93,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <h2 className="section-title mb-12">About Me</h2>
         
-        <ContainerScrollAnimation className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="animate-on-scroll opacity-0">
             <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Professional Summary</h3>
             <p className="text-gray-700 mb-6">
@@ -157,7 +157,7 @@ const About = () => {
               </p>
             </div>
           </div>
-        </ContainerScrollAnimation>
+        </div>
       </div>
     </section>
   );
