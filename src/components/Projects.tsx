@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog,
@@ -193,20 +194,22 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50 relative">
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-gray-50 relative">
       <div className="absolute inset-0 bg-circuit-pattern opacity-[0.03] z-0"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="section-title mb-12">Key Projects</h2>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl">Key Projects</h2>
+        </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <div 
               key={project.id} 
               className="project-card-container opacity-0"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="project-card h-full group">
-                <div className="relative h-48 sm:h-56 overflow-hidden">
+              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2">
+                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -214,34 +217,34 @@ const Projects = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
-                    <div className="p-4 text-white">
-                      <p className="text-sm font-medium">{project.duration}</p>
-                      <p className="text-sm opacity-80">{project.company}</p>
+                    <div className="p-3 sm:p-4 text-white">
+                      <p className="text-xs sm:text-sm font-medium">{project.duration}</p>
+                      <p className="text-xs opacity-80">{project.company}</p>
                     </div>
                   </div>
                 </div>
-                <div className="p-4 sm:p-6 bg-white">
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-2">{project.shortDescription}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                <div className="p-4 sm:p-6 bg-white flex flex-col h-full">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2 flex-shrink-0">{project.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{project.shortDescription}</p>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 flex-shrink-0">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs sm:text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
+                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs hover:bg-portfolio-blue hover:text-white transition-colors">
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs sm:text-sm">
+                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
                         +{project.technologies.length - 3}
                       </span>
                     )}
                   </div>
                   <Button 
                     variant="outline" 
-                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm flex-shrink-0"
                     onClick={() => handleOpenDetails(project)}
                   >
                     <span>View Details</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
               </div>
@@ -251,30 +254,32 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto p-4 sm:p-6">
+            <DialogContent className="sm:max-w-[90vw] lg:max-w-[800px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4">
               <DialogHeader>
-                <DialogTitle className="text-xl sm:text-2xl font-bold text-portfolio-darkBlue">{selectedProject.title}</DialogTitle>
-                <DialogDescription className="text-portfolio-blue font-medium text-sm sm:text-base">
+                <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8">{selectedProject.title}</DialogTitle>
+                <DialogDescription className="text-portfolio-blue font-medium text-sm">
                   {selectedProject.duration} | {selectedProject.company}
                 </DialogDescription>
               </DialogHeader>
-              <div className="mt-4">
-                <div className="mb-6 overflow-hidden rounded-md">
+              <div className="mt-4 space-y-4 sm:space-y-6">
+                <div className="overflow-hidden rounded-md">
                   <img 
                     src={selectedProject.image} 
                     alt={selectedProject.title} 
-                    className="w-full h-48 sm:h-64 object-cover hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-48 sm:h-64 lg:h-72 object-cover hover:scale-105 transition-transform duration-500" 
                     loading="lazy"
                   />
                 </div>
                 
-                <h4 className="text-lg font-medium mb-2">Overview</h4>
-                <p className="text-gray-700 mb-6 leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
+                <div>
+                  <h4 className="text-base sm:text-lg font-medium mb-2">Overview</h4>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
+                </div>
                 
                 {selectedProject.challenges && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-medium mb-2">Challenges</h4>
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-medium mb-2">Challenges</h4>
+                    <ul className="list-disc list-inside space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.challenges.map((challenge, index) => (
                         <li key={index} className="transition-all hover:translate-x-1">{challenge}</li>
                       ))}
@@ -283,9 +288,9 @@ const Projects = () => {
                 )}
                 
                 {selectedProject.achievements && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-medium mb-2">Key Achievements</h4>
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm sm:text-base">
+                  <div>
+                    <h4 className="text-base sm:text-lg font-medium mb-2">Key Achievements</h4>
+                    <ul className="list-disc list-inside space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.achievements.map((achievement, index) => (
                         <li key={index} className="transition-all hover:translate-x-1">{achievement}</li>
                       ))}
@@ -293,25 +298,27 @@ const Projects = () => {
                   </div>
                 )}
                 
-                <h4 className="text-lg font-medium mb-2">Technologies</h4>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.technologies.map((tech) => (
-                    <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
-                      {tech}
-                    </span>
-                  ))}
+                <div>
+                  <h4 className="text-base sm:text-lg font-medium mb-2">Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((tech) => (
+                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 
                 {selectedProject.links && (
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                     {selectedProject.links.demo && (
-                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm sm:text-base">
+                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm">
                         <ExternalLink className="w-4 h-4" />
                         View Demo
                       </Button>
                     )}
                     {selectedProject.links.github && (
-                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm sm:text-base">
+                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm">
                         <Github className="w-4 h-4" />
                         View Code
                       </Button>

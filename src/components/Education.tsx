@@ -39,19 +39,31 @@ const Education = () => {
   ];
 
   return (
-    <div className="space-y-6 animate-on-scroll opacity-0">
+    <div className="space-y-6 animate-on-scroll opacity-0 max-w-4xl mx-auto">
       {educationData.map((edu, index) => (
-        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-md transition-shadow duration-300">
-          <CardContent className="pt-6">
-            <h4 className="text-xl font-semibold text-portfolio-darkBlue">{edu.degree}</h4>
-            <p className="text-portfolio-blue mt-1">Institution: {edu.institution}</p>
-            <Badge variant="outline" className="mt-2">Duration: {edu.duration}</Badge>
+        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-lg transition-all duration-300 bg-white">
+          <CardContent className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
+              <div className="flex-1 mb-3 sm:mb-0">
+                <h4 className="text-lg sm:text-xl font-semibold text-portfolio-darkBlue mb-2 leading-tight">{edu.degree}</h4>
+                <p className="text-portfolio-blue text-sm sm:text-base font-medium mb-2">{edu.institution}</p>
+              </div>
+              <Badge variant="outline" className="self-start sm:self-center text-xs sm:text-sm whitespace-nowrap">
+                {edu.duration}
+              </Badge>
+            </div>
             
-            <div className="mt-4 space-y-2">
+            <div className="space-y-3">
               {edu.highlights.map((highlight) => (
-                <div key={highlight.id} className="flex flex-col md:flex-row md:items-start">
-                  <span className="font-medium text-gray-700 md:w-28">{highlight.label}:</span>
-                  <span className="text-gray-600 md:flex-1">{highlight.value}</span>
+                <div key={highlight.id} className="bg-gray-50 rounded-lg p-3 sm:p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start">
+                    <span className="font-medium text-gray-700 text-sm sm:text-base mb-1 sm:mb-0 sm:w-32 flex-shrink-0">
+                      {highlight.label}:
+                    </span>
+                    <span className="text-gray-600 text-sm sm:text-base sm:flex-1 leading-relaxed">
+                      {highlight.value}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

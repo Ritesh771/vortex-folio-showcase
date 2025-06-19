@@ -14,31 +14,33 @@ interface TimelineItemProps {
 
 const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period, description, technologies, index }) => {
   return (
-    <div className={`mb-8 animate-on-scroll opacity-0`} style={{ animationDelay: `${index * 100}ms` }}>
-      <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/3 mb-2 md:mb-0">
-          <span className="text-sm font-medium text-portfolio-blue">{period}</span>
+    <div className={`mb-6 sm:mb-8 animate-on-scroll opacity-0`} style={{ animationDelay: `${index * 100}ms` }}>
+      <div className="flex flex-col lg:flex-row">
+        <div className="lg:w-1/3 mb-2 lg:mb-0 flex-shrink-0">
+          <span className="text-sm font-medium text-portfolio-blue bg-portfolio-lightBlue bg-opacity-10 px-3 py-1 rounded-full inline-block">{period}</span>
         </div>
-        <div className="md:w-2/3 md:pl-6 border-l-2 border-portfolio-lightBlue relative">
+        <div className="lg:w-2/3 lg:pl-6 border-l-2 border-portfolio-lightBlue relative mt-2 lg:mt-0">
           {/* Timeline dot */}
           <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-portfolio-blue"></div>
           
-          <h4 className="text-xl font-semibold mb-1">{title}</h4>
-          <p className="text-portfolio-blue font-medium mb-3">{organization}</p>
-          <ul className="list-disc list-inside space-y-2 mb-3 text-gray-700">
-            {description.map((item, i) => (
-              <li key={i} className="transition-all hover:translate-x-1">{item}</li>
-            ))}
-          </ul>
-          {technologies && (
-            <div className="flex flex-wrap gap-2 mt-3">
-              {technologies.map((tech) => (
-                <span key={tech} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-portfolio-lightBlue hover:text-white transition-colors">
-                  {tech}
-                </span>
+          <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+            <h4 className="text-lg sm:text-xl font-semibold mb-1 text-portfolio-darkBlue">{title}</h4>
+            <p className="text-portfolio-blue font-medium mb-3 text-sm sm:text-base">{organization}</p>
+            <ul className="list-disc list-inside space-y-1.5 sm:space-y-2 mb-3 text-gray-700 text-sm sm:text-base">
+              {description.map((item, i) => (
+                <li key={i} className="transition-all hover:translate-x-1 leading-relaxed">{item}</li>
               ))}
-            </div>
-          )}
+            </ul>
+            {technologies && (
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3">
+                {technologies.map((tech) => (
+                  <span key={tech} className="bg-gray-100 text-gray-700 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm hover:bg-portfolio-lightBlue hover:text-white transition-colors">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -88,42 +90,48 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 relative scroll-mt-20">
+    <section id="experience" className="py-12 sm:py-16 lg:py-20 relative scroll-mt-20">
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent z-0"></div>
-      <div className="container mx-auto px-4 relative z-10">
-        <h2 className="section-title mb-12 animate-on-scroll">Experience & Education</h2>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl animate-on-scroll">Experience & Education</h2>
+        </div>
         
-        <Tabs defaultValue="work" className="w-full">
-          <TabsList className="grid w-full md:w-[400px] grid-cols-2 mb-10 bg-white/80 backdrop-blur-sm animate-on-scroll">
-            <TabsTrigger value="work" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
-              Work Experience
-            </TabsTrigger>
-            <TabsTrigger value="education" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white">
-              Education
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="work" className="mt-2">
-            <div className="space-y-6">
-              {workExperience.map((item, index) => (
-                <TimelineItem
-                  key={item.id}
-                  title={item.title}
-                  organization={item.organization}
-                  period={item.period}
-                  description={item.description}
-                  technologies={item.technologies}
-                  index={index}
-                />
-              ))}
+        <div className="max-w-4xl mx-auto">
+          <Tabs defaultValue="work" className="w-full">
+            <div className="flex justify-center mb-8 sm:mb-10">
+              <TabsList className="grid w-full max-w-md grid-cols-2 bg-white/80 backdrop-blur-sm animate-on-scroll">
+                <TabsTrigger value="work" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white text-sm sm:text-base">
+                  Work Experience
+                </TabsTrigger>
+                <TabsTrigger value="education" className="data-[state=active]:bg-portfolio-blue data-[state=active]:text-white text-sm sm:text-base">
+                  Education
+                </TabsTrigger>
+              </TabsList>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="education" className="mt-2">
-            <Education />
-          </TabsContent>
-        </Tabs>
+            
+            <TabsContent value="work" className="mt-2">
+              <div className="space-y-4 sm:space-y-6">
+                {workExperience.map((item, index) => (
+                  <TimelineItem
+                    key={item.id}
+                    title={item.title}
+                    organization={item.organization}
+                    period={item.period}
+                    description={item.description}
+                    technologies={item.technologies}
+                    index={index}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="education" className="mt-2">
+              <Education />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </section>
   );
