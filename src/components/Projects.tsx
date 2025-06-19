@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { BentoGrid, BentoGridItem } from './BentoGrid';
+import { cn } from '@/lib/utils';
 
 interface Project {
   id: number;
