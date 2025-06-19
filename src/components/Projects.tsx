@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog,
@@ -253,7 +254,7 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4">
+            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4 bg-white">
               <DialogHeader>
                 <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8 mb-2">{selectedProject.title}</DialogTitle>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-portfolio-blue">
