@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog,
@@ -8,7 +7,7 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Calendar, Building2, Code2 } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -243,7 +242,7 @@ const Projects = () => {
                     className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm flex-shrink-0"
                     onClick={() => handleOpenDetails(project)}
                   >
-                    <span>View Details</span>
+                    <span>View Project</span>
                     <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
@@ -254,13 +253,21 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[90vw] lg:max-w-[800px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4">
+            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4">
               <DialogHeader>
-                <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8">{selectedProject.title}</DialogTitle>
-                <DialogDescription className="text-portfolio-blue font-medium text-sm">
-                  {selectedProject.duration} | {selectedProject.company}
-                </DialogDescription>
+                <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8 mb-2">{selectedProject.title}</DialogTitle>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-portfolio-blue">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    <span>{selectedProject.duration}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Building2 className="w-4 h-4" />
+                    <span>{selectedProject.company}</span>
+                  </div>
+                </div>
               </DialogHeader>
+              
               <div className="mt-4 space-y-4 sm:space-y-6">
                 <div className="overflow-hidden rounded-md">
                   <img 
@@ -272,16 +279,22 @@ const Projects = () => {
                 </div>
                 
                 <div>
-                  <h4 className="text-base sm:text-lg font-medium mb-2">Overview</h4>
+                  <h4 className="text-base sm:text-lg font-semibold mb-3 flex items-center gap-2">
+                    <Code2 className="w-5 h-5 text-portfolio-blue" />
+                    Project Overview
+                  </h4>
                   <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
                 </div>
                 
                 {selectedProject.challenges && (
                   <div>
-                    <h4 className="text-base sm:text-lg font-medium mb-2">Challenges</h4>
-                    <ul className="list-disc list-inside space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
+                    <h4 className="text-base sm:text-lg font-semibold mb-3 text-red-600">Key Challenges</h4>
+                    <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.challenges.map((challenge, index) => (
-                        <li key={index} className="transition-all hover:translate-x-1">{challenge}</li>
+                        <li key={index} className="flex items-start gap-2 transition-all hover:translate-x-1">
+                          <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                          <span>{challenge}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -289,42 +302,48 @@ const Projects = () => {
                 
                 {selectedProject.achievements && (
                   <div>
-                    <h4 className="text-base sm:text-lg font-medium mb-2">Key Achievements</h4>
-                    <ul className="list-disc list-inside space-y-1.5 sm:space-y-2 text-gray-700 text-sm sm:text-base">
+                    <h4 className="text-base sm:text-lg font-semibold mb-3 text-green-600">Key Achievements</h4>
+                    <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
                       {selectedProject.achievements.map((achievement, index) => (
-                        <li key={index} className="transition-all hover:translate-x-1">{achievement}</li>
+                        <li key={index} className="flex items-start gap-2 transition-all hover:translate-x-1">
+                          <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                          <span>{achievement}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
                 )}
                 
                 <div>
-                  <h4 className="text-base sm:text-lg font-medium mb-2">Technologies</h4>
+                  <h4 className="text-base sm:text-lg font-semibold mb-3">Technologies Used</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.technologies.map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm hover:bg-portfolio-blue hover:text-white transition-colors">
+                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-2 rounded-full text-sm font-medium hover:bg-portfolio-blue hover:text-white transition-colors border border-portfolio-blue/20">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
                 
-                {selectedProject.links && (
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-                    {selectedProject.links.demo && (
-                      <Button className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm">
-                        <ExternalLink className="w-4 h-4" />
-                        View Demo
-                      </Button>
-                    )}
-                    {selectedProject.links.github && (
-                      <Button variant="outline" className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm">
-                        <Github className="w-4 h-4" />
-                        View Code
-                      </Button>
-                    )}
-                  </div>
-                )}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-gray-200">
+                  <Button 
+                    className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm"
+                    onClick={() => window.open('https://github.com/Ritesh771', '_blank')}
+                  >
+                    <Github className="w-4 h-4" />
+                    View GitHub Profile
+                  </Button>
+                  {selectedProject.links?.demo && (
+                    <Button 
+                      variant="outline" 
+                      className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm"
+                      onClick={() => window.open(selectedProject.links!.demo, '_blank')}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Demo
+                    </Button>
+                  )}
+                </div>
               </div>
             </DialogContent>
           )}
