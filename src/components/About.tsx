@@ -1,5 +1,6 @@
-
 import React, { useEffect, useRef } from 'react';
+import { BentoGrid, BentoGridItem } from './BentoGrid';
+import { cn } from '@/lib/utils';
 
 interface SkillBarProps {
   skill: string;
@@ -88,76 +89,141 @@ const About = () => {
     };
   }, []);
 
+  const techStacks = [
+    {
+      title: "Languages & Frameworks",
+      items: ["Python", "JavaScript", "TypeScript", "HTML5", "CSS3", "Django", "Django REST Framework", "Flask", "TensorFlow"]
+    },
+    {
+      title: "Frontend Technologies", 
+      items: ["React.js", "Redux Toolkit", "Tailwind CSS"]
+    },
+    {
+      title: "Databases & DevOps",
+      items: ["PostgreSQL", "MySQL", "Redis", "Git", "Postman"]
+    },
+    {
+      title: "Tools & Platforms",
+      items: ["Visual Studio Code", "GitHub", "AWS (basic)", "Android Studio"]
+    }
+  ];
+
+  const aboutItems = [
+    {
+      title: "Professional Summary",
+      content: "I bring hands-on experience in backend development using Django and REST APIs, along with a keen eye for building responsive and engaging frontends using React.js and Tailwind CSS. Passionate about building scalable tech solutions with real-world impact, especially in the education and security sectors.",
+      className: "md:col-span-2"
+    },
+    {
+      title: "Soft Skills",
+      content: ["Team Leadership", "Agile Collaboration", "Technical Mentoring"],
+      className: ""
+    },
+    {
+      title: "Technical Skills",
+      content: techStacks,
+      className: "md:col-span-2 md:row-span-2"
+    },
+    {
+      title: "Proficiency Level",
+      content: skills,
+      className: "md:row-span-2"
+    },
+    {
+      title: "Preferred Job Roles",
+      content: ["Software Engineer", "Backend Developer", "Frontend Developer", "DevOps Engineer"],
+      className: "md:col-span-2"
+    },
+    {
+      title: "Location Preference",
+      content: "Bengaluru, India",
+      className: ""
+    }
+  ];
+
   return (
     <section id="about" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="section-title mb-12">About Me</h2>
+        <h2 className="section-title mb-12 text-center">About Me</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="animate-on-scroll opacity-0">
-            <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Professional Summary</h3>
-            <p className="text-gray-700 mb-6">
-              I bring hands-on experience in backend development using Django and REST APIs, along with a keen eye for building responsive and engaging frontends using React.js and Tailwind CSS. Passionate about building scalable tech solutions with real-world impact, especially in the education and security sectors.
-            </p>
-            
-            <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Technical Skills</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-              <div>
-                <h4 className="font-medium mb-2 text-portfolio-blue">Languages & Frameworks</h4>
-                <p className="text-gray-700">Python, JavaScript, TypeScript, HTML5, CSS3, Django, Django REST Framework, Flask, TensorFlow</p>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2 text-portfolio-blue">Frontend Technologies</h4>
-                <p className="text-gray-700">React.js, Redux Toolkit, Tailwind CSS</p>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2 text-portfolio-blue">Databases & DevOps</h4>
-                <p className="text-gray-700">PostgreSQL, MySQL, Redis, Git, Postman</p>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2 text-portfolio-blue">Tools & Platforms</h4>
-                <p className="text-gray-700">Visual Studio Code, GitHub, AWS (basic), Android Studio</p>
-              </div>
-            </div>
-            
-            <h4 className="font-medium mb-2 text-portfolio-blue">Soft Skills</h4>
-            <p className="text-gray-700">Team Leadership, Agile Collaboration, Technical Mentoring</p>
-          </div>
-          
-          <div className="animate-on-scroll opacity-0">
-            <h3 className="text-2xl font-semibold mb-6 text-portfolio-darkBlue">Proficiency Level</h3>
-            <div>
-              {skills.map((skill) => (
-                <SkillBar
-                  key={skill.id}
-                  skill={skill.name}
-                  percentage={skill.percentage}
-                  delay={skill.delay}
-                />
-              ))}
-            </div>
-            
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Preferred Job Roles</h3>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {["Software Engineer", "Backend Developer", "Frontend Developer", "DevOps Engineer"].map((role) => (
-                  <span key={role} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm">
-                    {role}
-                  </span>
-                ))}
-              </div>
+        <BentoGrid className="max-w-6xl mx-auto">
+          {aboutItems.map((item, index) => (
+            <BentoGridItem
+              key={index}
+              title={item.title}
+              className={cn(
+                "bg-white border border-gray-200 hover:border-portfolio-blue/30 animate-on-scroll opacity-0",
+                item.className
+              )}
+            >
+              {item.title === "Professional Summary" && (
+                <p className="text-gray-700 text-sm leading-relaxed">
+                  {item.content as string}
+                </p>
+              )}
               
-              <h3 className="text-2xl font-semibold mb-4 text-portfolio-darkBlue">Location Preference</h3>
-              <p className="flex items-center text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-portfolio-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Bengaluru, India
-              </p>
-            </div>
-          </div>
-        </div>
+              {item.title === "Soft Skills" && (
+                <div className="flex flex-wrap gap-2">
+                  {(item.content as string[]).map((skill) => (
+                    <span key={skill} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              {item.title === "Technical Skills" && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {(item.content as typeof techStacks).map((stack) => (
+                    <div key={stack.title}>
+                      <h4 className="font-medium mb-2 text-portfolio-blue text-sm">{stack.title}</h4>
+                      <div className="flex flex-wrap gap-1">
+                        {stack.items.map((tech) => (
+                          <span key={tech} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {item.title === "Proficiency Level" && (
+                <div className="space-y-3">
+                  {(item.content as typeof skills).map((skill) => (
+                    <SkillBar
+                      key={skill.id}
+                      skill={skill.name}
+                      percentage={skill.percentage}
+                      delay={skill.delay}
+                    />
+                  ))}
+                </div>
+              )}
+              
+              {item.title === "Preferred Job Roles" && (
+                <div className="flex flex-wrap gap-2">
+                  {(item.content as string[]).map((role) => (
+                    <span key={role} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-1 rounded-full text-sm">
+                      {role}
+                    </span>
+                  ))}
+                </div>
+              )}
+              
+              {item.title === "Location Preference" && (
+                <p className="flex items-center text-gray-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-portfolio-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  {item.content as string}
+                </p>
+              )}
+            </BentoGridItem>
+          ))}
+        </BentoGrid>
       </div>
     </section>
   );
