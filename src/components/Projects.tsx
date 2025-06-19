@@ -166,6 +166,7 @@ const Projects = () => {
   ];
 
   const handleOpenDetails = (project: Project) => {
+    console.log('Opening project details for:', project.title);
     setSelectedProject(project);
     setIsOpen(true);
   };
@@ -208,8 +209,8 @@ const Projects = () => {
               className="project-card-container opacity-0"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2">
-                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden">
+              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 flex flex-col">
+                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden flex-shrink-0">
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -223,10 +224,12 @@ const Projects = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 sm:p-6 bg-white flex flex-col h-full">
-                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2 flex-shrink-0">{project.title}</h3>
+                
+                <div className="p-4 sm:p-6 bg-white flex flex-col flex-grow">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2">{project.title}</h3>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{project.shortDescription}</p>
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 flex-shrink-0">
+                  
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs hover:bg-portfolio-blue hover:text-white transition-colors">
                         {tech}
@@ -238,9 +241,11 @@ const Projects = () => {
                       </span>
                     )}
                   </div>
+                  
                   <Button 
                     variant="outline" 
-                    className="w-full border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white group-hover:shadow-md transition-all flex items-center justify-center gap-2 text-sm flex-shrink-0"
+                    size="sm"
+                    className="w-full mt-auto border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium py-2 px-4 rounded-md"
                     onClick={() => handleOpenDetails(project)}
                   >
                     <span>View Project</span>
@@ -254,7 +259,7 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4 bg-white">
+            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4 bg-white border border-gray-200 shadow-2xl z-50">
               <DialogHeader>
                 <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8 mb-2">{selectedProject.title}</DialogTitle>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-portfolio-blue">
