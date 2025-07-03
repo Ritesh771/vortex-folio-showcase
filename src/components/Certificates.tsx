@@ -30,7 +30,6 @@ interface CertificateItem {
 
 const Certificates = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
   const autoScrollIntervalRef = useRef<number | null>(null);
 
   const certificates: CertificateItem[] = [
@@ -149,14 +148,6 @@ const Certificates = () => {
       if (!scrollContainer) return;
 
       const animate = (timestamp: number) => {
-        if (!autoScrollEnabled) {
-          startTime = null;
-          if (autoScrollIntervalRef.current) {
-            autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
-          }
-          return;
-        }
-
         if (!startTime) startTime = timestamp;
         const elapsed = timestamp - startTime;
         const pixelsToScroll = elapsed * speed;
@@ -206,30 +197,13 @@ const Certificates = () => {
 
     startAutoScroll();
 
-    const carouselElement = carouselRef.current;
-    if (carouselElement) {
-      const handleMouseEnter = () => setAutoScrollEnabled(false);
-      const handleMouseLeave = () => setAutoScrollEnabled(true);
-
-      carouselElement.addEventListener('mouseenter', handleMouseEnter);
-      carouselElement.addEventListener('mouseleave', handleMouseLeave);
-
-      return () => {
-        carouselElement.removeEventListener('mouseenter', handleMouseEnter);
-        carouselElement.removeEventListener('mouseleave', handleMouseLeave);
-        if (autoScrollIntervalRef.current && typeof window !== 'undefined') {
-          window.cancelAnimationFrame(autoScrollIntervalRef.current);
-        }
-        observer.disconnect();
-      };
-    }
+    return () => {
+      if (autoScrollIntervalRef.current && typeof window !== 'undefined') {
+        window.cancelAnimationFrame(autoScrollIntervalRef.current);
+      }
+      observer.disconnect();
+    };
   }, []);
-
-  useEffect(() => {
-    if (autoScrollEnabled) {
-      startAutoScroll();
-    }
-  }, [autoScrollEnabled]);
 
   const getIconByType = (type: string) => {
     switch (type) {
