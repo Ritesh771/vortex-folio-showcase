@@ -58,6 +58,15 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleDownloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/lovable-uploads/RITESH N.pdf';
+    link.download = 'RITESH_N_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section 
       id="home" 
@@ -135,7 +144,11 @@ const Hero = () => {
             <ArrowDown className="w-4 h-4 animate-bounce-subtle" />
           </a>
           
-          <Button variant="outline" className="border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all group">
+          <Button
+            variant="outline"
+            className="border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all group"
+            onClick={handleDownloadResume}
+          >
             <Download className="w-4 h-4 mr-2 transition-transform group-hover:translate-y-0.5" />
             Download Resume
           </Button>
