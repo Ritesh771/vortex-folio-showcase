@@ -71,7 +71,7 @@ const Hero = () => {
     toast({
       title: 'Download started',
       description: 'Your resume download has been triggered.',
-      duration: 2000,
+      duration: 1000,
     });
   };
 
