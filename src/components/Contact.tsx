@@ -27,7 +27,7 @@ const Contact = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Information */}
-          <div className="animate-on-scroll opacity-0 space-y-6 sm:space-y-8">
+          <div className="animate-on-scroll opacity-0 space-y-6 sm:space-y-8 order-2 lg:order-1">
             <div className="bg-white rounded-lg p-6 sm:p-8 shadow-sm">
               <h3 className="text-xl sm:text-2xl font-semibold mb-6 text-portfolio-darkBlue">Contact Information</h3>
               
@@ -74,20 +74,24 @@ const Contact = () => {
               </div>
             </div>
             
-            <div className="bg-white rounded-lg p-6 sm:p-8 shadow-sm">
-              <h4 className="font-medium mb-3 text-base sm:text-lg text-portfolio-darkBlue">Preferred Location</h4>
-              <p className="flex items-center text-gray-700 text-sm sm:text-base">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-portfolio-blue flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                Bengaluru, India
-              </p>
+            {/* Review Button (Blue Gradient) */}
+            <div className="bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-blue-200 rounded-lg p-4 sm:p-6 md:p-8 shadow-sm flex flex-col items-center justify-center w-full">
+              <h4 className="font-medium mb-3 text-sm sm:text-base md:text-lg text-white text-center w-full">Share Your Feedback</h4>
+              <a
+                href="https://forms.gle/PmXwRUbqmtSEjftA7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-3 md:px-7 md:py-3 rounded-md bg-gradient-to-r from-blue-900 via-blue-600 to-blue-400 text-white font-semibold shadow-lg hover:from-blue-700 hover:via-blue-500 hover:to-blue-300 transition-colors text-base sm:text-lg border border-blue-800 w-full max-w-xs sm:max-w-md justify-center"
+                style={{ boxShadow: '0 4px 24px 0 rgba(30,58,138,0.10)' }}
+              >
+                <span role="img" aria-label="star">⭐</span> Leave a Review
+              </a>
+              <p className="mt-3 text-blue-50 text-xs sm:text-sm text-center w-full max-w-xs sm:max-w-sm">Your feedback helps me improve and showcase my work better. Thank you!</p>
             </div>
           </div>
           
           {/* Static CTA Card */}
-          <div className="animate-on-scroll opacity-0">
+          <div className="animate-on-scroll opacity-0 order-1 lg:order-2">
             <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 rounded-lg p-8 sm:p-12 shadow-lg flex flex-col items-center justify-center text-center border border-blue-100">
               <div className="mb-6">
                 <svg width="64" height="64" fill="none" viewBox="0 0 64 64" className="mx-auto mb-4">
