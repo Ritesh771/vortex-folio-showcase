@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog,
@@ -176,17 +175,16 @@ const Projects = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
+            entry.target.classList.add('animate-fade-in-smooth');
           }
         });
       },
       { threshold: 0.1 }
     );
-
-    document.querySelectorAll('.project-card-container').forEach((el) => {
+    document.querySelectorAll('.project-card-container').forEach((el, idx) => {
+      (el as HTMLElement).style.transitionDelay = `${idx * 120}ms`;
       observer.observe(el);
     });
-
     return () => {
       document.querySelectorAll('.project-card-container').forEach((el) => {
         observer.unobserve(el);
@@ -206,15 +204,14 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={project.id} 
-              className="project-card-container opacity-0"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="project-card-container opacity-0 transition-opacity duration-700 ease-in-out"
             >
-              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-2 flex flex-col">
-                <div className="relative h-40 sm:h-48 lg:h-56 overflow-hidden flex-shrink-0">
+              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 flex flex-col">
+                <div className="relative aspect-[16/9] sm:aspect-[4/3] lg:aspect-[3/2] overflow-hidden flex-shrink-0">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110" 
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
