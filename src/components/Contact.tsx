@@ -5,6 +5,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
+// WhatsApp SVG Icon
+const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width || 24}
+    height={props.height || 24}
+    {...props}
+  >
+    <circle cx="16" cy="16" r="16" fill="#25D366" />
+    <path
+      d="M23.47 8.53A8.94 8.94 0 0 0 16 6a9 9 0 0 0-7.8 13.5l-1.1 4.02a1 1 0 0 0 1.22 1.22l4.02-1.1A9 9 0 1 0 23.47 8.53Zm-7.47 13.2a7.2 7.2 0 0 1-3.67-1l-.26-.15-2.18.6.58-2.13-.17-.27A7.2 7.2 0 1 1 16 21.73Zm3.94-4.13c-.22-.11-1.3-.64-1.5-.71-.2-.07-.34-.11-.48.11-.14.22-.55.71-.67.85-.12.14-.25.16-.47.05-.22-.11-.92-.34-1.75-1.09-.65-.58-1.09-1.3-1.22-1.52-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.14-.22.22-.36.07-.14.04-.27-.02-.39-.07-.11-.48-1.16-.66-1.59-.17-.41-.34-.35-.48-.36-.12-.01-.27-.01-.42-.01-.15 0-.39.06-.6.27-.21.21-.8.78-.8 1.9 0 1.12.82 2.2.94 2.35.12.15 1.61 2.46 3.91 3.35.55.19.98.3 1.31.38.55.13 1.05.11 1.45.07.44-.05 1.3-.53 1.48-1.04.18-.51.18-.95.13-1.04-.05-.09-.2-.14-.42-.25Z"
+      fill="#fff"
+    />
+  </svg>
+);
+
 const Contact = () => {
   const { toast } = useToast();
   
@@ -38,6 +56,21 @@ const Contact = () => {
                     <h4 className="font-medium mb-1 text-sm sm:text-base">Email</h4>
                     <a href="mailto:riteshnvisonex@gmail.com" className="text-gray-700 hover:text-portfolio-blue transition-colors text-sm sm:text-base break-all">
                       riteshnvisonex@gmail.com
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <span className="mr-4 mt-1 flex-shrink-0"><WhatsAppIcon width={24} height={24} /></span>
+                  <div>
+                    <h4 className="font-medium mb-1 text-sm sm:text-base">WhatsApp</h4>
+                    <a
+                      href="https://wa.me/918660144040" // <-- Replace with your WhatsApp number
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-700 hover:text-green-500 transition-colors text-sm sm:text-base break-all"
+                    >
+                      +91 8660144040
                     </a>
                   </div>
                 </div>
@@ -104,15 +137,21 @@ const Contact = () => {
                   I love meeting new people, collaborating on exciting projects, and exploring innovative ideas. Whether you want to discuss tech, share an opportunity, or just say hello—I'm always open to connect!
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="mailto:riteshnvisonex@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-portfolio-blue text-white font-medium shadow hover:bg-portfolio-darkBlue transition-colors">
-                  <Mail className="w-5 h-5" /> Email Me
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4 w-full max-w-xs sm:max-w-none mx-auto">
+                <a href="mailto:riteshnvisonex@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-portfolio-blue text-white font-medium shadow hover:bg-portfolio-darkBlue transition-colors w-full sm:w-auto justify-center h-12">
+                  <Mail className="w-5 h-5" /> Email
                 </a>
-                <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-portfolio-blue text-portfolio-blue font-medium shadow hover:bg-portfolio-blue hover:text-white transition-colors">
-                  <Github className="w-5 h-5" /> GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-blue-400 text-blue-700 font-medium shadow hover:bg-blue-600 hover:text-white transition-colors">
+              
+                <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-blue-400 text-blue-700 font-medium shadow hover:bg-blue-600 hover:text-white transition-colors w-full sm:w-auto justify-center h-12">
                   <Linkedin className="w-5 h-5" /> LinkedIn
+                </a>
+                <a
+                  href="https://wa.me/918660144040"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-green-400 text-green-700 font-medium shadow hover:bg-green-500 hover:text-white transition-colors w-full sm:w-auto justify-center h-12"
+                >
+                  <WhatsAppIcon width={20} height={20} /> WhatsApp
                 </a>
               </div>
               <p className="mt-8 text-gray-500 text-sm">Or just drop me an email—I'll get back to you as soon as possible!</p>
