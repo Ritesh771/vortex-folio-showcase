@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -9,8 +9,11 @@ import Certificates from '../components/Certificates';
 import Footer from '../components/Footer';
 import { useAnimateOnScroll } from '../hooks/useAnimateOnScroll';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Index = () => {
+  const [loading, setLoading] = useState(true);
+
   // Fade in animation (default upward movement)
   useAnimateOnScroll({
     threshold: 0.1,

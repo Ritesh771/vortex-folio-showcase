@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Education from './Education';
@@ -86,7 +85,22 @@ const Experience = () => {
         "Improved data processing efficiency across student datasets"
       ],
       technologies: ["Python", "TensorFlow", "Data Analysis"]
-    }
+    },
+    {
+      id: 4,
+      title: "Bootcamp Trainee (Multiple Tracks)",
+      organization: "LetsUpgrade",
+      period: "Feb 2023 – Jun 2023",
+      description: [
+        "Completed intensive bootcamps in Figma (UI/UX), Python, React, SQL, and Placement Preparation.",
+        "Mastered UX/UI design principles and Figma tools for creating interactive prototypes and design systems.",
+        "Prepared for technical interviews with data structures, algorithms, and system design principles.",
+        "Comprehensive Python programming course covering fundamentals to advanced concepts like OOP and data analysis.",
+        "Built complex React applications with hooks, context API, and modern state management techniques.",
+        "Mastered database design, complex queries, and performance optimization for relational databases."
+      ],
+      technologies: ["Figma", "Python", "React.js", "SQL", "Data Structures", "Algorithms", "UI/UX"]
+    },
   ];
 
   return (

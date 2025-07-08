@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import type { CarouselApi } from '@/components/ui/carousel';
 import {
   Carousel,
   CarouselContent,
@@ -30,6 +31,7 @@ interface CertificateItem {
 
 const Certificates = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null);
   const autoScrollIntervalRef = useRef<number | null>(null);
 
   const certificates: CertificateItem[] = [
@@ -134,39 +136,29 @@ const Certificates = () => {
     }
   ];
 
-  const startAutoScroll = () => {
-    if (typeof window !== 'undefined') {
-      if (autoScrollIntervalRef.current) {
-        window.cancelAnimationFrame(autoScrollIntervalRef.current);
+  // Use Embla API to scroll to next slide every 2.5 seconds
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (autoScrollIntervalRef.current !== null) {
+      window.clearInterval(autoScrollIntervalRef.current);
+      autoScrollIntervalRef.current = null;
+    }
+    autoScrollIntervalRef.current = window.setInterval(() => {
+      if (emblaApi) {
+        if (emblaApi.canScrollNext()) {
+          emblaApi.scrollNext();
+        } else {
+          emblaApi.scrollTo(0);
+        }
+      }
+    }, 2500);
+    return () => {
+      if (autoScrollIntervalRef.current !== null) {
+        window.clearInterval(autoScrollIntervalRef.current);
         autoScrollIntervalRef.current = null;
       }
-
-      let startTime: number | null = null;
-      const speed = 0.5;
-
-      const scrollContainer = carouselRef.current?.querySelector('.embla__container') as HTMLElement;
-      if (!scrollContainer) return;
-
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const pixelsToScroll = elapsed * speed;
-
-        if (scrollContainer) {
-          scrollContainer.scrollLeft += pixelsToScroll / 60;
-
-          if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth - 10) {
-            scrollContainer.scrollLeft = 0;
-          }
-        }
-
-        startTime = timestamp;
-        autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
-      };
-
-      autoScrollIntervalRef.current = window.requestAnimationFrame(animate);
-    }
-  };
+    };
+  }, [emblaApi]);
 
   const handleDownload = (certificate: CertificateItem) => {
     const link = document.createElement('a');
@@ -195,12 +187,7 @@ const Certificates = () => {
       observer.observe(el);
     });
 
-    startAutoScroll();
-
     return () => {
-      if (autoScrollIntervalRef.current && typeof window !== 'undefined') {
-        window.cancelAnimationFrame(autoScrollIntervalRef.current);
-      }
       observer.disconnect();
     };
   }, []);
@@ -223,10 +210,8 @@ const Certificates = () => {
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] z-0"></div>
       <div className="container mx-auto px-4 relative z-10">
         <h2 className="section-title mb-12">Certificates & Achievements</h2>
-
         <div className="relative overflow-hidden py-10">
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent pointer-events-none z-10"></div>
-
           <Carousel
             className="w-full max-w-5xl mx-auto certificate-carousel"
             opts={{
@@ -236,6 +221,7 @@ const Certificates = () => {
               containScroll: false
             }}
             ref={carouselRef}
+            setApi={setEmblaApi}
           >
             <CarouselContent className="py-4 infinite-scroll-content">
               {[...certificates, ...certificates].map((cert, index) => (
@@ -248,16 +234,13 @@ const Certificates = () => {
                         </div>
                         <span className="text-sm text-gray-400">{cert.date}</span>
                       </div>
-
                       <h3 className="text-lg font-semibold mb-2 text-portfolio-darkBlue">{cert.title}</h3>
                       <p className="text-sm text-gray-600 mb-4">Issued by: {cert.issuer}</p>
-
                       <div className="mt-auto pt-4 border-t border-gray-100">
                         <div className="flex justify-between items-center">
                           <span className="text-xs uppercase tracking-wider text-gray-400">
                             {cert.type === 'certification' ? 'Certification' : cert.type === 'course' ? 'Course Completion' : 'Award'}
                           </span>
-
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button variant="link" className="text-portfolio-blue text-sm p-0 h-auto">
@@ -276,7 +259,6 @@ const Certificates = () => {
                                   </div>
                                 </DialogDescription>
                               </DialogHeader>
-
                               <div className="mt-4 space-y-4">
                                 {cert.imageSrc && (
                                   <div className="relative w-full aspect-auto bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
@@ -284,15 +266,14 @@ const Certificates = () => {
                                       src={cert.imageSrc}
                                       alt={`${cert.title} certificate`}
                                       className="w-full h-auto object-contain"
+                                      onError={e => { (e.currentTarget as HTMLImageElement).src = '/placeholder.svg'; }}
                                     />
                                   </div>
                                 )}
-
                                 <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
                                   <h4 className="font-medium text-gray-800 mb-2">Description</h4>
                                   <p className="text-gray-600">{cert.description}</p>
                                 </div>
-
                                 <div className="flex justify-between">
                                   <div className="flex items-center gap-2">
                                     <div className="p-2 bg-gray-50 rounded-md">
@@ -304,7 +285,6 @@ const Certificates = () => {
                                        cert.type === 'course' ? 'Course Completion' : 'Award'}
                                     </span>
                                   </div>
-
                                   <Button
                                     variant="outline"
                                     className="text-portfolio-blue border-portfolio-blue/50 hover:bg-portfolio-blue/10"
@@ -329,7 +309,6 @@ const Certificates = () => {
             </div>
           </Carousel>
         </div>
-
         <style>{`
           @keyframes fadeSlideUp {
             from {
@@ -349,7 +328,7 @@ const Certificates = () => {
           .certificate-card {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
           }
 
           .certificate-card:hover {
@@ -381,7 +360,7 @@ const Certificates = () => {
 
           /* Enhanced carousel interactions */
           .embla__slide {
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
           }
 
           .embla__slide:hover {

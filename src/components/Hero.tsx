@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Hero = () => {
   const profileImageRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const vortexRef = useRef<HTMLDivElement>(null);
+  const [imgLoaded, setImgLoaded] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -90,20 +92,25 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center text-center z-10">
         <div className="relative mb-6 sm:mb-8 md:mb-12 overflow-visible">
-          {/* Enhanced profile image with 3D effect */}
-          <div 
-            ref={profileImageRef} 
-            className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl transform-gpu"
-            style={{ 
+          {/* Skeleton for profile image */}
+          {!imgLoaded && (
+            <Skeleton className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-xl mb-2" />
+          )}
+          <div
+            ref={profileImageRef}
+            className={`w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl transform-gpu transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            style={{
               transformStyle: 'preserve-3d',
-              transition: 'filter 0.5s ease-out, box-shadow 0.5s ease-out'
+              transition: 'filter 0.5s ease-out, box-shadow 0.5s ease-out',
             }}
           >
-            <img 
-              src="/profile.png" 
-              alt="Ritesh N" 
+            <img
+              src="/profile.png"
+              alt="Ritesh N"
               className="w-full h-full object-cover"
               loading="eager"
+              onLoad={() => setImgLoaded(true)}
+              style={{ display: imgLoaded ? 'block' : 'none' }}
             />
           </div>
           
@@ -120,20 +127,31 @@ const Hero = () => {
           </div>
         </div>
         
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue mb-4 sm:mb-6 animate-fade-in tracking-tight">
-          Hi, I'm <span className="text-gradient-blue font-extrabold">Ritesh N</span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-8 animate-fade-in animate-delay-200">
-          Full-Stack Developer | AI Innovator | Startup Founder
-        </p>
-        
-        <p className="text-gray-600 max-w-3xl mx-auto mb-10 animate-fade-in animate-delay-300 leading-relaxed">
-          Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence 
-          and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College, 
-          Bangalore. Founder and CEO of Stalight Technology Pvt Ltd, a tech startup focused on campus 
-          automation and AI-driven applications.
-        </p>
+        {/* Skeleton for main text */}
+        <div className={imgLoaded ? 'opacity-100 transition-opacity duration-700' : 'opacity-0 transition-opacity duration-700'}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue mb-4 sm:mb-6 animate-fade-in tracking-tight">
+            Hi, I'm <span className="text-gradient-blue font-extrabold">Ritesh N</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-8 animate-fade-in animate-delay-200">
+            Full-Stack Developer | AI Innovator | Startup Founder
+          </p>
+          <p className="text-gray-600 max-w-3xl mx-auto mb-10 animate-fade-in animate-delay-300 leading-relaxed">
+            Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence
+            and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College,
+            Bangalore. Founder and CEO of Stalight Technology Pvt Ltd, a tech startup focused on campus
+            automation and AI-driven applications.
+          </p>
+        </div>
+        {/* Skeletons for text */}
+        {!imgLoaded && (
+          <>
+            <Skeleton className="w-64 h-8 mb-4 mx-auto" />
+            <Skeleton className="w-80 h-6 mb-2 mx-auto" />
+            <Skeleton className="w-80 h-6 mb-2 mx-auto" />
+            <Skeleton className="w-80 h-6 mb-2 mx-auto" />
+            <Skeleton className="w-40 h-6 mb-2 mx-auto" />
+          </>
+        )}
         
         <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400">
           <a 

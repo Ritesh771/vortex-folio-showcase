@@ -11,7 +11,7 @@ const Education = () => {
       institution: "A.M.C. Engineering College, Bangalore",
       duration: "Aug 2022 – Present",
       highlights: [
-        { id: 1, label: "CGPA", value: "SEM1 – 9.05 | SEM2 – 8.6 | SEM3 – 9.0 | SEM4 – 9.26" },
+        { id: 1, label: "SGPA", value: "SEM1 – 9.05 | SEM2 – 8.6 | SEM3 – 9.0 | SEM4 – 9.26 | SEM5 - 9.15 " },
         { id: 2, label: "Activities", value: "Actively involved in technical projects and hackathons" },
         { id: 3, label: "Backlogs", value: "No active backlogs" }
       ]
