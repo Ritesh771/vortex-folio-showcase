@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast, toast } from '@/components/ui/use-toast';
 
 const Hero = () => {
   const profileImageRef = useRef<HTMLDivElement>(null);
@@ -67,6 +68,11 @@ const Hero = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    toast({
+      title: 'Download started',
+      description: 'Your resume download has been triggered.',
+      duration: 2000,
+    });
   };
 
   return (
