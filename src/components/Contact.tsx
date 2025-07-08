@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,39 +86,32 @@ const Contact = () => {
             </div>
           </div>
           
-          {/* Contact Form */}
+          {/* Static CTA Card */}
           <div className="animate-on-scroll opacity-0">
-            <div className="bg-white rounded-lg p-6 sm:p-8 shadow-sm">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-6 text-portfolio-darkBlue">Send a Message</h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium">Name</label>
-                  <Input id="name" placeholder="Your name" required className="text-sm sm:text-base" />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
-                  <Input id="email" type="email" placeholder="Your email" required className="text-sm sm:text-base" />
-                </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block mb-2 text-sm font-medium">Subject</label>
-                  <Input id="subject" placeholder="Subject" required className="text-sm sm:text-base" />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block mb-2 text-sm font-medium">Message</label>
-                  <Textarea id="message" placeholder="Your message" className="min-h-[120px] text-sm sm:text-base" required />
-                </div>
-                
-                <Button 
-                  type="submit" 
-                  className="glowing-btn w-full mt-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm sm:text-base"
-                >
-                  Send Message
-                </Button>
-              </form>
+            <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 rounded-lg p-8 sm:p-12 shadow-lg flex flex-col items-center justify-center text-center border border-blue-100">
+              <div className="mb-6">
+                <svg width="64" height="64" fill="none" viewBox="0 0 64 64" className="mx-auto mb-4">
+                  <rect width="64" height="64" rx="16" fill="#3B82F6" fillOpacity="0.08"/>
+                  <path d="M20 28c0-4.418 3.582-8 8-8h8c4.418 0 8 3.582 8 8v8c0 4.418-3.582 8-8 8h-8c-4.418 0-8-3.582-8-8v-8z" fill="#3B82F6"/>
+                  <path d="M32 36a4 4 0 100-8 4 4 0 000 8z" fill="#1E3A8A"/>
+                </svg>
+                <h3 className="text-2xl sm:text-3xl font-bold text-portfolio-darkBlue mb-2">Let's Connect!</h3>
+                <p className="text-gray-700 max-w-md mx-auto mb-4 text-base sm:text-lg">
+                  I love meeting new people, collaborating on exciting projects, and exploring innovative ideas. Whether you want to discuss tech, share an opportunity, or just say hello—I'm always open to connect!
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="mailto:riteshnvisonex@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-portfolio-blue text-white font-medium shadow hover:bg-portfolio-darkBlue transition-colors">
+                  <Mail className="w-5 h-5" /> Email Me
+                </a>
+                <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-portfolio-blue text-portfolio-blue font-medium shadow hover:bg-portfolio-blue hover:text-white transition-colors">
+                  <Github className="w-5 h-5" /> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-blue-400 text-blue-700 font-medium shadow hover:bg-blue-600 hover:text-white transition-colors">
+                  <Linkedin className="w-5 h-5" /> LinkedIn
+                </a>
+              </div>
+              <p className="mt-8 text-gray-500 text-sm">Or just drop me an email—I'll get back to you as soon as possible!</p>
             </div>
           </div>
         </div>
