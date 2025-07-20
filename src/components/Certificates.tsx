@@ -177,7 +177,7 @@ const Certificates = () => {
       date: "20 July 2025",
       type: "certification",
       imageSrc: "/lovable-uploads/delloite .png",
-      description: "Completed practical tasks in Coding and Development as part of the Deloitte Technology Job Simulation."
+      description: "Completed practical tasks(2) in Coding and Development as part of the Deloitte Technology Job Simulation."
     }
   ];
 
