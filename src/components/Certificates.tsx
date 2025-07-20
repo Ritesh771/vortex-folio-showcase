@@ -133,6 +133,51 @@ const Certificates = () => {
       type: "certification",
       imageSrc: "/lovable-uploads/6b9add63-dda6-44cd-b763-ed763a73b700.png",
       description: "Exploration of Text to Speech capabilities using IBM Watson technology."
+    },
+    {
+      id: 12,
+      title: "JavaScript Bootcamp",
+      issuer: "LetsUpgrade",
+      date: "26 March 2025 – 28 March 2025",
+      type: "course",
+      imageSrc: "/lovable-uploads/javascriptbootcamp.png",
+      description: "Successfully completed JavaScript Bootcamp (3 days)."
+    },
+    {
+      id: 13,
+      title: "People Skills for Professional Success Bootcamp",
+      issuer: "LetsUpgrade",
+      date: "1 April 2025 – 3 April 2025",
+      type: "course",
+      imageSrc: "/lovable-uploads/peopleskills.png",
+      description: "Successfully completed People Skills for Professional Success Bootcamp (3 days)."
+    },
+    {
+      id: 14,
+      title: "Gemini AI Clone using HTML CSS & JavaScript",
+      issuer: "LetsUpgrade",
+      date: "6 June 2025 – 7 June 2025",
+      type: "course",
+      imageSrc: "/lovable-uploads/gemini ai.png",
+      description: "Successfully completed Gemini AI Clone using HTML CSS & JavaScript (2 days)."
+    },
+    {
+      id: 15,
+      title: "Emotional Intelligence Bootcamp",
+      issuer: "LetsUpgrade",
+      date: "14 April 2025 – 16 April 2025",
+      type: "course",
+      imageSrc: "/lovable-uploads/emotionalint.png",
+      description: "Successfully completed Emotional Intelligence Bootcamp (3 days)."
+    },
+    {
+      id: 16,
+      title: "Technology Job Simulation",
+      issuer: "Deloitte",
+      date: "20 July 2025",
+      type: "certification",
+      imageSrc: "/lovable-uploads/delloite .png",
+      description: "Completed practical tasks in Coding and Development as part of the Deloitte Technology Job Simulation."
     }
   ];
 
