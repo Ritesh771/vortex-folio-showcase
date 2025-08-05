@@ -251,10 +251,26 @@ const Certificates = () => {
   };
 
   return (
-    <section id="certificates" className="py-20 bg-gradient-to-b from-gray-50 to-white relative">
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] z-0"></div>
+    <section id="certificates" className="py-20 bg-gradient-to-br from-portfolio-background via-white to-portfolio-lightGray relative overflow-hidden">
+      <div className="absolute inset-0 bg-pattern-modern opacity-[0.02] z-0"></div>
+      <div className="floating-icon top-16 left-10 w-10 h-10 bg-portfolio-secondary rounded-full"></div>
+      <div className="floating-icon bottom-20 right-16 w-8 h-8 bg-portfolio-accent rounded-full"></div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="section-title mb-12">Certificates & Achievements</h2>
+        <div className="text-center mb-12">
+          <h2 className="section-title mb-4">Certificates & Achievements</h2>
+          <p className="text-portfolio-gray text-lg max-w-2xl mx-auto mb-8">Continuous learning and professional development milestones</p>
+          
+          {/* Add learning illustration */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/mock/Online learning.gif" 
+              alt="Online Learning" 
+              className="w-48 h-36 object-contain hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        </div>
+        
         <div className="relative overflow-hidden py-10">
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent pointer-events-none z-10"></div>
           <Carousel
@@ -271,36 +287,45 @@ const Certificates = () => {
             <CarouselContent className="py-4 infinite-scroll-content">
               {[...certificates, ...certificates].map((cert, index) => (
                 <CarouselItem key={`${cert.id}-${index}`} className="md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500">
-                  <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-lg border border-gray-100 h-full flex flex-col">
+                  <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-2xl card-modern h-full flex flex-col border-portfolio-primary/10">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="flex justify-between items-start mb-4">
-                        <div className="p-2 bg-gray-50 rounded-md">
+                        <div className={`p-2 rounded-xl transition-all hover:scale-110 duration-200 ${
+                          index % 4 === 0 ? 'bg-portfolio-primary/10 text-portfolio-primary' :
+                          index % 4 === 1 ? 'bg-portfolio-secondary/10 text-portfolio-secondary' :
+                          index % 4 === 2 ? 'bg-portfolio-accent/10 text-portfolio-accent' :
+                          'bg-portfolio-blue/10 text-portfolio-blue'
+                        }`}>
                           {getIconByType(cert.type)}
                         </div>
-                        <span className="text-sm text-gray-400">{cert.date}</span>
+                        <span className="text-sm text-portfolio-gray font-medium">{cert.date}</span>
                       </div>
                       <h3 className="text-lg font-semibold mb-2 text-portfolio-darkBlue">{cert.title}</h3>
-                      <p className="text-sm text-gray-600 mb-4">Issued by: {cert.issuer}</p>
-                      <div className="mt-auto pt-4 border-t border-gray-100">
+                      <p className="text-sm text-portfolio-gray mb-4">Issued by: <span className="font-medium text-portfolio-primary">{cert.issuer}</span></p>
+                      <div className="mt-auto pt-4 border-t border-portfolio-primary/20">
                         <div className="flex justify-between items-center">
-                          <span className="text-xs uppercase tracking-wider text-gray-400">
+                          <span className={`text-xs uppercase tracking-wider font-medium ${
+                            cert.type === 'certification' ? 'text-portfolio-primary' :
+                            cert.type === 'course' ? 'text-portfolio-secondary' :
+                            'text-portfolio-accent'
+                          }`}>
                             {cert.type === 'certification' ? 'Certification' : cert.type === 'course' ? 'Course Completion' : 'Award'}
                           </span>
                           <Dialog>
                             <DialogTrigger asChild>
-                              <Button variant="link" className="text-portfolio-blue text-sm p-0 h-auto">
+                              <Button variant="link" className="text-portfolio-primary hover:text-portfolio-secondary text-sm p-0 h-auto transition-colors">
                                 <span className="flex items-center gap-1">
                                   View <Eye className="w-3.5 h-3.5" />
                                 </span>
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-white/95 backdrop-blur-sm border border-portfolio-primary/20 rounded-3xl">
                               <DialogHeader>
-                                <DialogTitle className="text-xl text-portfolio-blue">{cert.title}</DialogTitle>
+                                <DialogTitle className="text-xl text-portfolio-primary">{cert.title}</DialogTitle>
                                 <DialogDescription>
                                   <div className="flex items-center justify-between my-2">
-                                    <span>Issued by: <strong>{cert.issuer}</strong></span>
-                                    <span>Date: <strong>{cert.date}</strong></span>
+                                    <span>Issued by: <strong className="text-portfolio-darkBlue">{cert.issuer}</strong></span>
+                                    <span>Date: <strong className="text-portfolio-darkBlue">{cert.date}</strong></span>
                                   </div>
                                 </DialogDescription>
                               </DialogHeader>

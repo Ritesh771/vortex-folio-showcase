@@ -40,24 +40,45 @@ const Education = () => {
 
   return (
     <div className="space-y-6 animate-on-scroll opacity-0 max-w-4xl mx-auto">
+      {/* Add education illustration */}
+      <div className="text-center mb-8">
+        <img 
+          src="/mock/undraw_educator_6dgp.svg" 
+          alt="Education" 
+          className="w-48 h-36 mx-auto object-contain hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      
       {educationData.map((edu, index) => (
-        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-lg transition-all duration-300 bg-white">
+        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-4 border-l-portfolio-blue">
           <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
               <div className="flex-1 mb-3 sm:mb-0">
                 <h4 className="text-lg sm:text-xl font-semibold text-portfolio-darkBlue mb-2 leading-tight">{edu.degree}</h4>
                 <p className="text-portfolio-blue text-sm sm:text-base font-medium mb-2">{edu.institution}</p>
               </div>
-              <Badge variant="outline" className="self-start sm:self-center text-xs sm:text-sm whitespace-nowrap">
+              <Badge variant="outline" className={`self-start sm:self-center text-xs sm:text-sm whitespace-nowrap border-portfolio-blue/20 text-portfolio-blue ${
+                index === 0 ? 'bg-portfolio-blue/10' :
+                index === 1 ? 'bg-portfolio-lightBlue/10 border-portfolio-lightBlue/20 text-portfolio-lightBlue' :
+                'bg-portfolio-darkBlue/10 border-portfolio-darkBlue/20 text-portfolio-darkBlue'
+              }`}>
                 {edu.duration}
               </Badge>
             </div>
             
             <div className="space-y-3">
-              {edu.highlights.map((highlight) => (
-                <div key={highlight.id} className="bg-gray-50 rounded-lg p-3 sm:p-4">
+              {edu.highlights.map((highlight, highlightIndex) => (
+                <div key={highlight.id} className={`rounded-xl p-3 sm:p-4 border transition-all hover:scale-[1.02] duration-200 ${
+                  highlightIndex % 3 === 0 ? 'bg-portfolio-blue/5 border-portfolio-blue/20' :
+                  highlightIndex % 3 === 1 ? 'bg-portfolio-lightBlue/5 border-portfolio-lightBlue/20' :
+                  'bg-portfolio-darkBlue/5 border-portfolio-darkBlue/20'
+                }`}>
                   <div className="flex flex-col sm:flex-row sm:items-start">
-                    <span className="font-medium text-gray-700 text-sm sm:text-base mb-1 sm:mb-0 sm:w-32 flex-shrink-0">
+                    <span className={`font-medium text-sm sm:text-base mb-1 sm:mb-0 sm:w-32 flex-shrink-0 ${
+                      highlightIndex % 3 === 0 ? 'text-portfolio-blue' :
+                      highlightIndex % 3 === 1 ? 'text-portfolio-lightBlue' :
+                      'text-portfolio-darkBlue'
+                    }`}>
                       {highlight.label}:
                     </span>
                     <span className="text-gray-600 text-sm sm:text-base sm:flex-1 leading-relaxed">

@@ -103,8 +103,8 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         "glow": {
-          "0%, 100%": { boxShadow: "0 0 5px rgba(59, 130, 246, 0.5)" },
-          "50%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 5px rgba(108, 92, 231, 0.5)" },
+          "50%": { boxShadow: "0 0 20px rgba(108, 92, 231, 0.8)" },
         },
         "macbook-scroll": {
           "0%": { transform: "translateZ(0) scale(0.8)" },
@@ -126,6 +126,32 @@ export default {
           "0%": { transform: "translateY(-20px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
+        "bounce-gentle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+        "wiggle": {
+          "0%, 100%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(1deg)" },
+          "75%": { transform: "rotate(-1deg)" },
+        },
+        "gradient-shift": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        "morphing-blob": {
+          "0%, 100%": { borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%" },
+          "50%": { borderRadius: "30% 60% 70% 40% / 50% 60% 30% 60%" },
+        },
+        "typing": {
+          "0%": { width: "0" },
+          "100%": { width: "100%" },
+        },
+        "blink": {
+          "0%, 50%": { borderColor: "transparent" },
+          "51%, 100%": { borderColor: "#6C5CE7" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -140,6 +166,12 @@ export default {
         "pulse-subtle": "pulse-subtle 2s ease-in-out infinite",
         "slide-up": "slide-up 0.6s ease-out forwards",
         "slide-down": "slide-down 0.6s ease-out forwards",
+        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
+        "wiggle": "wiggle 1s ease-in-out infinite",
+        "gradient-shift": "gradient-shift 3s ease infinite",
+        "morphing-blob": "morphing-blob 8s ease-in-out infinite",
+        "typing": "typing 3s steps(20) infinite",
+        "blink": "blink 1s infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

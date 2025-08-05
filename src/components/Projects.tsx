@@ -40,7 +40,7 @@ const Projects = () => {
       duration: "Apr 2025 - Present",
       company: "Stalight Technology",
       technologies: ["React.js", "Django", "PostgreSQL", "AWS", "Android"],
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      image: "/mock/undraw_mobile-development_tjxm.svg",
       challenges: [
         "Implementing accurate real-time location tracking with minimal battery consumption",
         "Creating a reliable alert system that works even in poor network conditions",
@@ -61,7 +61,7 @@ const Projects = () => {
       duration: "Jun 2023 - Aug 2023",
       company: "Stalight Technology",
       technologies: ["React.js", "Django", "PostgreSQL", "Redis"],
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+      image: "/mock/undraw_web-development_0wdh.svg",
       links: {
         demo: "https://example.com/demo",
         github: "https://github.com/example/project"
@@ -86,7 +86,7 @@ const Projects = () => {
       duration: "Feb 2025 - Present",
       company: "Castle Rockin",
       technologies: ["HTML5", "CSS3", "React.js", "Django"],
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
+      image: "/mock/undraw_developer-activity_4zqd.svg",
       challenges: [
         "Working within strict NDA constraints while delivering quality features",
         "Creating an adaptive UI for diverse user personas (students, recruiters, administrators)",
@@ -107,7 +107,7 @@ const Projects = () => {
       duration: "Apr 2024",
       company: "T. John College of Engineering",
       technologies: ["Python", "HTML5", "CSS3"],
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      image: "/mock/undraw_programming_65t2.svg",
       challenges: [
         "Integrating with various IoT sensors for soil data collection",
         "Building accurate prediction models with limited historical data",
@@ -128,7 +128,7 @@ const Projects = () => {
       duration: "Jan 2024 - Mar 2024",
       company: "AMC College of Engineering",
       technologies: ["Flask", "MySQL", "Redis"],
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      image: "/mock/undraw_real-time-collaboration_g4mc.svg",
       challenges: [
         "Processing video streams in real-time with limited computational resources",
         "Training the model to detect genuinely suspicious behavior with minimal false positives",
@@ -149,7 +149,7 @@ const Projects = () => {
       duration: "Jan 2025",
       company: "Stalight Technology",
       technologies: ["Python", "Flask", "TensorFlow"],
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      image: "/mock/undraw_vibe-coding_mjme.svg",
       challenges: [
         "Optimizing neural networks to run efficiently on resource-constrained devices",
         "Creating reliable object detection in varied lighting and environmental conditions",
@@ -193,11 +193,17 @@ const Projects = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-gray-50 relative">
-      <div className="absolute inset-0 bg-circuit-pattern opacity-[0.03] z-0"></div>
+    <section id="projects" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+      {/* Modern floating background elements */}
+      <div className="absolute inset-0 bg-circuit-pattern opacity-[0.02] z-0"></div>
+      <div className="floating-icon top-20 left-10 w-8 h-8 bg-portfolio-blue rounded-full"></div>
+      <div className="floating-icon top-40 right-20 w-6 h-6 bg-portfolio-lightBlue rounded-full"></div>
+      <div className="floating-icon bottom-32 left-20 w-10 h-10 bg-portfolio-darkBlue rounded-full"></div>
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-8 sm:mb-12">
           <h2 className="section-title text-2xl sm:text-3xl lg:text-4xl">Key Projects</h2>
+          <p className="text-portfolio-gray mt-4 text-lg max-w-2xl mx-auto">Showcasing innovative solutions and cutting-edge technology implementations</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
@@ -206,15 +212,15 @@ const Projects = () => {
               key={project.id} 
               className="project-card-container opacity-0 transition-opacity duration-700 ease-in-out"
             >
-              <div className="project-card h-full group bg-white rounded-lg shadow-md overflow-hidden transition-all duration-500 ease-in-out hover:shadow-xl hover:-translate-y-2 flex flex-col">
-                <div className="relative aspect-[16/9] sm:aspect-[4/3] lg:aspect-[3/2] overflow-hidden flex-shrink-0">
+              <div className="project-card h-full group bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transition-all duration-500 ease-in-out hover:shadow-2xl hover:-translate-y-3 flex flex-col border border-portfolio-blue/10">
+                <div className="relative aspect-[16/9] sm:aspect-[4/3] lg:aspect-[3/2] overflow-hidden flex-shrink-0 bg-gradient-to-br from-portfolio-blue/5 to-portfolio-lightBlue/5">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110" 
+                    className="w-full h-full object-contain p-8 transition-transform duration-700 ease-in-out group-hover:scale-110" 
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-gradient-to-t from-portfolio-darkBlue/70 to-transparent flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
                     <div className="p-3 sm:p-4 text-white">
                       <p className="text-xs sm:text-sm font-medium">{project.duration}</p>
                       <p className="text-xs opacity-80">{project.company}</p>
@@ -222,18 +228,22 @@ const Projects = () => {
                   </div>
                 </div>
                 
-                <div className="p-4 sm:p-6 bg-white flex flex-col flex-grow">
+                <div className="p-4 sm:p-6 bg-white/80 backdrop-blur-sm flex flex-col flex-grow">
                   <h3 className="text-base sm:text-lg lg:text-xl font-semibold mb-2 text-portfolio-darkBlue line-clamp-2">{project.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{project.shortDescription}</p>
+                  <p className="text-sm text-portfolio-gray mb-4 line-clamp-3 flex-grow">{project.shortDescription}</p>
                   
                   <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-2 py-1 rounded-full text-xs hover:bg-portfolio-blue hover:text-white transition-colors">
+                    {project.technologies.slice(0, 3).map((tech, index) => (
+                      <span key={tech} className={`px-2 py-1 rounded-full text-xs hover:scale-105 transition-transform duration-200 ${
+                        index === 0 ? 'bg-portfolio-blue/10 text-portfolio-blue border border-portfolio-blue/20' :
+                        index === 1 ? 'bg-portfolio-lightBlue/10 text-portfolio-lightBlue border border-portfolio-lightBlue/20' :
+                        'bg-portfolio-darkBlue/10 text-portfolio-darkBlue border border-portfolio-darkBlue/20'
+                      }`}>
                         {tech}
                       </span>
                     ))}
                     {project.technologies.length > 3 && (
-                      <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
+                      <span className="bg-portfolio-lightGray text-portfolio-gray px-2 py-1 rounded-full text-xs border border-portfolio-gray/20">
                         +{project.technologies.length - 3}
                       </span>
                     )}
@@ -242,7 +252,7 @@ const Projects = () => {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="w-full mt-auto border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium py-2 px-4 rounded-md"
+                    className="w-full mt-auto border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm font-medium py-2 px-4 rounded-xl group-hover:shadow-lg"
                     onClick={() => handleOpenDetails(project)}
                   >
                     <span>View Project</span>
@@ -256,7 +266,7 @@ const Projects = () => {
         
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           {selectedProject && (
-            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4 bg-white border border-gray-200 shadow-2xl z-50">
+            <DialogContent className="sm:max-w-[90vw] lg:max-w-[900px] max-h-[90vh] overflow-y-auto p-4 sm:p-6 mx-4 bg-white/95 backdrop-blur-sm border border-portfolio-blue/20 shadow-2xl z-50 rounded-3xl">
               <DialogHeader>
                 <DialogTitle className="text-lg sm:text-xl lg:text-2xl font-bold text-portfolio-darkBlue pr-8 mb-2">{selectedProject.title}</DialogTitle>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-portfolio-blue">
@@ -272,11 +282,11 @@ const Projects = () => {
               </DialogHeader>
               
               <div className="mt-4 space-y-4 sm:space-y-6">
-                <div className="overflow-hidden rounded-md">
+                <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-portfolio-blue/5 to-portfolio-lightBlue/5 p-8">
                   <img 
                     src={selectedProject.image} 
                     alt={selectedProject.title} 
-                    className="w-full h-48 sm:h-64 lg:h-72 object-cover hover:scale-105 transition-transform duration-500" 
+                    className="w-full h-48 sm:h-64 lg:h-72 object-contain hover:scale-105 transition-transform duration-500" 
                     loading="lazy"
                   />
                 </div>
@@ -286,13 +296,13 @@ const Projects = () => {
                     <Code2 className="w-5 h-5 text-portfolio-blue" />
                     Project Overview
                   </h4>
-                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
+                  <p className="text-portfolio-gray leading-relaxed text-sm sm:text-base">{selectedProject.detailedDescription}</p>
                 </div>
                 
                 {selectedProject.challenges && (
                   <div>
                     <h4 className="text-base sm:text-lg font-semibold mb-3 text-red-600">Key Challenges</h4>
-                    <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
+                    <ul className="space-y-2 text-portfolio-gray text-sm sm:text-base">
                       {selectedProject.challenges.map((challenge, index) => (
                         <li key={index} className="flex items-start gap-2 transition-all hover:translate-x-1">
                           <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
@@ -306,7 +316,7 @@ const Projects = () => {
                 {selectedProject.achievements && (
                   <div>
                     <h4 className="text-base sm:text-lg font-semibold mb-3 text-green-600">Key Achievements</h4>
-                    <ul className="space-y-2 text-gray-700 text-sm sm:text-base">
+                    <ul className="space-y-2 text-portfolio-gray text-sm sm:text-base">
                       {selectedProject.achievements.map((achievement, index) => (
                         <li key={index} className="flex items-start gap-2 transition-all hover:translate-x-1">
                           <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
@@ -320,17 +330,21 @@ const Projects = () => {
                 <div>
                   <h4 className="text-base sm:text-lg font-semibold mb-3">Technologies Used</h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedProject.technologies.map((tech) => (
-                      <span key={tech} className="bg-portfolio-lightBlue bg-opacity-10 text-portfolio-blue px-3 py-2 rounded-full text-sm font-medium hover:bg-portfolio-blue hover:text-white transition-colors border border-portfolio-blue/20">
+                    {selectedProject.technologies.map((tech, index) => (
+                      <span key={tech} className={`px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 hover:scale-105 border ${
+                        index % 3 === 0 ? 'bg-portfolio-blue/10 text-portfolio-blue border-portfolio-blue/20 hover:bg-portfolio-blue hover:text-white' :
+                        index % 3 === 1 ? 'bg-portfolio-lightBlue/10 text-portfolio-lightBlue border-portfolio-lightBlue/20 hover:bg-portfolio-lightBlue hover:text-white' :
+                        'bg-portfolio-darkBlue/10 text-portfolio-darkBlue border-portfolio-darkBlue/20 hover:bg-portfolio-darkBlue hover:text-white'
+                      }`}>
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 border-t border-portfolio-blue/20">
                   <Button 
-                    className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-colors text-sm"
+                    className="flex items-center gap-2 bg-portfolio-blue hover:bg-portfolio-darkBlue transition-all duration-300 text-sm rounded-xl shadow-lg hover:shadow-xl"
                     onClick={() => window.open('https://github.com/Ritesh771', '_blank')}
                   >
                     <Github className="w-4 h-4" />
@@ -339,7 +353,7 @@ const Projects = () => {
                   {selectedProject.links?.demo && (
                     <Button 
                       variant="outline" 
-                      className="flex items-center gap-2 border-portfolio-blue text-portfolio-blue hover:bg-portfolio-blue hover:text-white text-sm"
+                      className="flex items-center gap-2 border-portfolio-lightBlue text-portfolio-lightBlue hover:bg-portfolio-lightBlue hover:text-white text-sm rounded-xl"
                       onClick={() => window.open(selectedProject.links!.demo, '_blank')}
                     >
                       <ExternalLink className="w-4 h-4" />
