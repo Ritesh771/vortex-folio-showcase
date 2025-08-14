@@ -101,28 +101,8 @@ const Hero = () => {
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center items-center pt-16 overflow-hidden"
     >
-      {/* Modern floating elements and background */}
-      <div 
-        ref={vortexRef} 
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse at 50% 50%, rgba(30, 58, 138, 0.15) 0%, rgba(59, 130, 246, 0.08) 25%, transparent 60%)`,
-          borderRadius: '40%',
-          transform: 'rotate(0deg)',
-          transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-          willChange: 'transform, opacity',
-          backfaceVisibility: 'hidden',
-        }}
-      ></div>
-      
-      <div className="absolute inset-0 bg-gradient-radial from-portfolio-blue/5 via-transparent to-transparent z-0"></div>
-      <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
-      
-      {/* Floating decorative elements */}
-      <div className="floating-icon top-20 left-10 w-12 h-12 bg-portfolio-blue rounded-full opacity-10"></div>
-      <div className="floating-icon top-40 right-20 w-8 h-8 bg-portfolio-lightBlue rounded-full opacity-15"></div>
-      <div className="floating-icon bottom-32 left-20 w-16 h-16 bg-portfolio-darkBlue rounded-full opacity-10"></div>
-      <div className="floating-icon top-1/3 right-1/3 w-6 h-6 bg-portfolio-lightBlue rounded-full opacity-20"></div>
+  {/* Restored simple gradient background for visibility */}
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 z-0"></div>
       
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center text-center z-10">
         <div className="relative mb-6 sm:mb-8 md:mb-12 overflow-visible">

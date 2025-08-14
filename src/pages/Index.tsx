@@ -211,14 +211,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/80 via-white to-blue-100/50">
-      {/* Background patterns and effects */}
-      <div className="bg-pattern absolute inset-0 opacity-5 z-0"></div>
-      <div className="absolute inset-0 bg-gradient-radial from-portfolio-blue/5 via-transparent to-transparent z-0"></div>
-
-      {/* Dynamic vortex background */}
-      <div className="absolute top-0 left-0 right-0 h-[300px] overflow-hidden z-0 pointer-events-none">
-        <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-gradient-conic from-portfolio-blue/3 via-portfolio-lightBlue/1 to-portfolio-blue/3 animate-vortex"></div>
-      </div>
+      {/* Background patterns and effects removed */}
 
       <div className="relative z-10">
         <Navbar />

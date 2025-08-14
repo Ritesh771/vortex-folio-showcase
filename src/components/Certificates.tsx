@@ -253,8 +253,7 @@ const Certificates = () => {
   return (
     <section id="certificates" className="py-20 bg-gradient-to-br from-portfolio-background via-white to-portfolio-lightGray relative overflow-hidden">
       <div className="absolute inset-0 bg-pattern-modern opacity-[0.02] z-0"></div>
-      <div className="floating-icon top-16 left-10 w-10 h-10 bg-portfolio-secondary rounded-full"></div>
-      <div className="floating-icon bottom-20 right-16 w-8 h-8 bg-portfolio-accent rounded-full"></div>
+  {/* Floating bubble background elements removed */}
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
