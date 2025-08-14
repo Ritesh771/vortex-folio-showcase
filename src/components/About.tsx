@@ -92,8 +92,7 @@ const About = () => {
     <section id="about" className="py-8 sm:py-12 lg:py-16 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
       {/* Modern background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] z-0"></div>
-      <div className="floating-icon top-16 right-10 w-10 h-10 bg-portfolio-lightBlue rounded-full"></div>
-      <div className="floating-icon bottom-20 left-16 w-8 h-8 bg-portfolio-blue rounded-full"></div>
+  {/* Floating bubble background elements removed */}
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-6 sm:mb-8">

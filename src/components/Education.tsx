@@ -41,13 +41,7 @@ const Education = () => {
   return (
     <div className="space-y-6 animate-on-scroll opacity-0 max-w-4xl mx-auto">
       {/* Add education illustration */}
-      <div className="text-center mb-8">
-        <img 
-          src="/mock/undraw_educator_6dgp.svg" 
-          alt="Education" 
-          className="w-48 h-36 mx-auto object-contain hover:scale-105 transition-transform duration-300"
-        />
-      </div>
+     
       
       {educationData.map((edu, index) => (
         <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-4 border-l-portfolio-blue">

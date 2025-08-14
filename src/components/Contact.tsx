@@ -28,9 +28,7 @@ const Contact = () => {
     <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white via-gray-50 to-blue-50 relative overflow-hidden">
       {/* Modern background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] z-0"></div>
-      <div className="floating-icon top-20 left-10 w-12 h-12 bg-portfolio-lightBlue rounded-full animate-pulse"></div>
-      <div className="floating-icon bottom-20 right-20 w-8 h-8 bg-portfolio-blue rounded-full animate-bounce"></div>
-      <div className="floating-icon top-1/3 right-1/4 w-6 h-6 bg-portfolio-darkBlue rounded-full animate-pulse"></div>
+  {/* Floating bubble background elements removed */}
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Title */}
