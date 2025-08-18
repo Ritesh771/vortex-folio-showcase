@@ -240,32 +240,32 @@ const Certificates = () => {
   const getIconByType = (type: string) => {
     switch (type) {
       case 'certification':
-        return <GraduationCap className="w-6 h-6 text-portfolio-blue" />;
+        return <GraduationCap className="w-6 h-6" />;
       case 'course':
-        return <Award className="w-6 h-6 text-amber-500" />;
+        return <Award className="w-6 h-6" />;
       case 'award':
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
+        return <Trophy className="w-6 h-6" />;
       default:
-        return <GraduationCap className="w-6 h-6 text-portfolio-blue" />;
+        return <GraduationCap className="w-6 h-6" />;
     }
   };
 
   return (
-    <section id="certificates" className="py-20 bg-gradient-to-br from-portfolio-background via-white to-portfolio-lightGray relative overflow-hidden">
-      <div className="absolute inset-0 bg-pattern-modern opacity-[0.02] z-0"></div>
+  <section id="certificates" className="py-20 bg-gradient-to-br from-portfolio-background via-white to-portfolio-lightGray dark:from-darkBg dark:via-darkCard dark:to-darkBg relative overflow-hidden">
+  <div className="absolute inset-0 bg-pattern-modern opacity-[0.02] dark:opacity-10 z-0"></div>
   {/* Floating bubble background elements removed */}
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="section-title mb-4">Certificates & Achievements</h2>
-          <p className="text-portfolio-gray text-lg max-w-2xl mx-auto mb-8">Continuous learning and professional development milestones</p>
+          <h2 className="section-title mb-4 dark:text-darkAccent">Certificates & Achievements</h2>
+          <p className="text-portfolio-gray dark:text-darkText/80 text-lg max-w-2xl mx-auto mb-8">Continuous learning and professional development milestones</p>
           
           {/* Add learning illustration */}
           <div className="flex justify-center mb-8">
             <img 
               src="/mock/Online learning.gif" 
               alt="Online Learning" 
-              className="w-48 h-36 object-contain hover:scale-105 transition-transform duration-300"
+              className="w-48 h-36 object-contain hover:scale-105 transition-transform duration-300 dark:brightness-90"
             />
           </div>
         </div>
@@ -286,51 +286,51 @@ const Certificates = () => {
             <CarouselContent className="py-4 infinite-scroll-content">
               {[...certificates, ...certificates].map((cert, index) => (
                 <CarouselItem key={`${cert.id}-${index}`} className="md:basis-1/3 lg:basis-1/4 pl-4 transition-all duration-500">
-                  <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-2xl card-modern h-full flex flex-col border-portfolio-primary/10">
+                  <Card className="certificate-card transform transition-all duration-500 hover:scale-105 hover:shadow-2xl card-modern h-full flex flex-col border-portfolio-primary/10 dark:bg-darkCard dark:border-darkAccent/20 dark:hover:shadow-darkAccent">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="flex justify-between items-start mb-4">
-                        <div className={`p-2 rounded-xl transition-all hover:scale-110 duration-200 ${
-                          index % 4 === 0 ? 'bg-portfolio-primary/10 text-portfolio-primary' :
-                          index % 4 === 1 ? 'bg-portfolio-secondary/10 text-portfolio-secondary' :
-                          index % 4 === 2 ? 'bg-portfolio-accent/10 text-portfolio-accent' :
-                          'bg-portfolio-blue/10 text-portfolio-blue'
+                        <div className={`p-2 rounded-xl transition-all hover:scale-110 duration-200
+                          ${index % 4 === 0 ? 'bg-portfolio-primary/10 text-portfolio-primary dark:bg-darkAccent/10 dark:text-darkAccent' :
+                            index % 4 === 1 ? 'bg-portfolio-secondary/10 text-portfolio-secondary dark:bg-indigo-400/10 dark:text-indigo-400' :
+                            index % 4 === 2 ? 'bg-portfolio-accent/10 text-portfolio-accent dark:bg-slate-500/10 dark:text-slate-500' :
+                            'bg-portfolio-blue/10 text-portfolio-blue dark:bg-sky-500/10 dark:text-sky-500'}
                         }`}>
                           {getIconByType(cert.type)}
                         </div>
-                        <span className="text-sm text-portfolio-gray font-medium">{cert.date}</span>
+                        <span className="text-sm text-portfolio-gray dark:text-darkText/80 font-medium">{cert.date}</span>
                       </div>
-                      <h3 className="text-lg font-semibold mb-2 text-portfolio-darkBlue">{cert.title}</h3>
-                      <p className="text-sm text-portfolio-gray mb-4">Issued by: <span className="font-medium text-portfolio-primary">{cert.issuer}</span></p>
-                      <div className="mt-auto pt-4 border-t border-portfolio-primary/20">
+                      <h3 className="text-lg font-semibold mb-2 text-portfolio-darkBlue dark:text-darkAccent">{cert.title}</h3>
+                      <p className="text-sm text-portfolio-gray dark:text-darkText/80 mb-4">Issued by: <span className="font-medium text-portfolio-primary dark:text-darkAccent">{cert.issuer}</span></p>
+                      <div className="mt-auto pt-4 border-t border-portfolio-primary/20 dark:border-darkAccent/20">
                         <div className="flex justify-between items-center">
-                          <span className={`text-xs uppercase tracking-wider font-medium ${
-                            cert.type === 'certification' ? 'text-portfolio-primary' :
-                            cert.type === 'course' ? 'text-portfolio-secondary' :
-                            'text-portfolio-accent'
+                          <span className={`text-xs uppercase tracking-wider font-medium
+                            ${cert.type === 'certification' ? 'text-portfolio-primary dark:text-darkAccent' :
+                              cert.type === 'course' ? 'text-portfolio-secondary dark:text-indigo-400' :
+                              'text-portfolio-accent dark:text-slate-500'}
                           }`}>
                             {cert.type === 'certification' ? 'Certification' : cert.type === 'course' ? 'Course Completion' : 'Award'}
                           </span>
                           <Dialog>
                             <DialogTrigger asChild>
-                              <Button variant="link" className="text-portfolio-primary hover:text-portfolio-secondary text-sm p-0 h-auto transition-colors">
+                              <Button variant="link" className="text-portfolio-primary dark:text-darkAccent hover:text-portfolio-secondary dark:hover:text-darkAccent text-sm p-0 h-auto transition-colors">
                                 <span className="flex items-center gap-1">
                                   View <Eye className="w-3.5 h-3.5" />
                                 </span>
                               </Button>
                             </DialogTrigger>
-                            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-white/95 backdrop-blur-sm border border-portfolio-primary/20 rounded-3xl">
+                            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto bg-white/95 dark:bg-darkCard/95 backdrop-blur-sm border border-portfolio-primary/20 dark:border-darkAccent/20 rounded-3xl">
                               <DialogHeader>
-                                <DialogTitle className="text-xl text-portfolio-primary">{cert.title}</DialogTitle>
+                                <DialogTitle className="text-xl text-portfolio-primary dark:text-darkAccent">{cert.title}</DialogTitle>
                                 <DialogDescription>
                                   <div className="flex items-center justify-between my-2">
-                                    <span>Issued by: <strong className="text-portfolio-darkBlue">{cert.issuer}</strong></span>
-                                    <span>Date: <strong className="text-portfolio-darkBlue">{cert.date}</strong></span>
+                                    <span>Issued by: <strong className="text-portfolio-darkBlue dark:text-darkAccent">{cert.issuer}</strong></span>
+                                    <span>Date: <strong className="text-portfolio-darkBlue dark:text-darkAccent">{cert.date}</strong></span>
                                   </div>
                                 </DialogDescription>
                               </DialogHeader>
                               <div className="mt-4 space-y-4">
                                 {cert.imageSrc && (
-                                  <div className="relative w-full aspect-auto bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                                  <div className="relative w-full aspect-auto bg-gray-100 dark:bg-darkBg rounded-lg overflow-hidden border border-gray-200 dark:border-darkBorder">
                                     <img
                                       src={cert.imageSrc}
                                       alt={`${cert.title} certificate`}
@@ -339,16 +339,16 @@ const Certificates = () => {
                                     />
                                   </div>
                                 )}
-                                <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-                                  <h4 className="font-medium text-gray-800 mb-2">Description</h4>
-                                  <p className="text-gray-600">{cert.description}</p>
+                                <div className="bg-gray-50 dark:bg-darkCard p-6 rounded-lg border border-gray-100 dark:border-darkBorder">
+                                  <h4 className="font-medium text-gray-800 dark:text-darkAccent mb-2">Description</h4>
+                                  <p className="text-gray-600 dark:text-darkText/80">{cert.description}</p>
                                 </div>
                                 <div className="flex justify-between">
                                   <div className="flex items-center gap-2">
-                                    <div className="p-2 bg-gray-50 rounded-md">
+                                    <div className="p-2 bg-gray-50 dark:bg-darkCard rounded-md">
                                       {getIconByType(cert.type)}
                                     </div>
-                                    <span className="text-sm font-medium">
+                                    <span className="text-sm font-medium dark:text-darkAccent">
                                       {cert.type === 'certification' ?
                                        'Certification' :
                                        cert.type === 'course' ? 'Course Completion' : 'Award'}
@@ -356,7 +356,7 @@ const Certificates = () => {
                                   </div>
                                   <Button
                                     variant="outline"
-                                    className="text-portfolio-blue border-portfolio-blue/50 hover:bg-portfolio-blue/10"
+                                    className="text-portfolio-blue dark:text-darkAccent border-portfolio-blue/50 dark:border-darkAccent/50 hover:bg-portfolio-blue/10 dark:hover:bg-darkAccent/10"
                                     onClick={() => handleDownload(cert)}
                                   >
                                     <Download className="w-4 h-4 mr-2" /> Download

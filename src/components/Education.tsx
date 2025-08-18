@@ -44,17 +44,17 @@ const Education = () => {
      
       
       {educationData.map((edu, index) => (
-        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-4 border-l-portfolio-blue">
+        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-4 border-l-portfolio-blue dark:border-l-darkAccent">
           <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
               <div className="flex-1 mb-3 sm:mb-0">
-                <h4 className="text-lg sm:text-xl font-semibold text-portfolio-darkBlue mb-2 leading-tight">{edu.degree}</h4>
-                <p className="text-portfolio-blue text-sm sm:text-base font-medium mb-2">{edu.institution}</p>
+                <h4 className="text-lg sm:text-xl font-semibold text-portfolio-darkBlue dark:text-darkText mb-2 leading-tight">{edu.degree}</h4>
+                <p className="text-portfolio-blue dark:text-darkAccent text-sm sm:text-base font-medium mb-2">{edu.institution}</p>
               </div>
-              <Badge variant="outline" className={`self-start sm:self-center text-xs sm:text-sm whitespace-nowrap border-portfolio-blue/20 text-portfolio-blue ${
-                index === 0 ? 'bg-portfolio-blue/10' :
-                index === 1 ? 'bg-portfolio-lightBlue/10 border-portfolio-lightBlue/20 text-portfolio-lightBlue' :
-                'bg-portfolio-darkBlue/10 border-portfolio-darkBlue/20 text-portfolio-darkBlue'
+              <Badge variant="outline" className={`self-start sm:self-center text-xs sm:text-sm whitespace-nowrap border-portfolio-blue/20 text-portfolio-blue dark:border-darkAccent/20 dark:text-darkAccent ${
+                index === 0 ? 'bg-portfolio-blue/10 dark:bg-darkAccent/10' :
+                index === 1 ? 'bg-portfolio-lightBlue/10 border-portfolio-lightBlue/20 text-portfolio-lightBlue dark:bg-indigo-400/10 dark:border-indigo-400/20 dark:text-indigo-400' :
+                'bg-portfolio-darkBlue/10 border-portfolio-darkBlue/20 text-portfolio-darkBlue dark:bg-slate-500/10 dark:border-slate-500/20 dark:text-slate-500'
               }`}>
                 {edu.duration}
               </Badge>
@@ -63,19 +63,19 @@ const Education = () => {
             <div className="space-y-3">
               {edu.highlights.map((highlight, highlightIndex) => (
                 <div key={highlight.id} className={`rounded-xl p-3 sm:p-4 border transition-all hover:scale-[1.02] duration-200 ${
-                  highlightIndex % 3 === 0 ? 'bg-portfolio-blue/5 border-portfolio-blue/20' :
-                  highlightIndex % 3 === 1 ? 'bg-portfolio-lightBlue/5 border-portfolio-lightBlue/20' :
-                  'bg-portfolio-darkBlue/5 border-portfolio-darkBlue/20'
+                  highlightIndex % 3 === 0 ? 'bg-portfolio-blue/5 border-portfolio-blue/20 dark:bg-darkAccent/5 dark:border-darkAccent/20' :
+                  highlightIndex % 3 === 1 ? 'bg-portfolio-lightBlue/5 border-portfolio-lightBlue/20 dark:bg-indigo-400/5 dark:border-indigo-400/20' :
+                  'bg-portfolio-darkBlue/5 border-portfolio-darkBlue/20 dark:bg-slate-500/5 dark:border-slate-500/20'
                 }`}>
                   <div className="flex flex-col sm:flex-row sm:items-start">
                     <span className={`font-medium text-sm sm:text-base mb-1 sm:mb-0 sm:w-32 flex-shrink-0 ${
-                      highlightIndex % 3 === 0 ? 'text-portfolio-blue' :
-                      highlightIndex % 3 === 1 ? 'text-portfolio-lightBlue' :
-                      'text-portfolio-darkBlue'
+                      highlightIndex % 3 === 0 ? 'text-portfolio-blue dark:text-darkAccent' :
+                      highlightIndex % 3 === 1 ? 'text-portfolio-lightBlue dark:text-indigo-400' :
+                      'text-portfolio-darkBlue dark:text-slate-500'
                     }`}>
                       {highlight.label}:
                     </span>
-                    <span className="text-gray-600 text-sm sm:text-base sm:flex-1 leading-relaxed">
+                    <span className="text-gray-600 dark:text-darkText/80 text-sm sm:text-base sm:flex-1 leading-relaxed">
                       {highlight.value}
                     </span>
                   </div>

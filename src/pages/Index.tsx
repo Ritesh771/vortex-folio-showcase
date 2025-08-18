@@ -165,8 +165,9 @@ const Index = () => {
       }
 
       .certificate-card:hover {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07), 0 6px 10px rgba(0, 0, 0, 0.05);
-        transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07), 0 6px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px) scale(1.02);
+    /* No color change, only shadow and transform */
       }
 
       /* Enhanced smooth animations */
@@ -210,7 +211,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50/80 via-white to-blue-100/50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50/80 via-white to-blue-100/50 dark:bg-gradient-to-br dark:from-darkBg dark:via-darkCard dark:to-darkBg">
       {/* Background patterns and effects removed */}
 
       <div className="relative z-10">
@@ -225,7 +226,7 @@ const Index = () => {
         </main>
         <Footer />
       </div>
-      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue z-50 progress-indicator" style={{width: 'var(--scroll-progress, 0%)'}}></div>
+      <div className="fixed top-0 left-0 h-1 bg-gradient-to-r from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue dark:from-darkAccent dark:via-darkAccent dark:to-darkAccent z-50 progress-indicator" style={{width: 'var(--scroll-progress, 0%)'}}></div>
     </div>
   );
 };

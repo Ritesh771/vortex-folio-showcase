@@ -102,7 +102,7 @@ const Hero = () => {
       className="relative min-h-screen flex flex-col justify-center items-center pt-16 overflow-hidden"
     >
   {/* Restored simple gradient background for visibility */}
-  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 z-0"></div>
+  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-darkBg dark:via-darkCard dark:to-darkBg z-0"></div>
       
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center text-center z-10">
         <div className="relative mb-6 sm:mb-8 md:mb-12 overflow-visible">
@@ -132,7 +132,7 @@ const Hero = () => {
           </div>
           
           {/* Enhanced gradient glow effect with original blue theme */}
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue opacity-20 blur-lg -z-10 animate-pulse-subtle"></div>
+          <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-portfolio-blue via-portfolio-lightBlue to-portfolio-blue dark:from-darkAccent dark:via-darkAccent dark:to-darkAccent opacity-20 blur-lg -z-10 animate-pulse-subtle"></div>
           
           {/* Animated particle effect around the image with original colors */}
           <div className="absolute inset-0 rounded-full -z-5 overflow-hidden">
@@ -146,16 +146,16 @@ const Hero = () => {
         
         {/* Skeleton for main text */}
         <div className={imgLoaded ? 'opacity-100 transition-opacity duration-700' : 'opacity-0 transition-opacity duration-700'}>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue mb-4 sm:mb-6 animate-fade-in tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-portfolio-darkBlue dark:text-darkText mb-4 sm:mb-6 animate-fade-in tracking-tight">
             Hi, I'm <span className="text-gradient-blue font-extrabold">Ritesh N</span>
           </h1>
-          <p className="text-xl md:text-2xl text-portfolio-gray max-w-2xl mx-auto mb-8 animate-fade-in animate-delay-200">
+          <p className="text-xl md:text-2xl text-portfolio-gray dark:text-darkText/80 max-w-2xl mx-auto mb-8 animate-fade-in animate-delay-200">
             Full-Stack Developer | AI Innovator | Startup Founder
           </p>
-          <p className="text-portfolio-gray max-w-3xl mx-auto mb-10 animate-fade-in animate-delay-300 leading-relaxed">
+          <p className="text-portfolio-gray dark:text-darkText/70 max-w-3xl mx-auto mb-10 animate-fade-in animate-delay-300 leading-relaxed">
             Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence
             and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College,
-            Bangalore. Founder and CEO of Stalight Technology Pvt Ltd, a tech startup focused on campus
+            Bangalore. Founder and CEO of Stalight Technology, a tech startup focused on campus
             automation and AI-driven applications.
           </p>
         </div>
@@ -173,30 +173,29 @@ const Hero = () => {
         <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400">
           <a 
             href="#about" 
-            className="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white font-semibold"
+            className="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent"
           >
             More About Me
             <ArrowDown className="w-4 h-4 animate-bounce-gentle" />
           </a>
           
           <Button
-            variant="outline"
-            className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary hover:text-white transition-all group rounded-xl px-8 py-4 font-semibold"
             onClick={handleDownloadResume}
+            className="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent"
           >
-            <Download className="w-4 h-4 mr-2 transition-transform group-hover:translate-y-0.5" />
+            <Download className="w-4 h-4 mr-2" />
             Download Resume
           </Button>
         </div>
       </div>
       
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
-        <a href="#about" aria-label="Scroll down" className="p-3 rounded-full bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 border border-portfolio-primary/20">
-          <ArrowDown className="w-6 h-6 text-portfolio-primary" />
+        <a href="#about" aria-label="Scroll down" className="p-3 rounded-full bg-white/90 dark:bg-darkCard shadow-xl hover:shadow-2xl transition-all duration-300 border border-portfolio-primary/20 dark:border-darkAccent/40">
+          <ArrowDown className="w-6 h-6 text-portfolio-primary dark:text-darkAccent" />
         </a>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-portfolio-background to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-portfolio-background to-transparent dark:from-darkBg dark:to-transparent"></div>
     </section>
   );
 };
