@@ -42,31 +42,46 @@
   }
   
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --secondary: 217 24% 59%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 76% 48%;
+    --background: 222 47% 8%; /* near-black, deep background */
+    --foreground: 210 40% 96%; /* very light text */
+    --card: 222 47% 13%; /* slightly lighter than bg */
+    --card-foreground: 210 40% 96%;
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 221 83% 66%; /* vibrant blue accent */
+    --primary-foreground: 222 47% 8%;
+    --secondary: 217 24% 32%; /* muted blue-gray */
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 20%; /* muted dark */
+    --muted-foreground: 215 16% 70%;
+    --accent: 236 100% 67%; /* purple accent */
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 222 47% 18%; /* subtle border */
+    --input: 222 47% 18%;
+    --ring: 221 83% 66%;
+    --radius: 0.5rem;
+    --sidebar-background: 222 47% 10%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 221 83% 66%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 236 100% 67%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 221 83% 66%;
+    --scroll-progress: 0%;
+    /* Theme colors */
+    --theme-primary: #6366f1; /* indigo-500 */
+    --theme-secondary: #818cf8; /* indigo-400 */
+    --theme-accent: #a5b4fc; /* indigo-300 */
+    --theme-background: #18181b; /* zinc-900 */
+  }
+  /* Removed duplicate custom properties. All variables are defined in :root and .dark blocks above. */
   }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  /* Removed invalid @apply border-border; */
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -93,7 +108,6 @@
     content: "";
     @apply block absolute w-3/4 h-1 bg-portfolio-lightBlue mt-1;
   }
-}
 
 @layer components {
   .project-card {
@@ -105,6 +119,7 @@
   .project-card:hover {
     @apply shadow-xl;
     transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+    /* No color change, only shadow and transform */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 8px rgba(59, 130, 246, 0.4);
   }
   
@@ -118,7 +133,7 @@
   }
   
   .glowing-btn:hover::before {
-    @apply opacity-40;
+    /* Hover effect disabled */
   }
   
   .vortex-bg {
@@ -205,7 +220,7 @@
   }
 
   .card-modern {
-    @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg;
+    @apply bg-white/80 dark:bg-darkCard/80 backdrop-blur-sm rounded-2xl shadow-lg;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -244,7 +259,7 @@
   .card-modern:hover {
     @apply shadow-2xl;
     transform: translateY(-5px);
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    /* background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%); */
   }
 
   .floating-icon {
