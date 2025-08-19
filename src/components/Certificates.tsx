@@ -271,7 +271,7 @@ const Certificates = () => {
         </div>
         
         <div className="relative overflow-hidden py-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent pointer-events-none z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/10 to-transparent dark:from-darkBg/40 dark:via-darkBg/10 pointer-events-none z-10"></div>
           <Carousel
             className="w-full max-w-5xl mx-auto certificate-carousel"
             opts={{
@@ -291,9 +291,9 @@ const Certificates = () => {
                       <div className="flex justify-between items-start mb-4">
                         <div className={`p-2 rounded-xl transition-all hover:scale-110 duration-200
                           ${index % 4 === 0 ? 'bg-portfolio-primary/10 text-portfolio-primary dark:bg-darkAccent/10 dark:text-darkAccent' :
-                            index % 4 === 1 ? 'bg-portfolio-secondary/10 text-portfolio-secondary dark:bg-indigo-400/10 dark:text-indigo-400' :
-                            index % 4 === 2 ? 'bg-portfolio-accent/10 text-portfolio-accent dark:bg-slate-500/10 dark:text-slate-500' :
-                            'bg-portfolio-blue/10 text-portfolio-blue dark:bg-sky-500/10 dark:text-sky-500'}
+                            index % 4 === 1 ? 'bg-portfolio-secondary/10 text-portfolio-secondary dark:bg-secondary/10 dark:text-secondary' :
+                            index % 4 === 2 ? 'bg-portfolio-accent/10 text-portfolio-accent dark:bg-accent/10 dark:text-accent' :
+                            'bg-portfolio-blue/10 text-portfolio-blue dark:bg-primary/10 dark:text-primary'}
                         }`}>
                           {getIconByType(cert.type)}
                         </div>
@@ -305,8 +305,8 @@ const Certificates = () => {
                         <div className="flex justify-between items-center">
                           <span className={`text-xs uppercase tracking-wider font-medium
                             ${cert.type === 'certification' ? 'text-portfolio-primary dark:text-darkAccent' :
-                              cert.type === 'course' ? 'text-portfolio-secondary dark:text-indigo-400' :
-                              'text-portfolio-accent dark:text-slate-500'}
+                              cert.type === 'course' ? 'text-portfolio-secondary dark:text-secondary' :
+                              'text-portfolio-accent dark:text-accent'}
                           }`}>
                             {cert.type === 'certification' ? 'Certification' : cert.type === 'course' ? 'Course Completion' : 'Award'}
                           </span>
