@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown } from 'lucide-react';
+// Removed ArrowDown icon per request
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast, toast } from '@/components/ui/use-toast';
@@ -10,6 +10,8 @@ const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const vortexRef = useRef<HTMLDivElement>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
+  // Shared CTA button classes to ensure identical sizing & styling
+  const ctaClasses = "glowing-btn flex-1 min-w-[200px] inline-flex items-center justify-center transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent text-center";
   
   useEffect(() => {
     let animationFrameId: number;
@@ -159,24 +161,15 @@ const Hero = () => {
           </>
         )}
         
-        <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400">
-          <a 
-            href="#about" 
-            className="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent"
-          >
-            More About Me
-            <ArrowDown className="w-4 h-4 animate-bounce-gentle" />
+        <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400 w-full max-w-xl">
+          <a href="#about" className={ctaClasses}>
+            <span>More About Me</span>
           </a>
-          
-          <ResumeDownload triggerClassName="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent" />
+          <ResumeDownload triggerClassName={ctaClasses} />
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
-        <a href="#about" aria-label="Scroll down" className="p-3 rounded-full bg-white/90 dark:bg-darkCard shadow-xl hover:shadow-2xl transition-all duration-300 border border-portfolio-primary/20 dark:border-darkAccent/40">
-          <ArrowDown className="w-6 h-6 text-portfolio-primary dark:text-darkAccent" />
-        </a>
-      </div>
+  {/* Removed bottom scroll arrow per request */}
 
       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-portfolio-background to-transparent dark:from-darkBg dark:to-transparent"></div>
     </section>
