@@ -64,7 +64,7 @@ I bring hands-on experience in backend development using Django and REST APIs, a
   - Worked on PostgreSQL-based dynamic dashboards and secure backend services
 
 ### Founder & CEO
-- **Company**: Stalight Technology Pvt Ltd, Bengaluru
+- **Company**: Stalight Technology , Bengaluru
 - **Duration**: Feb 2025 – Present
 - **Responsibilities**:
   - Bootstrapped an AI-based education tech startup
@@ -73,13 +73,13 @@ I bring hands-on experience in backend development using Django and REST APIs, a
   - Tech stack: React.js, Django, PostgreSQL, AWS, Android
 
 ### Python Development Intern
-- **Company**: Codetech IT Solutions (Remote)
-- **Duration**: Jan 2023 – Jan 2024
+- **Company**: StonxSolutions Bengaluru
+- **Duration**: July 2025 – Oct 2025
 - **Responsibilities**:
-  - Built and deployed ML models using TensorFlow
-  - Designed and implemented smart attendance tracking with performance prediction
-  - Conducted data analysis for business insights
-  - Improved data processing efficiency across student datasets
+  - Build a kite API connection system to fetch the portfolio values 
+  - Designed backed for Brokage activation and connection (session activation (Zerodha))
+  - Implemented Trading dashboard for both Client and Trader 
+  - Improved data processing efficiency 
 
 ## Key Projects
 

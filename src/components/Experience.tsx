@@ -81,14 +81,14 @@ const Experience = () => {
     {
       id: 3,
       title: "Python Development Intern",
-      organization: "Codetech IT Solutions",
+      organization: "Stonx Solutions",
       period: "Jan 2023 - Jan 2024",
-      description: [
-        "Built and deployed ML models using TensorFlow",
-        "Designed and implemented smart attendance tracking with performance prediction",
-        "Conducted data analysis for business insights",
-        "Improved data processing efficiency across student datasets"
-      ],
+description: [
+  "Build a kite API connection system to fetch the portfolio values",
+  "Designed backend for Brokerage activation and connection (session activation - Zerodha)",
+  "Implemented Trading dashboard for both Client and Trader",
+  "Improved data processing efficiency"
+],
       technologies: ["Python", "TensorFlow", "Data Analysis"]
     },
     {
