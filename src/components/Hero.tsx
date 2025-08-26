@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ResumeDownload from '@/components/ResumeDownload';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast, toast } from '@/components/ui/use-toast';
+// Removed inline dialog usage in favor of dedicated ResumeDownload component
 
 const Hero = () => {
   const profileImageRef = useRef<HTMLDivElement>(null);
@@ -81,13 +83,8 @@ const Hero = () => {
     };
   }, []);
 
-  const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = '/lovable-uploads/RITESH N.pdf';
-    link.download = 'RITESH_N_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = (url: string) => {
+    window.open(url, '_blank');
     toast({
       title: 'Download started',
       description: 'Your resume download has been triggered.',
@@ -179,21 +176,11 @@ const Hero = () => {
             <ArrowDown className="w-4 h-4 animate-bounce-gentle" />
           </a>
           
-          <Button
-            onClick={handleDownloadResume}
-            className="glowing-btn inline-flex items-center gap-2 transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Download Resume
-          </Button>
+          <ResumeDownload triggerClassName="glowing-btn px-8 py-4 rounded-xl" />
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
-        <a href="#about" aria-label="Scroll down" className="p-3 rounded-full bg-white/90 dark:bg-darkCard shadow-xl hover:shadow-2xl transition-all duration-300 border border-portfolio-primary/20 dark:border-darkAccent/40">
-          <ArrowDown className="w-6 h-6 text-portfolio-primary dark:text-darkAccent" />
-        </a>
-      </div>
+      
 
       <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-portfolio-background to-transparent dark:from-darkBg dark:to-transparent"></div>
     </section>
