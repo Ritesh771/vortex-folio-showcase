@@ -69,7 +69,7 @@ const Experience = () => {
     {
       id: 2,
       title: "Founder & CEO",
-      organization: "Stalight Technology Pvt Ltd",
+      organization: "Stalight Technology",
       period: "Feb 2025 - Present",
       description: [
         "Bootstrapped an AI-based education tech startup",
