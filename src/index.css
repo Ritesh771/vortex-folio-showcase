@@ -132,10 +132,6 @@
     @apply absolute inset-0 bg-portfolio-lightBlue opacity-0 transition-opacity duration-500;
   }
   
-  .glowing-btn:hover::before {
-    /* Hover effect disabled */
-  }
-  
   .vortex-bg {
     @apply relative overflow-hidden;
   }
@@ -159,11 +155,11 @@
   }
   
   .progress-bar {
-    @apply h-2 bg-portfolio-lightGray rounded-full overflow-hidden;
+    @apply h-2 bg-portfolio-lightGray dark:bg-darkBorder rounded-full overflow-hidden;
   }
   
   .progress-bar-fill {
-    @apply h-full bg-portfolio-lightBlue rounded-full;
+    @apply h-full bg-portfolio-lightBlue dark:bg-darkAccent rounded-full;
     transition: width 1s ease-out;
   }
 

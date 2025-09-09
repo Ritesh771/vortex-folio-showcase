@@ -59,7 +59,7 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className={`cursor-pointer inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl bg-gradient-to-r from-portfolio-blue to-portfolio-lightBlue dark:from-darkAccent dark:to-darkAccent text-white shadow-lg hover:shadow-xl hover:brightness-110 active:scale-[0.97] transition-all ${triggerClassName}`}>
+        <Button variant="ghost" size="default" className={triggerClassName}>
           <Download className="w-4 h-4" />
           Download Resume
         </Button>

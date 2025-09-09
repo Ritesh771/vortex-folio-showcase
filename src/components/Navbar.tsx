@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -7,6 +7,18 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  
+  // Typewriter effect states
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
+  
+  // Words to cycle through
+  const words = ['Ritesh N', 'Developer', 'AI Enthusiast', 'Innovator'];
+  const typingSpeed = 150; // ms per character
+  const deletingSpeed = 100; // ms per character when deleting
+  const pauseTime = 2000; // ms to pause at end of word
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +31,45 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Typewriter effect
+  useEffect(() => {
+    const currentWord = words[currentIndex];
+    
+    if (isDeleting) {
+      // Deleting characters
+      if (currentText.length > 0) {
+        setTimeout(() => {
+          setCurrentText(currentText.slice(0, -1));
+        }, deletingSpeed);
+      } else {
+        // Finished deleting, move to next word
+        setIsDeleting(false);
+        setCurrentIndex((prev) => (prev + 1) % words.length);
+      }
+    } else {
+      // Typing characters
+      if (currentText.length < currentWord.length) {
+        setTimeout(() => {
+          setCurrentText(currentWord.slice(0, currentText.length + 1));
+        }, typingSpeed);
+      } else {
+        // Finished typing, pause then start deleting
+        setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
+      }
+    }
+  }, [currentText, currentIndex, isDeleting, words]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 500);
+    
+    return () => clearInterval(cursorInterval);
   }, []);
 
   const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -52,7 +103,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#home" className="text-portfolio-blue dark:text-darkAccent font-bold text-xl sm:text-2xl">Ritesh N</a>
+            <a href="#home" className="text-gradient-blue font-extrabold text-xl sm:text-2xl">
+              {currentText}
+              <span className={`inline-block w-0.5 h-6 sm:h-8 bg-gradient-to-b from-portfolio-blue to-portfolio-lightBlue ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}></span>
+            </a>
           </div>
           
           {/* Desktop Navigation */}
@@ -69,16 +123,7 @@ const Navbar = () => {
                 </a>
               ))}
             </div>
-            <div className="flex items-center space-x-3">
-              <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="w-5 h-5 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-              </a>
-              <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-              </a>
-              <a href="mailto:riteshnvisonex@gmail.com" aria-label="Email">
-                <Mail className="w-5 h-5 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-              </a>
+            <div className="flex items-center">
               <Button 
                 variant="ghost" 
                 size="icon" 
@@ -126,17 +171,6 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-darkAccent/20">
-                <a href="https://github.com/Ritesh771" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  <Github className="w-6 h-6 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-                </a>
-                <a href="https://www.linkedin.com/in/ritesh-n-5113b328a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <Linkedin className="w-6 h-6 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-                </a>
-                <a href="mailto:riteshnvisonex@gmail.com" aria-label="Email">
-                  <Mail className="w-6 h-6 text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors" />
-                </a>
-              </div>
             </div>
           </div>
         )}

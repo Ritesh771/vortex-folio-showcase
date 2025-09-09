@@ -261,13 +261,7 @@ const Certificates = () => {
           <p className="text-portfolio-gray dark:text-darkText/80 text-lg max-w-2xl mx-auto mb-8">Continuous learning and professional development milestones</p>
           
           {/* Add learning illustration */}
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/mock/Online learning.gif" 
-              alt="Online Learning" 
-              className="w-48 h-36 object-contain hover:scale-105 transition-transform duration-300 dark:brightness-90"
-            />
-          </div>
+         
         </div>
         
         <div className="relative overflow-hidden py-10">

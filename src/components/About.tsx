@@ -40,8 +40,8 @@ const SkillBar: React.FC<SkillBarProps> = ({ skill, percentage, delay }) => {
   return (
     <div className="mb-4">
       <div className="flex justify-between mb-1">
-        <span className="font-medium text-portfolio-darkBlue text-sm sm:text-base">{skill}</span>
-        <span className="text-xs sm:text-sm text-portfolio-gray">{percentage}%</span>
+        <span className="font-medium text-portfolio-darkBlue dark:text-white text-sm sm:text-base">{skill}</span>
+        <span className="text-xs sm:text-sm text-portfolio-gray dark:text-white">{percentage}%</span>
       </div>
       <div className="progress-bar">
         <div
