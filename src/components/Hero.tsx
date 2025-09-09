@@ -11,7 +11,7 @@ const Hero = () => {
   const vortexRef = useRef<HTMLDivElement>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   // Shared CTA button classes to ensure identical sizing & styling
-  const ctaClasses = "glowing-btn flex-1 min-w-[200px] inline-flex items-center justify-center transition-all px-8 py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent text-center";
+  const ctaClasses = "glowing-btn flex-1 min-w-[200px] inline-flex items-center justify-center transition-all px-8 py-4 !px-8 !py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent text-center";
   
   useEffect(() => {
     let animationFrameId: number;
@@ -162,9 +162,9 @@ const Hero = () => {
         )}
         
         <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400 w-full max-w-xl">
-          <a href="#about" className={ctaClasses}>
+          <Button variant="ghost" size="default" className={ctaClasses} onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
             <span>More About Me</span>
-          </a>
+          </Button>
           <ResumeDownload triggerClassName={ctaClasses} />
         </div>
       </div>
