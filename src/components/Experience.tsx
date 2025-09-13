@@ -18,10 +18,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, organization, period
         <div className="lg:w-1/3 mb-2 lg:mb-0 flex-shrink-0">
           <span className="text-sm font-medium text-portfolio-blue bg-portfolio-blue/10 px-3 py-1 rounded-full inline-block border border-portfolio-blue/20 dark:text-darkAccent dark:bg-darkAccent/10 dark:border-darkAccent/20">{period}</span>
         </div>
-        <div className="lg:w-2/3 lg:pl-6 border-l-2 border-portfolio-lightBlue relative mt-2 lg:mt-0">
-          {/* Timeline dot */}
-          <div className="absolute -left-[5px] top-0 w-3 h-3 rounded-full bg-gradient-to-r from-portfolio-blue to-portfolio-lightBlue dark:from-darkAccent dark:to-indigo-400"></div>
-          
+        <div className="lg:w-2/3 mt-2 lg:mt-0">
           <div className="card-modern p-4 sm:p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
             <h4 className="text-lg sm:text-xl font-semibold mb-1 text-portfolio-darkBlue dark:text-darkText">{title}</h4>
             <p className="text-portfolio-blue dark:text-darkAccent font-medium mb-3 text-sm sm:text-base">{organization}</p>
@@ -131,16 +128,16 @@ description: [
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue="work" className="w-full">
             <div className="flex justify-center mb-8 sm:mb-10">
-              <TabsList className="grid w-full max-w-md grid-cols-2 bg-white/90 dark:bg-darkCard/90 backdrop-blur-sm animate-on-scroll rounded-2xl p-1 border border-portfolio-blue/20 dark:border-darkAccent/20 shadow-lg dark:shadow-darkAccent/30">
-                <TabsTrigger 
-                  value="work" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-portfolio-blue data-[state=active]:to-portfolio-lightBlue data-[state=active]:text-white data-[state=active]:shadow-lg text-portfolio-darkBlue dark:text-darkAccent font-medium text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-portfolio-blue/5 dark:hover:bg-darkAccent/10"
+              <TabsList className="grid w-full max-w-md grid-cols-2 bg-white/90 dark:bg-darkCard/95 backdrop-blur-sm animate-on-scroll rounded-2xl p-1 border border-portfolio-blue/20 dark:border-darkAccent/30 shadow-lg dark:shadow-darkAccent/40">
+                <TabsTrigger
+                  value="work"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-portfolio-blue data-[state=active]:to-portfolio-lightBlue data-[state=active]:text-white data-[state=active]:shadow-lg text-portfolio-darkBlue dark:text-gray-300 dark:data-[state=active]:text-white font-medium text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-portfolio-blue/5 dark:hover:bg-darkAccent/20 data-[state=inactive]:text-gray-600 dark:data-[state=inactive]:text-gray-400"
                 >
                   Work Experience
                 </TabsTrigger>
-                <TabsTrigger 
-                  value="education" 
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-portfolio-lightBlue data-[state=active]:to-portfolio-darkBlue data-[state=active]:text-white data-[state=active]:shadow-lg text-portfolio-darkBlue dark:text-darkAccent font-medium text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-portfolio-lightBlue/5 dark:hover:bg-darkAccent/10"
+                <TabsTrigger
+                  value="education"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-portfolio-lightBlue data-[state=active]:to-portfolio-darkBlue data-[state=active]:text-white data-[state=active]:shadow-lg text-portfolio-darkBlue dark:text-gray-300 dark:data-[state=active]:text-white font-medium text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-portfolio-lightBlue/5 dark:hover:bg-darkAccent/20 data-[state=inactive]:text-gray-600 dark:data-[state=inactive]:text-gray-400"
                 >
                   Education
                 </TabsTrigger>

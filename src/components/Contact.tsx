@@ -2,16 +2,9 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Github, Linkedin, Mail, Send } from 'lucide-react';
+import { Github, Mail, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
-
-// WhatsApp SVG Icon
-const WhatsAppIcon = (props) => (
-  <svg viewBox="0 0 32 32" fill="none" width={props.width || 24} height={props.height || 24} {...props}>
-    <circle cx="16" cy="16" r="16" fill="#25D366" />
-    <path d="M23.47 8.53A8.94 8.94 0 0 0 16 6a9 9 0 0 0-7.8 13.5l-1.1 4.02a1 1 0 0 0 1.22 1.22l4.02-1.1A9 9 0 1 0 23.47 8.53Zm-7.47 13.2a7.2 7.2 0 0 1-3.67-1l-.26-.15-2.18.6.58-2.13-.17-.27A7.2 7.2 0 1 1 16 21.73Z" fill="#fff" />
-  </svg>
-);
+import { SiGmail, SiWhatsapp, SiLinkedin, SiGithub } from "react-icons/si";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -40,14 +33,7 @@ const Contact = () => {
             Connect with me for collaborations, opportunities, or just to say hi!
           </p>
           
-          {/* Add contact illustration */}
-          <div className="mt-8 flex justify-center">
-            <img 
-              src="/mock/undraw_email_b5yu.svg" 
-              alt="Contact Us" 
-              className="w-64 h-48 object-contain hover:scale-105 transition-transform duration-300 dark:brightness-90"
-            />
-          </div>
+          
         </div>
 
         {/* Modern Bento Grid with blue theme */}
@@ -75,7 +61,7 @@ const Contact = () => {
             href="https://wa.me/918660144040"
           >
             <IconBox color="dark:from-green-500 dark:to-green-600 bg-gradient-to-r from-green-500 to-green-600 shadow-lg shadow-green-500/25">
-              <WhatsAppIcon width={24} height={24} />
+              <SiWhatsapp className="text-white w-6 h-6 drop-shadow-sm" />
             </IconBox>
             <CardTitle>WhatsApp</CardTitle>
             <CardDesc>Quick messages</CardDesc>
@@ -91,7 +77,7 @@ const Contact = () => {
             href="https://linkedin.com/in/ritesh-n-5113b328a"
           >
             <IconBox color="dark:from-blue-600 dark:to-blue-700 bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg shadow-blue-600/25">
-              <Linkedin className="text-white w-6 h-6 drop-shadow-sm" />
+              <SiLinkedin className="text-white w-6 h-6 drop-shadow-sm" />
             </IconBox>
             <CardTitle>LinkedIn</CardTitle>
             <CardDesc>Professional network</CardDesc>

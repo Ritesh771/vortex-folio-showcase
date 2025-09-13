@@ -1,181 +1,150 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useTheme } from '@/context/ThemeContext';
+import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ThemeToggle from "./ThemeToggle";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  
-  // Typewriter effect states
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
-  
-  // Words to cycle through
-  const words = ['Ritesh N', 'Developer', 'AI Enthusiast', 'Innovator'];
-  const typingSpeed = 150; // ms per character
-  const deletingSpeed = 100; // ms per character when deleting
-  const pauseTime = 2000; // ms to pause at end of word
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navbarRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Typewriter effect
-  useEffect(() => {
-    const currentWord = words[currentIndex];
-    
-    if (isDeleting) {
-      // Deleting characters
-      if (currentText.length > 0) {
-        setTimeout(() => {
-          setCurrentText(currentText.slice(0, -1));
-        }, deletingSpeed);
-      } else {
-        // Finished deleting, move to next word
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % words.length);
-      }
-    } else {
-      // Typing characters
-      if (currentText.length < currentWord.length) {
-        setTimeout(() => {
-          setCurrentText(currentWord.slice(0, currentText.length + 1));
-        }, typingSpeed);
-      } else {
-        // Finished typing, pause then start deleting
-        setTimeout(() => {
-          setIsDeleting(true);
-        }, pauseTime);
-      }
-    }
-  }, [currentText, currentIndex, isDeleting, words]);
+  const navItems = [
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+];
 
-  // Cursor blinking effect
-  useEffect(() => {
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 500);
-    
-    return () => clearInterval(cursorInterval);
-  }, []);
 
-  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      setIsMenuOpen(false);
-      window.scrollTo({
-        top: element.getBoundingClientRect().top + window.scrollY - 80,
-        behavior: 'smooth'
-      });
-    }
+  const scrollToSection = (href) => {
+    // Small delay to ensure DOM is fully rendered
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setIsOpen(false);
+      } else {
+        console.log('Element not found:', href);
+      }
+    }, 100);
   };
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${isScrolled
-          ? 'bg-white/95 dark:bg-darkBg/95 backdrop-blur-md shadow-lg dark:shadow-darkAccent py-2'
-          : 'bg-transparent dark:bg-darkBg/80 py-4'}
-      `}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <a href="#home" className="text-gradient-blue font-extrabold text-xl sm:text-2xl">
-              {currentText}
-              <span className={`inline-block w-0.5 h-6 sm:h-8 bg-gradient-to-b from-portfolio-blue to-portfolio-lightBlue ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}></span>
-            </a>
-          </div>
-          
+    <>
+      {/* Navbar */}
+      <motion.nav
+        className="fixed top-2 left-0 right-0 z-50 flex justify-center px-4"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, mass: 0.6, velocity: 2 }}
+      >
+        <motion.div
+          ref={navbarRef}
+          layout
+          initial={false}
+          animate={{
+            width: scrolled ? "85%" : "auto",
+            borderRadius: "9999px",
+            paddingLeft: scrolled ? "2rem" : "1rem",
+            paddingRight: scrolled ? "2rem" : "1rem",
+            paddingTop: scrolled ? "0.75rem" : "0.5rem",
+            paddingBottom: scrolled ? "0.75rem" : "0.5rem",
+          }}
+          transition={{
+            layout: { type: "spring", stiffness: 120, damping: 18, mass: 0.6, restDelta: 0.001 },
+            default: { duration: 0.5, ease: [0.45, 0, 0.55, 1] },
+          }}
+          className="flex flex-row items-center justify-between shadow-lg backdrop-blur-md border border-border/50 glass-card bg-background/70 overflow-hidden relative z-50"
+        >
+          {/* Logo */}
+          <motion.div
+            className="text-xl font-bold mr-6 whitespace-nowrap min-w-[130px]"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 250, damping: 18 }}
+          >
+            <span className="text-gradient-blue font-extrabold">Ritesh N</span>
+          </motion.div>
+
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            <div className="flex space-x-6">
-              {navLinks.map((link) => (
-                <a 
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavLinkClick(e, link.href)}
-                  className="text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent font-medium transition-colors text-sm xl:text-base"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-            <div className="flex items-center">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={toggleTheme} 
-                aria-label="Toggle theme"
-                className="text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors"
+          <div className="hidden md:flex items-center space-x-6">
+            {navItems.map((item, index) => (
+              <motion.button
+                key={item.name}
+                onClick={() => scrollToSection(item.href)}
+                className="text-muted-foreground hover:text-foreground transition-smooth relative group"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08, type: "spring", stiffness: 180, damping: 20 }}
+                whileHover={{ y: -2, scale: 1.05 }}
               >
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </Button>
-            </div>
+                {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              </motion.button>
+            ))}
+            <ThemeToggle />
           </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="flex items-center lg:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleTheme} 
-              aria-label="Toggle theme"
-              className="text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent transition-colors mr-2"
-            >
-              {theme === 'dark' ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+
+          {/* Mobile Hamburger */}
+          <div className="flex flex-row items-center space-x-2 md:hidden ml-auto relative">
+            <ThemeToggle />
+            <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
-            <button 
-              className="text-gray-700 dark:text-darkText/80 p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          </div>
+        </motion.div>
+      </motion.nav>
+
+      {/* Mobile Dropdown */}
+      <AnimatePresence>
+        {isOpen && (
+          // Backdrop
+          <motion.div
+            className="fixed inset-0 z-40 bg-black/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)} // click outside closes
+          >
+            {/* Mobile Dropdown */}
+            <motion.div
+              className="fixed top-[90px] left-1/2 -translate-x-1/2 w-52 bg-background/70 dark:bg-background/50 backdrop-blur-md border border-border/50 shadow-lg flex flex-col items-center space-y-2 p-4 z-50 rounded-xl"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ type: "spring", stiffness: 120, damping: 20 }}
+              onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-        
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 dark:bg-darkBg/95 backdrop-blur-md border-t border-gray-200 dark:border-darkAccent/20 py-4 px-4 shadow-lg animate-fade-in">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <a 
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-700 hover:text-portfolio-blue dark:text-darkText/80 dark:hover:text-darkAccent font-medium transition-colors py-2 text-base"
-                  onClick={(e) => handleNavLinkClick(e, link.href)}
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.name}
+                  onClick={() => {
+                    scrollToSection(item.href);
+                    setIsOpen(false);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-smooth px-4 py-2 rounded-lg w-full text-center"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
                 >
-                  {link.name}
-                </a>
+                  {item.name}
+                </motion.button>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+    </>
   );
 };
 

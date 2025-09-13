@@ -159,7 +159,8 @@
   }
   
   .progress-bar-fill {
-    @apply h-full bg-portfolio-lightBlue dark:bg-darkAccent rounded-full;
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
     transition: width 1s ease-out;
   }
 
