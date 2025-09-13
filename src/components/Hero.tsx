@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast, toast } from '@/components/ui/use-toast';
 import ResumeDownload from '@/components/ResumeDownload';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Hero = () => {
   const profileImageRef = useRef<HTMLDivElement>(null);
@@ -11,7 +12,7 @@ const Hero = () => {
   const vortexRef = useRef<HTMLDivElement>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   // Shared CTA button classes to ensure identical sizing & styling
-  const ctaClasses = "glowing-btn flex-1 min-w-[200px] inline-flex items-center justify-center transition-all px-8 py-4 !px-8 !py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent text-center";
+  const ctaClasses = "glowing-btn min-w-[100px] inline-flex items-center justify-center transition-all px-4 py-2 !px-4 !py-4 rounded-xl text-white dark:text-darkText font-semibold dark:bg-darkAccent text-center text-sm";
   
   useEffect(() => {
     let animationFrameId: number;
@@ -92,8 +93,7 @@ const Hero = () => {
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center items-center pt-16 overflow-hidden"
     >
-  {/* Restored simple gradient background for visibility */}
-  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-darkBg dark:via-darkCard dark:to-darkBg z-0"></div>
+     
       
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-20 flex flex-col items-center text-center z-10">
         <div className="relative mb-6 sm:mb-8 md:mb-12 overflow-visible">
@@ -161,11 +161,40 @@ const Hero = () => {
           </>
         )}
         
-        <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400 w-full max-w-xl">
+        <div className="flex flex-wrap justify-center gap-4 animate-fade-in animate-delay-400 w-full max-w-md">
           <Button variant="ghost" size="default" className={ctaClasses} onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
             <span>More About Me</span>
           </Button>
           <ResumeDownload triggerClassName={ctaClasses} />
+        </div>
+
+        {/* Social Media Icons */}
+        <div className="flex justify-center gap-6 mt-8 animate-fade-in animate-delay-500">
+          <a
+            href="https://github.com/Ritesh771"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-3 rounded-full bg-white/10 dark:bg-darkCard/20 backdrop-blur-sm border border-white/20 dark:border-darkAccent/20 hover:bg-white/20 dark:hover:bg-darkAccent/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+            aria-label="GitHub Profile"
+          >
+            <Github className="w-6 h-6 text-portfolio-gray dark:text-darkText/80 group-hover:text-portfolio-blue dark:group-hover:text-darkAccent transition-colors duration-300" />
+          </a>
+          <a
+            href="https://linkedin.com/in/ritesh-n"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-3 rounded-full bg-white/10 dark:bg-darkCard/20 backdrop-blur-sm border border-white/20 dark:border-darkAccent/20 hover:bg-white/20 dark:hover:bg-darkAccent/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+            aria-label="LinkedIn Profile"
+          >
+            <Linkedin className="w-6 h-6 text-portfolio-gray dark:text-darkText/80 group-hover:text-portfolio-blue dark:group-hover:text-darkAccent transition-colors duration-300" />
+          </a>
+          <a
+            href="mailto:ritesh@example.com"
+            className="group p-3 rounded-full bg-white/10 dark:bg-darkCard/20 backdrop-blur-sm border border-white/20 dark:border-darkAccent/20 hover:bg-white/20 dark:hover:bg-darkAccent/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
+            aria-label="Email Contact"
+          >
+            <Mail className="w-6 h-6 text-portfolio-gray dark:text-darkText/80 group-hover:text-portfolio-blue dark:group-hover:text-darkAccent transition-colors duration-300" />
+          </a>
         </div>
       </div>
       

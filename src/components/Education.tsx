@@ -44,7 +44,7 @@ const Education = () => {
      
       
       {educationData.map((edu, index) => (
-        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-4 border-l-portfolio-blue dark:border-l-darkAccent">
+        <Card key={edu.id} className="overflow-visible mb-6 hover:shadow-xl transition-all duration-300 card-modern border-l-2 border-l-portfolio-blue dark:border-l-darkAccent">
           <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
               <div className="flex-1 mb-3 sm:mb-0">

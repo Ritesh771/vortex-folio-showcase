@@ -346,16 +346,7 @@ const Projects = () => {
                     <Github className="w-4 h-4" />
                     View GitHub Profile
                   </Button>
-                  {selectedProject.links?.demo && (
-                    <Button 
-                      variant="outline" 
-                      className="flex items-center gap-2 border-portfolio-lightBlue text-portfolio-lightBlue hover:bg-portfolio-lightBlue hover:text-white dark:border-darkAccent dark:text-darkAccent dark:hover:bg-darkAccent dark:hover:text-darkText text-sm rounded-xl"
-                      onClick={() => window.open(selectedProject.links!.demo, '_blank')}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      View Demo
-                    </Button>
-                  )}
+                  
                 </div>
               </div>
             </DialogContent>
