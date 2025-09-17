@@ -1,5 +1,28 @@
 
 import React, { useEffect, useRef } from 'react';
+import LogoLoop from './LogoLoop';
+import {
+  SiPython,
+  SiJavascript,
+  SiTypescript,
+  SiHtml5,
+  SiCss3,
+  SiDjango,
+  SiFlask,
+  SiTensorflow,
+  SiReact,
+  SiRedux,
+  SiTailwindcss,
+  SiPostgresql,
+  SiMysql,
+  SiRedis,
+  SiGit,
+  SiPostman,
+  SiCodepen,
+  SiGithub,
+  SiAmazon,
+  SiAndroidstudio
+} from 'react-icons/si';
 
 interface SkillBarProps {
   skill: string;
@@ -60,6 +83,36 @@ const About = () => {
     { id: 2, name: "Frontend Development", percentage: 65, delay: 600 },
     { id: 3, name: "DevOps & Deployment", percentage: 60, delay: 800 },
     { id: 4, name: "Software Engineering", percentage: 50, delay: 200 }
+  ];
+
+  const techLogos = [
+    // Languages & Frameworks
+    { node: <SiPython />, title: "Python", href: "https://python.org" },
+    { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+    { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+    { node: <SiHtml5 />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+    { node: <SiCss3 />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+    { node: <SiDjango />, title: "Django", href: "https://www.djangoproject.com" },
+    { node: <SiFlask />, title: "Flask", href: "https://flask.palletsprojects.com" },
+    { node: <SiTensorflow />, title: "TensorFlow", href: "https://www.tensorflow.org" },
+    
+    // Frontend Technologies
+    { node: <SiReact />, title: "React.js", href: "https://react.dev" },
+    { node: <SiRedux />, title: "Redux Toolkit", href: "https://redux-toolkit.js.org" },
+    { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+    
+    // Databases & DevOps
+    { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+    { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com" },
+    { node: <SiRedis />, title: "Redis", href: "https://redis.io" },
+    { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
+    { node: <SiPostman />, title: "Postman", href: "https://www.postman.com" },
+    
+    // Tools & Platforms
+    { node: <SiCodepen />, title: "Visual Studio Code", href: "https://code.visualstudio.com" },
+    { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+    { node: <SiAmazon />, title: "AWS", href: "https://aws.amazon.com" },
+    { node: <SiAndroidstudio />, title: "Android Studio", href: "https://developer.android.com/studio" },
   ];
 
   const animateOnScroll = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -196,6 +249,27 @@ const About = () => {
                 </svg>
                 Bengaluru, India
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Technology Skills Logo Loop */}
+        <div className="mt-8 animate-on-scroll opacity-0">
+          <div className="card-modern p-4 sm:p-6 dark:bg-darkCard dark:text-darkText">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4 text-portfolio-darkBlue dark:text-darkAccent text-center">Technology Stack</h3>
+            <div style={{ height: '80px', position: 'relative', overflow: 'hidden' }}>
+              <LogoLoop
+                logos={techLogos}
+                speed={80}
+                direction="left"
+                logoHeight={40}
+                gap={30}
+                pauseOnHover
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#ffffff"
+                ariaLabel="Technology stack logos"
+              />
             </div>
           </div>
         </div>
