@@ -180,7 +180,7 @@ const Hero = () => {
             <Github className="w-6 h-6 text-portfolio-gray dark:text-darkText/80 group-hover:text-portfolio-blue dark:group-hover:text-darkAccent transition-colors duration-300" />
           </a>
           <a
-            href="https://linkedin.com/in/ritesh-n"
+            href="https://www.linkedin.com/in/ritesh-n-5113b328a/" 
             target="_blank"
             rel="noopener noreferrer"
             className="group p-3 rounded-full bg-white/10 dark:bg-darkCard/20 backdrop-blur-sm border border-white/20 dark:border-darkAccent/20 hover:bg-white/20 dark:hover:bg-darkAccent/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
@@ -189,7 +189,7 @@ const Hero = () => {
             <Linkedin className="w-6 h-6 text-portfolio-gray dark:text-darkText/80 group-hover:text-portfolio-blue dark:group-hover:text-darkAccent transition-colors duration-300" />
           </a>
           <a
-            href="mailto:ritesh@example.com"
+            href="mailto:riteshnvisonex@gmail.com"
             className="group p-3 rounded-full bg-white/10 dark:bg-darkCard/20 backdrop-blur-sm border border-white/20 dark:border-darkAccent/20 hover:bg-white/20 dark:hover:bg-darkAccent/20 transition-all duration-300 hover:scale-110 hover:shadow-lg"
             aria-label="Email Contact"
           >
