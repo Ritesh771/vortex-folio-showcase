@@ -11,8 +11,8 @@ type ResumeDownloadProps = {
 
 // Default links converted to direct download format
 // If you change to another Drive share URL, the utility below will still convert it.
-const DEFAULT_STANDARD = 'https://drive.google.com/file/d/13XLc-coZlQ0q6YdelCXDLlU6fOgO-wrQ/view?usp=drive_link';
-const DEFAULT_ATS = 'https://drive.google.com/file/d/1omMK5eB8OmkKXliMjpgcG9SeVoQuJstC/view?usp=drive_link';
+const DEFAULT_STANDARD = 'https://drive.google.com/file/d/13XLc-coZlQ0q6YdelCXDLlU6fOgO-wrQ/view?usp=sharing';
+const DEFAULT_ATS = 'https://drive.google.com/file/d/1KCVbamF1BHtTpdcffuFcjlldhftP8YW1/view?usp=sharing';
 
 export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   triggerClassName = '',
@@ -28,25 +28,57 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
     return url; // fallback
   };
 
-  const openInNew = (url: string) => {
-    const direct = toDirectDownload(url);
+  const getFileNameFromDriveId = async (fileId: string): Promise<string> => {
     try {
-      // Prefer anchor click (less likely to be blocked) over window.open
+      // Try to get filename from Google Drive API (public files only)
+      const response = await fetch(`https://drive.google.com/file/d/${fileId}/view`);
+      const text = await response.text();
+      
+      // Extract filename from the page title or metadata
+      const titleMatch = text.match(/<title>([^<]+)/);
+      if (titleMatch && titleMatch[1]) {
+        let filename = titleMatch[1].replace(' - Google Drive', '').trim();
+        // Ensure it has .pdf extension
+        if (!filename.toLowerCase().endsWith('.pdf')) {
+          filename += '.pdf';
+        }
+        return filename;
+      }
+    } catch (error) {
+      console.warn('Could not extract filename from Drive:', error);
+    }
+    
+    // Fallback names based on the file type
+    return fileId === '13XLc-coZlQ0q6YdelCXDLlU6fOgO-wrQ' ? 'Ritesh_Resume_Standard.pdf' : 'Ritesh_Resume_ATS.pdf';
+  };
+
+  const openInNew = async (url: string) => {
+    const direct = toDirectDownload(url);
+    const idMatch = direct.match(/id=([^&]+)/);
+    const fileId = idMatch ? idMatch[1] : '';
+    
+    try {
+      // Get the actual filename
+      const filename = await getFileNameFromDriveId(fileId);
+      
+      // Create download link
       const a = document.createElement('a');
       a.href = direct;
+      a.download = filename;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      // Suggest a filename if possible
-      const idMatch = direct.match(/id=([^&]+)/);
-      if (idMatch) {
-        a.download = idMatch[1] + '.pdf';
-      }
+      
+      // Force download behavior
+      a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
+      
+      // Clean up
       setTimeout(() => {
         document.body.removeChild(a);
-      }, 0);
+      }, 100);
     } catch (e) {
+      console.warn('Download method failed, trying fallback:', e);
       // Fallback: navigate current tab
       window.location.href = direct;
     }
@@ -91,7 +123,7 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
             </p>
             <div className="mt-4 flex items-center justify-between text-[11px] text-portfolio-gray/70 dark:text-darkText/50">
               <span>PDF • ~350KB</span>
-              <span>Updated Aug 2025</span>
+              <span>Updated Sep 2025</span>
             </div>
             <Button aria-label="Download standard resume" onClick={() => openInNew(standardUrl)} variant="default" className="relative z-10 cursor-pointer hover:cursor-pointer mt-4 w-full inline-flex items-center gap-2 font-medium bg-portfolio-blue hover:bg-portfolio-blue/90 dark:bg-darkAccent dark:hover:bg-darkAccent/90">
               <Download className="w-4 h-4" /> Download
@@ -114,7 +146,7 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
             </p>
             <div className="mt-4 flex items-center justify-between text-[11px] text-portfolio-gray/70 dark:text-darkText/50">
               <span>PDF • ~220KB</span>
-              <span>Updated Aug 2025</span>
+              <span>Updated Sep 2025</span>
             </div>
             <Button aria-label="Download ATS resume" onClick={() => openInNew(atsUrl)} variant="secondary" className="relative z-10 cursor-pointer hover:cursor-pointer mt-4 w-full inline-flex items-center gap-2 font-medium bg-portfolio-lightBlue hover:bg-portfolio-lightBlue/90 text-white dark:text-darkText dark:bg-darkAccent dark:hover:bg-darkAccent/90">
               <Download className="w-4 h-4" /> Download
