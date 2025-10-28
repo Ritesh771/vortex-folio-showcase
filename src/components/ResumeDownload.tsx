@@ -2,6 +2,7 @@ import React from 'react';
 import { Download, FileText } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 type ResumeDownloadProps = {
   triggerClassName?: string;
@@ -11,8 +12,8 @@ type ResumeDownloadProps = {
 
 // Default links converted to direct download format
 // If you change to another Drive share URL, the utility below will still convert it.
-const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1hmTOS2WQocIPeiC-6K89KIJQMjL8B5qj/view?usp=sharing';
-const DEFAULT_ATS = 'https://drive.google.com/file/d/1IPa8IKK3an_3zLeJ37kFf9AlfiCi0JQ-/view?usp=sharing';
+const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1KfdNz8lkzZl3QgDck9PZi1vQnDX_z7oM/view?usp=sharing';
+const DEFAULT_ATS = 'https://drive.google.com/file/d/1aGXF4BoJQ-5v-PChD9NCSS0uD5Cw6Apz/view?usp=sharing';
 
 export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   triggerClassName = '',
@@ -28,65 +29,61 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
     return url; // fallback
   };
 
-  const getFileNameFromDriveId = async (fileId: string): Promise<string> => {
-    try {
-      // Try to get filename from Google Drive API (public files only)
-      const response = await fetch(`https://drive.google.com/file/d/${fileId}/view`);
-      const text = await response.text();
-      
-      // Extract filename from the page title or metadata
-      const titleMatch = text.match(/<title>([^<]+)/);
-      if (titleMatch && titleMatch[1]) {
-        let filename = titleMatch[1].replace(' - Google Drive', '').trim();
-        // Ensure it has .pdf extension
-        if (!filename.toLowerCase().endsWith('.pdf')) {
-          filename += '.pdf';
-        }
-        return filename;
-      }
-    } catch (error) {
-      console.warn('Could not extract filename from Drive:', error);
-    }
-    
-    // Fallback names based on the file type
-    return fileId === '13XLc-coZlQ0q6YdelCXDLlU6fOgO-wrQ' ? 'Ritesh_Resume_Standard.pdf' : 'Ritesh_Resume_ATS.pdf';
+  // Prefer a synchronous mapping for filenames. Fetching the Drive page often
+  // runs into CORS restrictions in the browser, so rely on known IDs and
+  // sensible fallbacks instead.
+  const getFileNameFromDriveId = (fileId: string): string => {
+    const mapping: Record<string, string> = {
+      '1KfdNz8lkzZl3QgDck9PZi1vQnDX_z7oM': 'Ritesh_Resume_Standard.pdf',
+      '1aGXF4BoJQ-5v-PChD9NCSS0uD5Cw6Apz': 'Ritesh_Resume_ATS.pdf',
+    };
+
+    return mapping[fileId] || 'Ritesh_Resume.pdf';
   };
 
-  const openInNew = async (url: string) => {
+  const { toast } = useToast();
+
+  const openInNew = (url: string) => {
     const direct = toDirectDownload(url);
-    const idMatch = direct.match(/id=([^&]+)/);
-    const fileId = idMatch ? idMatch[1] : '';
-    
+    const idMatch = direct.match(/id=([^&]+)/) || direct.match(/\/d\/([A-Za-z0-9_-]+)/);
+    const fileId = idMatch && idMatch[1] ? idMatch[1] : '';
+
+    const filename = getFileNameFromDriveId(fileId);
+
     try {
-      // Get the actual filename
-      const filename = await getFileNameFromDriveId(fileId);
-      
-      // Create download link
       const a = document.createElement('a');
       a.href = direct;
       a.download = filename;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      
-      // Force download behavior
       a.style.display = 'none';
       document.body.appendChild(a);
       a.click();
-      
-      // Clean up
+
       setTimeout(() => {
-        document.body.removeChild(a);
+        if (a.parentNode) document.body.removeChild(a);
       }, 100);
+
+      toast({
+        title: 'Download started',
+        description: `${filename} will be downloaded shortly.`,
+        duration: 2000,
+      });
     } catch (e) {
       console.warn('Download method failed, trying fallback:', e);
-      // Fallback: navigate current tab
       window.location.href = direct;
+
+      toast({
+        title: 'Download attempted',
+        description: 'If the download did not start, please open the link.',
+        duration: 2000,
+      });
     }
   };
 
   const subject = 'Custom Targeted Resume Request';
   const body = `Hi Ritesh,\n\nI'd like a custom targeted resume. Here are the details:\n- Role Title: \n- Company: \n- Job Description URL: \n- Key Skills to Highlight: \n- Deadline: \n\nAnything else you need, let me know.\n\nThanks!`;
-  const mailtoHref = `mailto:riteshnvisonex@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoHref = `mailto:ritesh.2004.n@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
     <Dialog>
