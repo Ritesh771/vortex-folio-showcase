@@ -17,6 +17,7 @@ I bring hands-on experience in backend development using Django and REST APIs, a
   - SEM2: 8.6
   - SEM3: 9.0
   - SEM4: 9.26
+  - SEM5: 9.15
 - **Activities**: Actively involved in technical projects and hackathons
 - **Backlogs**: No active backlogs
 
