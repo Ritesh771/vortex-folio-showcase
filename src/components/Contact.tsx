@@ -42,7 +42,7 @@ const Contact = () => {
           <Card 
             gradient="dark:from-darkAccent/10 dark:via-darkCard/5 dark:to-darkBg from-portfolio-blue/10 via-portfolio-lightBlue/5 to-white" 
             border="dark:border-darkAccent/30 border-portfolio-blue/30" 
-            href="mailto:riteshnvisonex@gmail.com"
+            href="mailto:ritesh.2004.n@gmail.com"
           >
             <IconBox color="dark:from-darkAccent dark:to-indigo-500 bg-gradient-to-r from-portfolio-blue to-portfolio-lightBlue shadow-lg shadow-portfolio-blue/25">
               <Mail className="text-white w-6 h-6 drop-shadow-sm" />
