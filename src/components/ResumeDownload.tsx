@@ -12,8 +12,8 @@ type ResumeDownloadProps = {
 
 // Default links converted to direct download format
 // If you change to another Drive share URL, the utility below will still convert it.
-const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1KfdNz8lkzZl3QgDck9PZi1vQnDX_z7oM/view?usp=sharing';
-const DEFAULT_ATS = 'https://drive.google.com/file/d/1KGG_f-Q2h_dtS0uf48LJXM0v8Qe_6LSw/view?usp=sharing';
+const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1LqsaIFuJUOTBsocp9A3rqfmHfTrgK8b-/view?usp=sharing';
+const DEFAULT_ATS = 'https://drive.google.com/file/d/1S-4CMjSw_5OcZtYht2KsuKZCfwBLRAXf/view?usp=sharing';
 
 export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   triggerClassName = '',
