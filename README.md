@@ -92,7 +92,9 @@ I bring hands-on experience in backend development using Django and REST APIs, a
 ### Slot Booking Platform
 - **Duration**: Jun 2023 – Aug 2023 | Stalight Technology
 - **Description**: Online slot booking system for sports with Razorpay integration. Features: Secure payments, transaction rollback, real-time dashboards.
-- **Technologies**: React.js, Django, PostgreSQL, Redis
+- **Technologies**: React.js, Django, PostgreSQL, Redis , AWS
+
+### Campus Management System
 
 ### Crack the Campus (Placement Guidance)
 - **Duration**: Feb 2025 – Present | Castle Rockin
