@@ -3,7 +3,7 @@
 
 ## About Me
 
-Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College, Bangalore. Founder and CEO of Stalight Technology Pvt Ltd, a tech startup focused on campus automation and AI-driven applications.
+Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College, Bangalore.
 
 I bring hands-on experience in backend development using Django and REST APIs, along with a keen eye for building responsive and engaging frontends using React.js and Tailwind CSS. Passionate about building scalable tech solutions with real-world impact, especially in the education and security sectors.
 
@@ -64,7 +64,7 @@ I bring hands-on experience in backend development using Django and REST APIs, a
   - Collaborated with cross-functional teams using Git, React, and Django stack
   - Worked on PostgreSQL-based dynamic dashboards and secure backend services
 
-### Founder & CEO
+### Python Developer & Deployement Lead
 - **Company**: Stalight Technology , Bengaluru
 - **Duration**: Feb 2025 – Present
 - **Responsibilities**:

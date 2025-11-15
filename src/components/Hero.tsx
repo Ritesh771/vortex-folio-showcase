@@ -141,13 +141,12 @@ const Hero = () => {
             Hi, I'm <span className="text-gradient-blue font-extrabold">Ritesh N</span>
           </h1>
           <p className="text-xl md:text-2xl text-portfolio-gray dark:text-darkText/80 max-w-2xl mx-auto mb-8 animate-fade-in animate-delay-200">
-            Full-Stack Developer | AI Innovator | Startup Founder
+            Full-Stack Developer | AI Innovator | Leadership in Action
           </p>
           <p className="text-portfolio-gray dark:text-darkText/70 max-w-3xl mx-auto mb-10 animate-fade-in animate-delay-300 leading-relaxed">
             Enthusiastic and driven Full-Stack Developer with a strong foundation in Artificial Intelligence
             and Machine Learning, currently pursuing a B.E. in CSE (AI & ML) from A.M.C. Engineering College,
-            Bangalore. Founder and CEO of Stalight Technology, a tech startup focused on campus
-            automation and AI-driven applications.
+            Bangalore. 
           </p>
         </div>
         {/* Skeletons for text */}

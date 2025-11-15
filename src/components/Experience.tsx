@@ -65,7 +65,7 @@ const Experience = () => {
     },
     {
       id: 2,
-      title: "Founder & CEO",
+      title: "Pythoon Lead Deplyoment & Product Head",
       organization: "Stalight Technology",
       period: "Feb 2025 - Present",
       description: [

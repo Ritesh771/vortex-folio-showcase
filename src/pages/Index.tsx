@@ -81,7 +81,7 @@ const Index = () => {
 
   useEffect(() => {
     // Update the document title
-    document.title = "Ritesh N - Full-Stack Developer | AI Innovator | Startup Founder";
+    document.title = "Ritesh N - Full-Stack Developer | AI Innovator | Leadership in Action";
 
     // Apply a global theme based on the profile photo colors (blue shirt)
     document.documentElement.style.setProperty('--theme-primary', '#1E3A8A');  // Dark blue from shirt
