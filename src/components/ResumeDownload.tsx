@@ -12,8 +12,8 @@ type ResumeDownloadProps = {
 
 // Default links converted to direct download format
 // If you change to another Drive share URL, the utility below will still convert it.
-const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1LqsaIFuJUOTBsocp9A3rqfmHfTrgK8b-/view?usp=sharing';
-const DEFAULT_ATS = 'https://drive.google.com/file/d/1S-4CMjSw_5OcZtYht2KsuKZCfwBLRAXf/view?usp=sharing';
+const DEFAULT_STANDARD = 'https://drive.google.com/file/d/1txAcfxJkOvMhHTBCh0l3ywccm6T153mp/view?usp=sharing';
+const DEFAULT_ATS = 'https://drive.google.com/file/d/1jJJ4mFTRriswt0-5nc3ZPQjTfiQce5Qf/view?usp=sharing';
 
 export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   triggerClassName = '',
@@ -34,8 +34,8 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
   // sensible fallbacks instead.
   const getFileNameFromDriveId = (fileId: string): string => {
     const mapping: Record<string, string> = {
-      '1KfdNz8lkzZl3QgDck9PZi1vQnDX_z7oM': 'Ritesh_Resume_Standard.pdf',
-      '1aGXF4BoJQ-5v-PChD9NCSS0uD5Cw6Apz': 'Ritesh_Resume_ATS.pdf',
+      '1txAcfxJkOvMhHTBCh0l3ywccm6T153mp': 'Ritesh_Resume_Standard.pdf',
+      '1jJJ4mFTRriswt0-5nc3ZPQjTfiQce5Qf': 'Ritesh_Resume_ATS.pdf',
     };
 
     return mapping[fileId] || 'Ritesh_Resume.pdf';
