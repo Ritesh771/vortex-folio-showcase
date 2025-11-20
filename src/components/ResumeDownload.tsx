@@ -83,7 +83,7 @@ export const ResumeDownload: React.FC<ResumeDownloadProps> = ({
 
   const subject = 'Custom Targeted Resume Request';
   const body = `Hi Ritesh,\n\nI'd like a custom targeted resume. Here are the details:\n- Role Title: \n- Company: \n- Job Description URL: \n- Key Skills to Highlight: \n- Deadline: \n\nAnything else you need, let me know.\n\nThanks!`;
-  const mailtoHref = `mailto:ritesh.2004.n@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoHref = `mailto:riturithesh66@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   return (
     <Dialog>

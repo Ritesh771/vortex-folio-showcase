@@ -169,7 +169,7 @@
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%
-        \mbox{\hrefWithoutArrow{mailto:ritesh.2004.n@gmail.com}{ritesh.2004.n@gmail.com}}%
+        \mbox{\hrefWithoutArrow{mailto:riturithesh66@gmail.com}{riturithesh66@gmail.com}}%
         \kern 5.0 pt%
         \AND%
         \kern 5.0 pt%

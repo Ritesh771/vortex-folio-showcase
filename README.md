@@ -143,6 +143,6 @@ I bring hands-on experience in backend development using Django and REST APIs, a
 
 ## Contact Information
 
-- **Email**: ritesh.2004.n@gmail.com
+- **Email**: riturithesh66@gmail.com
 - **GitHub**: [github.com/Ritesh771](https://github.com/Ritesh771)
 - **LinkedIn**: https://www.linkedin.com/in/ritesh-n-5113b328a/
